@@ -41,7 +41,7 @@ Please make sure to update tests as appropriate.
 
 **"Prepatch"** is not needed, it works with the original game executable. Special thanks to **Skyth**.
 
-Special thanks to korenkonder for **"PvList"**.
+Special thanks to **korenkonder** for **"PvList"**.
 
 Configuration files for **TLAC** and any other compatible extension will be read from **"plugins\"** and **NOT** from the root folder of the game.
 
