@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DIVA-Loader", "DIVA-Loader\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TLAC", "TLAC\TLAC.vcxproj", "{2B5533BB-04A1-424F-9BCA-1CA963B46B7F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Patches", "Patches\Patches.vcxproj", "{3FD6ACA9-E613-4FD6-BDA2-55A91C2CF65C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,10 @@ Global
 		{2B5533BB-04A1-424F-9BCA-1CA963B46B7F}.Debug|x64.Build.0 = Debug|x64
 		{2B5533BB-04A1-424F-9BCA-1CA963B46B7F}.Release|x64.ActiveCfg = Release|x64
 		{2B5533BB-04A1-424F-9BCA-1CA963B46B7F}.Release|x64.Build.0 = Release|x64
+		{3FD6ACA9-E613-4FD6-BDA2-55A91C2CF65C}.Debug|x64.ActiveCfg = Debug|x64
+		{3FD6ACA9-E613-4FD6-BDA2-55A91C2CF65C}.Debug|x64.Build.0 = Debug|x64
+		{3FD6ACA9-E613-4FD6-BDA2-55A91C2CF65C}.Release|x64.ActiveCfg = Release|x64
+		{3FD6ACA9-E613-4FD6-BDA2-55A91C2CF65C}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
