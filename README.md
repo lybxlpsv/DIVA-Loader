@@ -4,12 +4,12 @@
 
 ## Installation
 
-* Have a full clean dump of the game version **"7.10"**.
+* Have a **full clean** dump of the game version **"7.10"** decompressed without **"mdata"** merges or any other modifications.
 * Download the latest release.
 * Decompress everything into the **root folder** of the game.
 * Files required to load **"mdata"** without merging it into the actual game are included (**"ram\databank\PvList*"** files, up to **M270** is supported.).
 
-For this to work, you have to drop each mdata update decompressed into the folder **"mdata\"**.
+For this to work, you have to drop each **mdata** update decompressed into the folder **"mdata\"** (create it if it doesn't exists).
 
 **e.g.** For all mdata's you should have the following folders inside:
   * M215
