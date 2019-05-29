@@ -4,14 +4,30 @@
 
 ## Installation
 
-Download the latest release.\
-Decompress everything into the **root folder** of the game.
+* Have a full clean dump of the game version **"7.10"**.
+* Download the latest release.
+* Decompress everything into the **root folder** of the game.
+* Files required to load **"mdata"** without merging it into the actual game are included (**"ram\databank\PvList*"** files, up to **M270** is supported.).
+
+For this to work, you have to drop each mdata update decompressed into the folder **"mdata\"**.
+
+**e.g.** For all mdata's you should have the following folders inside:
+  * M215
+  * M220
+  * M230
+  * M240
+  * M250
+  * M260
+  * M270
 
 ## Usage
 
-Use the **"plugins\config.ini"** to enable or disable plugins loading.\
-Place any **Dynamic-link library (DLL)** with the filename extension as **".dva"** inside the **"plugins"** folder, **TLAC v2.0** and an alternative for **"Prepatch"** are included by default.\
-Launch **"diva.exe"** with your desired parameters (e.g. **"-w -hdtv1080"**).
+Use the **"plugins\config.ini"** to enable or disable plugins loading.
+
+Place any **Dynamic-link library (DLL)** with the filename extension as **".dva"** inside the **"plugins"** folder.\
+**TLAC v2.0** and an alternative for **"Prepatch"** are included by default.
+
+Just launch **"diva.exe"** with your desired parameters (e.g. **"-w -hdtv1080"**).
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
@@ -23,9 +39,11 @@ Please make sure to update tests as appropriate.
 
 ## FAQ
 
-**"Prepatch"** is not needed, it works with the original game executable. Special thanks to Skyth.
+**"Prepatch"** is not needed, it works with the original game executable. Special thanks to **Skyth**.
 
-Configuration files for **TLAC** and any other extension will be read from **"plugins\"** and **NOT** from the root folder of the game.
+Special thanks to korenkonder for **"PvList"**.
+
+Configuration files for **TLAC** and any other compatible extension will be read from **"plugins\"** and **NOT** from the root folder of the game.
 
 This is a stripdown of [**ThirteenAG's** Ultimate ASI Loader v4.47](https://github.com/ThirteenAG/Ultimate-ASI-Loader/) for **"dinput8.dll"** usage only with minor modifications.
 
