@@ -10,7 +10,7 @@ Decompress everything into the **root folder** of the game.
 ## Usage
 
 Use the **"plugins\config.ini"** to enable or disable plugins loading.\
-Place any **Dynamic-link library (DLL)** with the filename extension as **".dva"** inside the **"plugins"** folder, **TLAC v2.0** is included by default.\
+Place any **Dynamic-link library (DLL)** with the filename extension as **".dva"** inside the **"plugins"** folder, **TLAC v2.0** and an alternative for **"Prepatch"** are included by default.\
 Launch **"diva.exe"** with your desired parameters (e.g. **"-w -hdtv1080"**).
 
 ## Contributing
@@ -23,7 +23,7 @@ Please make sure to update tests as appropriate.
 
 ## FAQ
 
-**"Prepatch"** is not included yet.
+**"Prepatch"** is not needed, it works with the original game executable. Special thanks to Skyth.
 
 Configuration files for **TLAC** and any other extension will be read from **"plugins\"** and **NOT** from the root folder of the game.
 
