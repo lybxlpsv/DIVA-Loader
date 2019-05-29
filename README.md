@@ -1,6 +1,6 @@
 # DIVA Loader
 
-**DIVA Loader** lets you load plugins into **Hatsune Miku Project DIVA Arcade Future Tone** by placing them into the **"plugins"** folder.
+**DIVA Loader** lets you load plugins into **Hatsune Miku Project DIVA Arcade Future Tone** by placing them into the **"plugins"** folder, it includes useful ones such as **TLAC** by **Samyuu** and **Prepatch** in the form of a plugin without needing to use extra executables.
 
 ## Installation
 
@@ -11,7 +11,7 @@
 
 For this to work, you have to drop each **mdata** update decompressed into the folder **"mdata\"** (create it if it doesn't exists).
 
-**e.g.** For all mdata's you should have the following folders inside:
+**e.g.** For all **"mdata"** you should have the following folders inside:
   * M215
   * M220
   * M230
