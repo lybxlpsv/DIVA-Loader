@@ -133,6 +133,8 @@ namespace TLAC
 
 	void InstallHooks()
 	{
+		HWND consoleHandle = GetConsoleWindow();
+		ShowWindow(consoleHandle, SW_HIDE);
 		InstallHook((void*)ENGINE_UPDATE_HOOK_TARGET_ADDRESS, (void*)UpdateTick, 0xE);
 	}
 

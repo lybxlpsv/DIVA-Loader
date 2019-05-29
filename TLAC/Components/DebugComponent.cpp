@@ -109,6 +109,9 @@ namespace TLAC::Components
 
 		InjectPatches();
 
+		HWND consoleHandle = GetConsoleWindow();
+		ShowWindow(consoleHandle, SW_SHOW);
+
 		// In case the FrameRateManager isn't enabled
 		DWORD oldProtect;
 		VirtualProtect((void*)AET_FRAME_DURATION_ADDRESS, sizeof(float), PAGE_EXECUTE_READWRITE, &oldProtect);
@@ -168,6 +171,7 @@ namespace TLAC::Components
 	void DebugComponent::SetConsoleForeground()
 	{
 		HWND consoleHandle = GetConsoleWindow();
+		ShowWindow(consoleHandle, SW_SHOW);
 		
 		if (consoleHandle == NULL)
 			return;
