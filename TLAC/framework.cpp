@@ -13,6 +13,8 @@ namespace TLAC
 	HWND framework::DivaWindowHandle;
 	HMODULE framework::Module;
 
+	bool framework::inputDisable = false;
+
 	std::string framework::GetModuleDirectory()
 	{
 		if (moduleDirectory == nullptr)

@@ -49,7 +49,7 @@ namespace TLAC::Components
 		else if (previousGameState == GS_STARTUP)
 		{
 			dataInitialized = true;
-			printf("FastLoader::Update(): Data Initialized\n");
+			printf("[TLAC] FastLoader::Update(): Data Initialized\n");
 		}
 	}
 

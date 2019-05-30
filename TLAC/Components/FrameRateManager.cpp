@@ -3,6 +3,7 @@
 #include "GameState.h"
 #include <stdio.h>
 #include <windows.h>
+#include "../framework.h"
 
 namespace TLAC::Components
 {
@@ -36,7 +37,6 @@ namespace TLAC::Components
 	void FrameRateManager::Update()
 	{
 		float frameRate = 0.0f;
-
 		frameRate = RoundFrameRate(GetGameFrameRate());
 
 		*aetFrameDuration = 1.0f / frameRate;

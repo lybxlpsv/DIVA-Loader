@@ -40,7 +40,7 @@ namespace TLAC::Components
 
 		if (false && Input::Keyboard::GetInstance()->IsTapped(VK_F12))
 		{
-			printf("PlayerDataManager::Update(): Loading config...\n");
+			printf("[TLAC] PlayerDataManager::Update(): Loading config...\n");
 			LoadConfig();
 		}
 	}

@@ -11,6 +11,7 @@
 #include "StageManager.h"
 #include "CameraController.h"
 #include "DebugComponent.h"
+#include "ScaleComponent.h"
 
 using ConfigFile = TLAC::FileSystem::ConfigFile;
 
@@ -40,6 +41,7 @@ namespace TLAC::Components
 			new StageManager(),
 			new CameraController(),
 			new DebugComponent(),
+			new ScaleComponent(),
 		};
 
 		ConfigFile componentsConfig(framework::GetModuleDirectory(), COMPONENTS_CONFIG_FILE_NAME);

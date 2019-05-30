@@ -2,7 +2,9 @@
 #include "windows.h"
 #include "../Bindings/KeyboardBinding.h"
 #include "../Bindings/Ds4Binding.h"
-#include "../../Utilities/Operations.h"
+#include "../../Utilities/Operations.h"3
+#include "../Bindings/XinputBinding.h"
+#include "../../Constants.h"
 
 namespace TLAC::Input::KeyConfig
 {
@@ -23,6 +25,9 @@ namespace TLAC::Input::KeyConfig
 		{ "Minus", VK_SUBTRACT },
 		{ "Divide", VK_DIVIDE },
 		{ "Multiply", VK_MULTIPLY },
+		{ "Comma", VK_OEM_COMMA },
+		{ "Period", VK_OEM_PERIOD },
+		{ "Slash", VK_OEM_2 },
 		// F-Keys
 		{ "F1", VK_F1 },
 		{ "F2", VK_F2 },
@@ -84,6 +89,29 @@ namespace TLAC::Input::KeyConfig
 		{ "Comma",	VK_OEM_COMMA },
 		{ "Period", VK_OEM_PERIOD },
 		{ "Slash",	VK_OEM_2 },
+	};
+
+	KeycodeMap Config::XinputMap =
+	{
+		//XINPUT
+		{ "XINPUT_A", XINPUT_A},
+		{ "XINPUT_B", XINPUT_B},
+		{ "XINPUT_X", XINPUT_X},
+		{ "XINPUT_Y", XINPUT_Y},
+		{ "XINPUT_UP", XINPUT_UP},
+		{ "XINPUT_DOWN", XINPUT_DOWN},
+		{ "XINPUT_LEFT", XINPUT_LEFT},
+		{ "XINPUT_RIGHT", XINPUT_RIGHT},
+		{ "XINPUT_START", XINPUT_START},
+		{ "XINPUT_BACK", XINPUT_BACK},
+		{ "XINPUT_LS", XINPUT_LS},
+		{ "XINPUT_RS", XINPUT_RS},
+		{ "XINPUT_LT", XINPUT_LT},
+		{ "XINPUT_RT", XINPUT_RT},
+		{ "XINPUT_LLEFT", XINPUT_LLEFT},
+		{ "XINPUT_LRIGHT", XINPUT_LRIGHT},
+		{ "XINPUT_RLEFT", XINPUT_RLEFT},
+		{ "XINPUT_RRIGHT", XINPUT_RRIGHT},
 	};
 
 	Ds4ButtonMap Config::Ds4Map =
@@ -210,16 +238,25 @@ namespace TLAC::Input::KeyConfig
 				}
 				else
 				{
-					// just gonna be lazy for now and put this inside an else statement
-					auto ds4Button = Config::Ds4Map.find(key.c_str());
+					auto xinputBtn = Config::XinputMap.find(key.c_str());
 
-					if (ds4Button != Config::Ds4Map.end())
+					if (xinputBtn != Config::XinputMap.end())
 					{
-						bindObj.AddBinding(new Ds4Binding(ds4Button->second));
+						bindObj.AddBinding(new XinputBinding(xinputBtn->second));
 					}
-					else
+					else 
 					{
-						printf("Config::BindConfigKeys(): Unable to parse key: '%s'\n", key.c_str());
+						// just gonna be lazy for now and put this inside an else statement
+						auto ds4Button = Config::Ds4Map.find(key.c_str());
+
+						if (ds4Button != Config::Ds4Map.end())
+						{
+							bindObj.AddBinding(new Ds4Binding(ds4Button->second));
+						}
+						else
+						{
+							printf("[TLAC] Config::BindConfigKeys(): Unable to parse key: '%s'\n", key.c_str());
+						}
 					}
 				}
 			}

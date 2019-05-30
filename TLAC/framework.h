@@ -13,6 +13,8 @@ namespace TLAC
 		static const wchar_t* DivaWindowName;
 		static const wchar_t* GlutDefaultName;
 
+		static bool inputDisable;
+
 		static HWND DivaWindowHandle;
 		static HMODULE Module;
 

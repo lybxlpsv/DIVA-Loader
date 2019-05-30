@@ -105,7 +105,7 @@ namespace TLAC::Components
 
 	void DebugComponent::Initialize(ComponentsManager*)
 	{
-		printf("DebugComponent::Initialize(): Initialized\n");
+		printf("[TLAC] DebugComponent::Initialize(): Initialized\n");
 
 		InjectPatches();
 

@@ -48,7 +48,7 @@ namespace TLAC::Components
 	{
 		componentsManager = manager;
 
-		printf("CameraController::Initialize(): Initialized\n");
+		printf("[TLAC] CameraController::Initialize(): Initialized\n");
 
 		for (int i = 0; i < sizeof(cameraSetterAddresses) / sizeof(void*); i++)
 		{
@@ -178,7 +178,7 @@ namespace TLAC::Components
 		SetIsEnabled(value);
 		componentsManager->SetUpdateGameInput(!value);
 
-		printf("CameraController::SetControls(): enabled = %s\n", GetIsEnabled() ? "true" : "false");
+		printf("[TLAC] CameraController::SetControls(): enabled = %s\n", GetIsEnabled() ? "true" : "false");
 
 		typedef void __stdcall _glutSetCursor(int);
 		auto glutSetCursor = (_glutSetCursor*)GLUT_SET_CURSOR_ADDRESS;

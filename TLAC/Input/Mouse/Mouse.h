@@ -35,6 +35,14 @@ namespace TLAC::Input
 		MouseState currentState;
 		DirectInputMouse* directInputMouse = nullptr;
 
+		int* gameWidth;
+		int* gameHeight;
+		int* fbWidth;
+		int* fbHeight;
+
+		float xoffset;
+		float scale;
+
 		static Mouse* instance;
 	};
 }

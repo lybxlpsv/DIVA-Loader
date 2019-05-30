@@ -1,8 +1,11 @@
 #include "windows.h"
 #include "vector"
+#include <tchar.h>
 
 void InjectCode(void* address, const std::initializer_list<uint8_t>& data);
 void ApplyPatches();
+
+const LPCTSTR CONFIG_FILE = _T(".\\config.ini");
 
 BOOL APIENTRY DllMain(HMODULE hModule,
 	DWORD  ul_reason_for_call,
@@ -12,8 +15,8 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
-	case DLL_THREAD_ATTACH:
 		ApplyPatches();
+	case DLL_THREAD_ATTACH:
 	case DLL_THREAD_DETACH:
 	case DLL_PROCESS_DETACH:
 		break;
@@ -61,16 +64,19 @@ void ApplyPatches() {
 		{ (void*)0x0000000140502150, { 0x90 } },
 		// Toon Shader Outline Fix by lybxlpsv
 		{ (void*)0x0000000140641102, { 0x01 } }
-
-		// TO-DO: Convert this array into a vector to be able to handle which patches to active and push them
-		// TAA Remover by lybxlpsv
-		//{ (void*)0x00000001411AB67C, { 0x00 } },
-		// MLAA Remover by lybxlpsv
-		//{ (void*)0x00000001411AB680, { 0x00 } },
 	};
+	printf("[Patches] Patches loaded\n");
 
 	for (size_t i = 0; i < _countof(patches); i++)
 		InjectCode(patches[i].Address, patches[i].Data);
+
+	auto nStereo = GetPrivateProfileIntW(L"patches", L"stereo", TRUE, CONFIG_FILE);
+	// Initialize Audio with dual-channels instead of quads
+	if(nStereo)
+	{
+		InjectCode((void*)0x0000000140A860C0, { 0x02 });
+		printf("[Patches] Stereo enabled\n");
+	}
 }
 
 void InjectCode(void* address, const std::initializer_list<uint8_t>& data)

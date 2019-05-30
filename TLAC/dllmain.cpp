@@ -1,12 +1,17 @@
+#include <iostream>
+#include <vector>
 #include <Windows.h>
 #include <Dbt.h>
+#include <stdio.h>
 #include "Constants.h"
 #include "framework.h"
 #include "Input/Mouse/Mouse.h"
+#include "Input/Xinput/Xinput.h"
 #include "Input/Keyboard/Keyboard.h"
 #include "Input/DirectInput/DirectInput.h"
 #include "Input/DirectInput/Ds4/DualShock4.h"
 #include "Components/ComponentsManager.h"
+#include <tchar.h>
 
 LRESULT CALLBACK MessageWindowProcessCallback(HWND, UINT, WPARAM, LPARAM);
 DWORD WINAPI WindowMessageDispatcher(LPVOID);
@@ -23,10 +28,16 @@ const wchar_t *MessageWindowName = TEXT("MessageWindowTitle");
 
 namespace TLAC
 {
+	const LPCTSTR RESOLUTION_CONFIG_FILE_NAME = _T(".\\config.ini");
 	Components::ComponentsManager ComponentsManager;
 	bool DeviceConnected = true;
 	bool FirstUpdateTick = true;
 	bool HasWindowFocus, HadWindowFocus;
+
+	void InstallCustomResolution()
+	{
+
+	}
 
 	void* InstallHook(void* source, void* destination, int length)
 	{
@@ -70,7 +81,7 @@ namespace TLAC
 	{
 		RegisterMessageWindowClass();
 		if ((MessageThread.Handle = CreateThread(0, 0, WindowMessageDispatcher, 0, 0, 0)) == NULL)
-			printf("InitializeTick(): CreateThread() Error: %d\n", GetLastError());
+			printf("[TLAC] InitializeTick(): CreateThread() Error: %d\n", GetLastError());
 
 		framework::DivaWindowHandle = FindWindow(0, framework::DivaWindowName);
 		if (framework::DivaWindowHandle == NULL)
@@ -78,7 +89,7 @@ namespace TLAC
 
 		HRESULT diInitResult = Input::InitializeDirectInput(framework::Module);
 		if (FAILED(diInitResult))
-			printf("InitializeTick(): Failed to initialize DirectInput. Error: 0x%08X\n", diInitResult);
+			printf("[TLAC] InitializeTick(): Failed to initialize DirectInput. Error: 0x%08X\n", diInitResult);
 
 		ComponentsManager.Initialize();
 	}
@@ -98,7 +109,7 @@ namespace TLAC
 			if (!Input::DualShock4::InstanceInitialized())
 			{
 				if (Input::DualShock4::TryInitializeInstance())
-					printf("UpdateTick(): DualShock4 connected and initialized\n");
+					printf("[TLAC] UpdateTick(): DualShock4 connected and initialized\n");
 			}
 		}
 
@@ -107,21 +118,38 @@ namespace TLAC
 		HadWindowFocus = HasWindowFocus;
 		HasWindowFocus = framework::DivaWindowHandle == NULL || GetForegroundWindow() == framework::DivaWindowHandle;
 
-		if (HasWindowFocus)
+		if ((HasWindowFocus) && (!framework::inputDisable))
 		{
 			Input::Keyboard::GetInstance()->PollInput();
 			Input::Mouse::GetInstance()->PollInput();
+			Input::Xinput::GetInstance()->PollInput();
 
 			if (Input::DualShock4::GetInstance() != nullptr)
 			{
 				if (!Input::DualShock4::GetInstance()->PollInput())
 				{
 					Input::DualShock4::DeleteInstance();
-					printf("UpdateTick(): DualShock4 connection lost\n");
+					printf("[TLAC] UpdateTick(): DualShock4 connection lost\n");
 				}
 			}
 
 			ComponentsManager.UpdateInput();
+		}
+
+		if ((framework::inputDisable))
+		{
+			Input::Keyboard::GetInstance()->PollInput();
+			Input::Mouse::GetInstance()->PollInput();
+			Input::Xinput::GetInstance()->PollInput();
+
+			if (Input::DualShock4::GetInstance() != nullptr)
+			{
+				if (!Input::DualShock4::GetInstance()->PollInput())
+				{
+					Input::DualShock4::DeleteInstance();
+					printf("[TLAC] UpdateTick(): DualShock4 connection lost\n");
+				}
+			}
 		}
 
 		if (HasWindowFocus && !HadWindowFocus)
@@ -131,11 +159,73 @@ namespace TLAC
 			ComponentsManager.OnFocusLost();
 	}
 
+	void InitializeExtraSettings()
+	{
+		auto nCustomRes = GetPrivateProfileIntW(L"resolution", L"r.enable", FALSE, RESOLUTION_CONFIG_FILE_NAME);
+		auto nMaxWidth = GetPrivateProfileIntW(L"resolution", L"r.width", NULL, RESOLUTION_CONFIG_FILE_NAME);
+		auto nMaxHeight = GetPrivateProfileIntW(L"resolution", L"r.height", NULL, RESOLUTION_CONFIG_FILE_NAME);
+		auto nTAA = GetPrivateProfileIntW(L"graphics", L"taa", TRUE, RESOLUTION_CONFIG_FILE_NAME);
+		auto nMLAA = GetPrivateProfileIntW(L"graphics", L"mlaa", TRUE, RESOLUTION_CONFIG_FILE_NAME);
+
+		int maxWidth = 2560;
+		int maxHeight = 1440;
+
+		if (nCustomRes)
+		{
+			printf("[TLAC] Custom internal resolution enabled\n");
+			if (nMaxWidth != NULL)
+			{
+				maxWidth = nMaxWidth;
+			}
+			if (nMaxHeight != NULL)
+			{
+				maxHeight = nMaxHeight;
+			}
+			printf("[TLAC] X: %d Y: %d\n", nMaxWidth, nMaxHeight);
+			{
+				DWORD oldProtect, bck;
+				VirtualProtect((BYTE*)0x00000001409B8B68, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
+				*((int*)0x00000001409B8B68) = maxWidth;
+				VirtualProtect((BYTE*)0x00000001409B8B68, 6, oldProtect, &bck);
+			}
+			{
+				DWORD oldProtect, bck;
+				VirtualProtect((BYTE*)0x00000001409B8B6C, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
+				*((int*)0x00000001409B8B6C) = maxHeight;
+				VirtualProtect((BYTE*)0x00000001409B8B6C, 6, oldProtect, &bck);
+			}
+			//*((int*)0x00000001409B8B6C) = maxHeight;
+			//*((int*)0x00000001409B8B14) = maxWidth;
+			//*((int*)0x00000001409B8B18) = maxHeight;
+		}
+		if (!nTAA)
+		{
+			DWORD oldProtect, bck;
+			VirtualProtect((BYTE*)0x00000001411AB67C, 1, PAGE_EXECUTE_READWRITE, &oldProtect);
+			*((byte*)0x00000001411AB67C + 0) = 0x00;
+			VirtualProtect((BYTE*)0x00000001411AB67C, 1, oldProtect, &bck);
+
+			printf("[TLAC] TAA disabled\n");
+		}
+		if (!nMLAA)
+		{
+			DWORD oldProtect, bck;
+			VirtualProtect((BYTE*)0x00000001411AB680, 1, PAGE_EXECUTE_READWRITE, &oldProtect);
+			*((byte*)0x00000001411AB680 + 0) = 0x00;
+			VirtualProtect((BYTE*)0x00000001411AB680, 1, oldProtect, &bck);
+
+			printf("[TLAC] MLAA disabled\n");
+		}
+
+
+	}
+
 	void InstallHooks()
 	{
 		HWND consoleHandle = GetConsoleWindow();
 		ShowWindow(consoleHandle, SW_HIDE);
 		InstallHook((void*)ENGINE_UPDATE_HOOK_TARGET_ADDRESS, (void*)UpdateTick, 0xE);
+		InitializeExtraSettings();
 	}
 
 	void Dispose()
@@ -157,7 +247,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
-		printf("DllMain(): Installing hooks...\n");
+		printf("[TLAC] DllMain(): Installing hooks...\n");
 
 		TLAC::InstallHooks();
 		TLAC::framework::Module = hModule;
@@ -185,7 +275,7 @@ DWORD WINAPI WindowMessageDispatcher(LPVOID lpParam)
 
 	if (!windowHandle)
 	{
-		printf("WindowMessageDispatcher(): CreateWindowW() Error: %d\n", GetLastError());
+		printf("[TLAC] WindowMessageDispatcher(): CreateWindowW() Error: %d\n", GetLastError());
 		return 1;
 	}
 
@@ -194,7 +284,7 @@ DWORD WINAPI WindowMessageDispatcher(LPVOID lpParam)
 	MSG message;
 	DWORD returnValue;
 
-	printf("WindowMessageDispatcher(): Entering message loop...\n");
+	printf("[TLAC] WindowMessageDispatcher(): Entering message loop...\n");
 
 	while (1)
 	{
@@ -206,7 +296,7 @@ DWORD WINAPI WindowMessageDispatcher(LPVOID lpParam)
 		}
 		else
 		{
-			printf("WindowMessageDispatcher(): GetMessage() Error: %d\n", returnValue);
+			printf("[TLAC] WindowMessageDispatcher(): GetMessage() Error: %d\n", returnValue);
 		}
 	}
 
@@ -235,7 +325,7 @@ LRESULT CALLBACK MessageWindowProcessCallback(HWND hWnd, UINT message, WPARAM wP
 		HDEVNOTIFY hDevNotify = NULL;
 
 		if (!RegisterDeviceInterface(hWnd, &hDevNotify))
-			printf("MessageWindowProcessCallback(): RegisterDeviceInterface() Error: %d\n", GetLastError());
+			printf("[TLAC] MessageWindowProcessCallback(): RegisterDeviceInterface() Error: %d\n", GetLastError());
 
 		break;
 	}

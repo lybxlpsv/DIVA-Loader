@@ -7,6 +7,8 @@
 #include "../../Input/Bindings/KeyboardBinding.h"
 #include "../../Input/Bindings/MouseBinding.h"
 #include "../../Input/Bindings/Ds4Binding.h"
+#include "../../Input/Bindings/XinputBinding.h"
+#include "../../Input/Bindings/MouseBinding.h"
 #include "../../Input/KeyConfig/Config.h"
 #include "../../Utilities/Operations.h"
 #include "../../Utilities/EnumBitwiseOperations.h"
