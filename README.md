@@ -1,15 +1,17 @@
 # DIVA Loader
 
-**DIVA Loader** lets you load plugins into **Hatsune Miku Project DIVA Arcade Future Tone** by placing them into the **"plugins"** folder, it includes useful ones such as **TLAC** by **Samyuu** and **Prepatch** in the form of a plugin without needing to use extra executables.
+**DIVA Loader** lets you load plugins into **Hatsune Miku Project DIVA Arcade Future Tone** by placing them into the **"plugins"** folder, it includes useful ones such as **TLAC** and **Prepatch** by **Samyuu** in the form of a plugin without needing to use extra executables.
 
 ## Installation
 
 * Have a **full clean** dump of the game version **"7.10"** decompressed without **"mdata"** merges or any other modifications.
 * Download the latest release.
 * Decompress everything into the **root folder** of the game.
-* Files required to load **"mdata"** without merging it into the actual game are included (**"ram\databank\PvList*"** files, up to **M270** is supported.).
 
-For this to work, you have to drop each **mdata** update decompressed into the folder **"mdata\"** (create it if it doesn't exists).
+* **"mdata"** from **M215** to **M270** are supported, custom **"mdata"** will be possible soon.
+* Files required to load **"mdata"** without merging it into the actual game are included (**"ram\databank\PvList*"** files)
+
+For **"mdata"** to work, you have to drop each **"mdata"** update decompressed into the **"mdata\"** folder in the root folder of the game (create it if it doesn't exists).
 
 **e.g.** For all **"mdata"** you should have the following folders inside:
   * M215
@@ -28,6 +30,16 @@ Place any **Dynamic-link library (DLL)** with the filename extension as **".dva"
 **TLAC v2.0** and an alternative for **"Prepatch"** are included by default.
 
 Just launch **"diva.exe"** with your desired parameters (e.g. **"-w -hdtv1080"**).
+
+## Screenshots
+
+Your **root** game folder should look like this:
+
+![root game folder](https://i.imgur.com/D48bJS0.png)
+
+Your **"mdata"** folder should look like this:
+
+![mdata folder](https://i.imgur.com/2jUjosM.png)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
