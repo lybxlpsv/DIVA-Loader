@@ -24,7 +24,10 @@ For **"mdata"** to work, you have to drop each **"mdata"** update decompressed i
 
 ## Usage
 
-Use the **"plugins\config.ini"** to enable or disable plugins loading.
+Use **"plugins\components.ini"** to enable or disable TLAC components.
+Use **"plugins\config.ini"** to enable or disable plugins loading along other useful settings.
+Use **"plugins\keyconfig.ini"** to change your game keybinds.
+Use **"plugins\playerdata.ini"** to change your playername and other player customization.
 
 Place any **Dynamic-link library (DLL)** with the filename extension as **".dva"** inside the **"plugins"** folder.\
 **TLAC v2.0** and an alternative for **"Prepatch"** are included by default.
