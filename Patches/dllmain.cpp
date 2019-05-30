@@ -54,6 +54,19 @@ void ApplyPatches() {
 		{ (void*)0x00000001406724E7, { 0x00, 0x00 } },
 		// Ignore SYSTEM_STARTUP Location Server checks
 		{ (void*)0x00000001406732A2, { 0x90, 0x90 } },
+		// Dirty hide of CREDIT(S) counter
+		{ (void*)0x00000001409F6200, { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, } },
+		// Toon Shader Fix by lybxlpsv
+		{ (void*)0x000000014050214F, { 0x90 } },
+		{ (void*)0x0000000140502150, { 0x90 } },
+		// Toon Shader Outline Fix by lybxlpsv
+		{ (void*)0x0000000140641102, { 0x01 } }
+
+		// TO-DO: Convert this array into a vector to be able to handle which patches to active and push them
+		// TAA Remover by lybxlpsv
+		//{ (void*)0x00000001411AB67C, { 0x00 } },
+		// MLAA Remover by lybxlpsv
+		//{ (void*)0x00000001411AB680, { 0x00 } },
 	};
 
 	for (size_t i = 0; i < _countof(patches); i++)

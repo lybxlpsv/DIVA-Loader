@@ -35,7 +35,9 @@ namespace TLAC::Components
 
 	void FrameRateManager::Update()
 	{
-		float frameRate = RoundFrameRate(GetGameFrameRate());
+		float frameRate = 0.0f;
+
+		frameRate = RoundFrameRate(GetGameFrameRate());
 
 		*aetFrameDuration = 1.0f / frameRate;
 		*pvFrameRate = frameRate;
@@ -53,10 +55,10 @@ namespace TLAC::Components
 			// so we'll make sure to keep updating it as well.
 			// Each new motion also creates its own copy of these values but keeping track of the active motions is annoying
 			// and they usually change multiple times per PV anyway so this should suffice for now
-			float* pvStructPvFrameRate  = (float*)(0x0000000140CDD978 + 0x2BF98);
+			float* pvStructPvFrameRate = (float*)(0x0000000140CDD978 + 0x2BF98);
 			float* pvStructPvFrameSpeed = (float*)(0x0000000140CDD978 + 0x2BF9C);
 
-			*pvStructPvFrameRate  = *pvFrameRate;
+			*pvStructPvFrameRate = *pvFrameRate;
 			*pvStructPvFrameSpeed = (defaultFrameRate / *pvFrameRate);
 
 			*frameSpeed = defaultFrameSpeed;
