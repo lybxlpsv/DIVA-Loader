@@ -58,21 +58,21 @@ void ApplyPatches() {
 		// Ignore SYSTEM_STARTUP Location Server checks
 		{ (void*)0x00000001406732A2, { 0x90, 0x90 } },
 		// Dirty hide of CREDIT(S) counter
-		{ (void*)0x00000001409F6200, { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, } },
+		{ (void*)0x00000001409F6200, { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } },
 		// Toon Shader Fix by lybxlpsv
 		{ (void*)0x000000014050214F, { 0x90 } },
 		{ (void*)0x0000000140502150, { 0x90 } },
 		// Toon Shader Outline Fix by lybxlpsv
-		{ (void*)0x0000000140641102, { 0x01 } }
+		{ (void*)0x0000000140641102, { 0x01 } },
 	};
 	printf("[Patches] Patches loaded\n");
 
 	for (size_t i = 0; i < _countof(patches); i++)
 		InjectCode(patches[i].Address, patches[i].Data);
 
-	auto nStereo = GetPrivateProfileIntW(L"patches", L"stereo", TRUE, CONFIG_FILE);
+	auto nStereo = GetPrivateProfileIntW(L"patches", L"stereo", FALSE, CONFIG_FILE);
 	// Initialize Audio with dual-channels instead of quads
-	if(nStereo)
+	if (nStereo)
 	{
 		InjectCode((void*)0x0000000140A860C0, { 0x02 });
 		printf("[Patches] Stereo enabled\n");

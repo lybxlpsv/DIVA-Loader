@@ -12,7 +12,6 @@
 #include "Input/DirectInput/Ds4/DualShock4.h"
 #include "Components/ComponentsManager.h"
 #include <tchar.h>
-
 LRESULT CALLBACK MessageWindowProcessCallback(HWND, UINT, WPARAM, LPARAM);
 DWORD WINAPI WindowMessageDispatcher(LPVOID);
 VOID RegisterMessageWindowClass();
@@ -28,7 +27,6 @@ const wchar_t *MessageWindowName = TEXT("MessageWindowTitle");
 
 namespace TLAC
 {
-	const LPCTSTR RESOLUTION_CONFIG_FILE_NAME = _T(".\\config.ini");
 	Components::ComponentsManager ComponentsManager;
 	bool DeviceConnected = true;
 	bool FirstUpdateTick = true;
@@ -161,6 +159,7 @@ namespace TLAC
 
 	void InitializeExtraSettings()
 	{
+		const LPCTSTR RESOLUTION_CONFIG_FILE_NAME = _T(".\\config.ini");
 		auto nCustomRes = GetPrivateProfileIntW(L"resolution", L"r.enable", FALSE, RESOLUTION_CONFIG_FILE_NAME);
 		auto nMaxWidth = GetPrivateProfileIntW(L"resolution", L"r.width", NULL, RESOLUTION_CONFIG_FILE_NAME);
 		auto nMaxHeight = GetPrivateProfileIntW(L"resolution", L"r.height", NULL, RESOLUTION_CONFIG_FILE_NAME);
@@ -184,15 +183,15 @@ namespace TLAC
 			printf("[TLAC] X: %d Y: %d\n", nMaxWidth, nMaxHeight);
 			{
 				DWORD oldProtect, bck;
-				VirtualProtect((BYTE*)0x00000001409B8B68, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
-				*((int*)0x00000001409B8B68) = maxWidth;
-				VirtualProtect((BYTE*)0x00000001409B8B68, 6, oldProtect, &bck);
+				VirtualProtect((BYTE*)0x00000001409B8B30, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
+				*((int*)0x00000001409B8B30) = maxWidth;
+				VirtualProtect((BYTE*)0x00000001409B8B30, 6, oldProtect, &bck);
 			}
 			{
 				DWORD oldProtect, bck;
-				VirtualProtect((BYTE*)0x00000001409B8B6C, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
-				*((int*)0x00000001409B8B6C) = maxHeight;
-				VirtualProtect((BYTE*)0x00000001409B8B6C, 6, oldProtect, &bck);
+				VirtualProtect((BYTE*)0x00000001409B8B34, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
+				*((int*)0x00000001409B8B34) = maxHeight;
+				VirtualProtect((BYTE*)0x00000001409B8B34, 6, oldProtect, &bck);
 			}
 			//*((int*)0x00000001409B8B6C) = maxHeight;
 			//*((int*)0x00000001409B8B14) = maxWidth;

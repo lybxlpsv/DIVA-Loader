@@ -32,7 +32,7 @@ Use **"plugins\playerdata.ini"** to change your playername and other player cust
 Place any **Dynamic-link library (DLL)** with the filename extension as **".dva"** inside the **"plugins"** folder.\
 **TLAC v2.0** and an alternative for **"Prepatch"** are included by default.
 
-Just launch **"diva.exe"** with your desired parameters (e.g. **"-w -hdtv1080"**).
+Launch **"diva.exe"** with **"-w" parameter.
 
 ## Screenshots
 
@@ -53,6 +53,10 @@ Please make sure to update tests as appropriate.
 [MIT](https://choosealicense.com/licenses/mit/)
 
 ## FAQ
+
+Compatible with **Windows 7** except for WMV PV videos.
+
+Previous versions used **dinput8.dll** in the game root folder, if you still have it you must delete it.
 
 **"Prepatch"** is not needed, it works with the original game executable. Special thanks to **Skyth**.
 

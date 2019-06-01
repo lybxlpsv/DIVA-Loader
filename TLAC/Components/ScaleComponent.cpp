@@ -6,7 +6,7 @@
 #include "../framework.h"
 #include <chrono>
 #include <thread>
-#include "../FileSystem/ConfigFile.h"
+#include <GL/glut.h>
 
 namespace TLAC::Components
 {
@@ -62,8 +62,30 @@ namespace TLAC::Components
 			VirtualProtect((BYTE*)0x00000001404ACD2B, 6, oldProtect, &bck);
 		}
 
-	}
+		const LPCTSTR RESOLUTION_CONFIG_FILE_NAME = _T(".\\plugins\\config.ini");
+		auto nFullscreen = GetPrivateProfileIntW(L"resolution", L"fullscreen", TRUE, RESOLUTION_CONFIG_FILE_NAME);
+		auto nWidth = GetPrivateProfileIntW(L"resolution", L"width", NULL, RESOLUTION_CONFIG_FILE_NAME);
+		auto nHeight = GetPrivateProfileIntW(L"resolution", L"height", NULL, RESOLUTION_CONFIG_FILE_NAME);
+		//auto nRefreshRate = GetPrivateProfileIntW(L"resolution", L"refreshrate", NULL, RESOLUTION_CONFIG_FILE_NAME);
 
+		if (nFullscreen)
+		{
+			glutFullScreen();
+			glutPostRedisplay;
+			printf("[TLAC] Fullscreen enabled\n");
+		}
+		else
+		{
+			// Only works with "-w" parameter, won't be able to resize window if not used, possible cause is "glutFitWindowSizeToDesktop"
+			glutPositionWindow(0, 12);
+			glutReshapeWindow(nWidth, nHeight);			
+			glutPostRedisplay;
+			printf("[TLAC] Windowed size - X: %d Y: %d\n", nWidth, nHeight);
+		}
+
+
+
+	}
 
 	void ScaleComponent::Update()
 	{
