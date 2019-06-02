@@ -33,13 +33,13 @@ Place any **Dynamic-link library (DLL)** with the filename extension as **".dva"
 **TLAC v2.0** and an alternative for **"Prepatch"** are included by default.
 
 Launch **"diva.exe"** with **"-w"** to be able to use a custom windowed size, otherwise it will be always the size of the desktop.\
-Launch **"diva.exe"** with **"-wqhd"** to be able to use a custom internal resolution.\
+Launch **"diva.exe"** with **"-wqhd"** to be able to use a custom internal resolution.
 
 ## Screenshots
 
 Your **root** game folder should look like this:
 
-![root game folder](https://i.imgur.com/D48bJS0.png)
+![root game folder](https://i.imgur.com/c57lQPH.png)
 
 Your **"mdata"** folder should look like this:
 
@@ -63,12 +63,16 @@ Previous versions used **dinput8.dll** in the game root folder, if you still hav
 
 Special thanks to **korenkonder** for **"PvList"**.
 
-Configuration files for **TLAC** and any other compatible extension will be read from **"plugins\"** and **NOT** from the root folder of the game.
-
-This is a stripdown of [**ThirteenAG's** Ultimate ASI Loader v4.47](https://github.com/ThirteenAG/Ultimate-ASI-Loader/) for **"dinput8.dll"** usage only with minor modifications.
+Configuration files for **TLAC** and any other compatible extension may possibly be read from **"plugins\"** instead of the root folder of the game, this depends of each plugin.
 
 [TLAC (TotallyLegitArcadeController) v2.0](https://github.com/samyuu/TotallyLegitArcadeController) by **Samyuu**.
+
+## Developer FAQ
+
+This is a stripdown of [**ThirteenAG's** Ultimate ASI Loader v4.47](https://github.com/ThirteenAG/Ultimate-ASI-Loader/) for **"dnsapi.dll"** usage only.
 
 Solution for **Visual Studio 2019** platform toolset **v142** and **Windows 10 SDK (10.0.17763.0)**.
 
 Requires **Windows Universal CRT SDK**.
+
+Requires [**NVIDIA DesignWorks Cg Toolkit 3.1**](https://developer.nvidia.com/cg-toolkit-download)
