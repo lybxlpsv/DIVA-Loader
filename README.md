@@ -63,11 +63,13 @@ Previous versions used **dinput8.dll** in the game root folder, if you still hav
 
 Special thanks to **korenkonder** for **"PvList"**.
 
-Configuration files for **TLAC** and any other compatible extension will be read from **"plugins\"** and **NOT** from the root folder of the game.
-
-This is a stripdown of [**ThirteenAG's** Ultimate ASI Loader v4.47](https://github.com/ThirteenAG/Ultimate-ASI-Loader/) for **"dinput8.dll"** usage only with minor modifications.
+Configuration files for **TLAC** and any other compatible extension may possibly be read from **"plugins\"** instead of the root folder of the game, this depends of each plugin.
 
 [TLAC (TotallyLegitArcadeController) v2.0](https://github.com/samyuu/TotallyLegitArcadeController) by **Samyuu**.
+
+## Developer FAQ
+
+This is a stripdown of [**ThirteenAG's** Ultimate ASI Loader v4.47](https://github.com/ThirteenAG/Ultimate-ASI-Loader/) for **"dnsapi.dll"** usage only.
 
 Solution for **Visual Studio 2019** platform toolset **v142** and **Windows 10 SDK (10.0.17763.0)**.
 
