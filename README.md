@@ -72,3 +72,5 @@ This is a stripdown of [**ThirteenAG's** Ultimate ASI Loader v4.47](https://gith
 Solution for **Visual Studio 2019** platform toolset **v142** and **Windows 10 SDK (10.0.17763.0)**.
 
 Requires **Windows Universal CRT SDK**.
+
+Requires [**NVIDIA DesignWorks Cg Toolkit 3.1**](https://developer.nvidia.com/cg-toolkit-download)
