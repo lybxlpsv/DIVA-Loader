@@ -1,7 +1,7 @@
 #include "windows.h"
 #include "vector"
 #include <tchar.h>
-#include <GL/glut.h>
+//#include <GL/glut.h>
 
 void InjectCode(void* address, const std::initializer_list<uint8_t>& data);
 void ApplyPatches();
@@ -30,7 +30,7 @@ void ApplyPatches() {
 	const struct { void* Address; std::initializer_list<uint8_t> Data; } patches[] =
 	{
 		// Use GLUT_CURSOR_RIGHT_ARROW instead of GLUT_CURSOR_NONE
-		//{ (void*)0x000000014019341B, { 0x00 } } // We can now use GLUT directly
+		{ (void*)0x000000014019341B, { 0x00 } }, // We are supposed to be able to use GLUT library directly but doesnt works
 		// Disable the keychip time bomb
 		{ (void*)0x0000000140210820, { 0xB8, 0x00, 0x00, 0x00, 0x00, 0xC3 } },
 		// Always return true for the SelCredit enter SelPv check
@@ -79,7 +79,7 @@ void ApplyPatches() {
 		printf("[Patches] Stereo enabled\n");
 	}
 
-	glutSetCursor(GLUT_CURSOR_RIGHT_ARROW);
+	//glutSetCursor(GLUT_CURSOR_RIGHT_ARROW); // We are supposed to be able to use GLUT library directly but doesnt works
 }
 
 void InjectCode(void* address, const std::initializer_list<uint8_t>& data)
