@@ -12,6 +12,8 @@
 #include "Input/DirectInput/Ds4/DualShock4.h"
 #include "Components/ComponentsManager.h"
 #include <tchar.h>
+#include <GL/glut.h>
+
 LRESULT CALLBACK MessageWindowProcessCallback(HWND, UINT, WPARAM, LPARAM);
 DWORD WINAPI WindowMessageDispatcher(LPVOID);
 VOID RegisterMessageWindowClass();
@@ -161,41 +163,35 @@ namespace TLAC
 	{
 		const LPCTSTR RESOLUTION_CONFIG_FILE_NAME = _T(".\\config.ini");
 		auto nCustomRes = GetPrivateProfileIntW(L"resolution", L"r.enable", FALSE, RESOLUTION_CONFIG_FILE_NAME);
-		auto nMaxWidth = GetPrivateProfileIntW(L"resolution", L"r.width", NULL, RESOLUTION_CONFIG_FILE_NAME);
-		auto nMaxHeight = GetPrivateProfileIntW(L"resolution", L"r.height", NULL, RESOLUTION_CONFIG_FILE_NAME);
+		auto nCustomWidth = GetPrivateProfileIntW(L"resolution", L"r.width", NULL, RESOLUTION_CONFIG_FILE_NAME);
+		auto nCustomHeight = GetPrivateProfileIntW(L"resolution", L"r.height", NULL, RESOLUTION_CONFIG_FILE_NAME);
 		auto nTAA = GetPrivateProfileIntW(L"graphics", L"taa", TRUE, RESOLUTION_CONFIG_FILE_NAME);
 		auto nMLAA = GetPrivateProfileIntW(L"graphics", L"mlaa", TRUE, RESOLUTION_CONFIG_FILE_NAME);
-
-		int maxWidth = 2560;
-		int maxHeight = 1440;
 
 		if (nCustomRes)
 		{
 			printf("[TLAC] Custom internal resolution enabled\n");
-			if (nMaxWidth != NULL)
-			{
-				maxWidth = nMaxWidth;
-			}
-			if (nMaxHeight != NULL)
-			{
-				maxHeight = nMaxHeight;
-			}
-			printf("[TLAC] X: %d Y: %d\n", nMaxWidth, nMaxHeight);
+			printf("[TLAC] X: %d Y: %d\n", nCustomWidth, nCustomHeight);
+			// Requires -wqhd launch parameter
 			{
 				DWORD oldProtect, bck;
-				VirtualProtect((BYTE*)0x00000001409B8B30, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
-				*((int*)0x00000001409B8B30) = maxWidth;
-				VirtualProtect((BYTE*)0x00000001409B8B30, 6, oldProtect, &bck);
+				VirtualProtect((BYTE*)0x00000001409B8B68, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
+				*((int*)0x00000001409B8B68) = nCustomWidth;
+				VirtualProtect((BYTE*)0x00000001409B8B68, 6, oldProtect, &bck);
 			}
 			{
 				DWORD oldProtect, bck;
-				VirtualProtect((BYTE*)0x00000001409B8B34, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
-				*((int*)0x00000001409B8B34) = maxHeight;
-				VirtualProtect((BYTE*)0x00000001409B8B34, 6, oldProtect, &bck);
+				VirtualProtect((BYTE*)0x00000001409B8B6C, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
+				*((int*)0x00000001409B8B6C) = nCustomHeight;
+				VirtualProtect((BYTE*)0x00000001409B8B6C, 6, oldProtect, &bck);
 			}
+
 			//*((int*)0x00000001409B8B6C) = maxHeight;
 			//*((int*)0x00000001409B8B14) = maxWidth;
 			//*((int*)0x00000001409B8B18) = maxHeight;
+			
+			//*((int*)0x00000001409B8B1C) = maxWidth; // No parameters width?
+			//*((int*)0x00000001409B8B20) = maxHeight; // No parameters height?
 		}
 		if (!nTAA)
 		{
@@ -215,8 +211,6 @@ namespace TLAC
 
 			printf("[TLAC] MLAA disabled\n");
 		}
-
-
 	}
 
 	void InstallHooks()

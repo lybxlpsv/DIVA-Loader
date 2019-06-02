@@ -6,8 +6,8 @@
 #include "../framework.h"
 #include <chrono>
 #include <thread>
-#include <GL/glut.h>
 #include <tchar.h>
+#include <GL/glut.h>
 
 namespace TLAC::Components
 {
@@ -27,6 +27,26 @@ namespace TLAC::Components
 
 	void ScaleComponent::Initialize(ComponentsManager*)
 	{
+		const LPCTSTR RESOLUTION_CONFIG_FILE_NAME = _T(".\\plugins\\config.ini");
+		auto nFullscreen = GetPrivateProfileIntW(L"resolution", L"fullscreen", TRUE, RESOLUTION_CONFIG_FILE_NAME);
+		auto nWidth = GetPrivateProfileIntW(L"resolution", L"width", NULL, RESOLUTION_CONFIG_FILE_NAME);
+		auto nHeight = GetPrivateProfileIntW(L"resolution", L"height", NULL, RESOLUTION_CONFIG_FILE_NAME);
+		//auto nRefreshRate = GetPrivateProfileIntW(L"resolution", L"refreshrate", NULL, RESOLUTION_CONFIG_FILE_NAME);
+
+		if (nFullscreen)
+		{
+			glutFullScreen();
+			// glutEnterGameMode crashes, this one can specify refresh rate
+			printf("[TLAC] Fullscreen enabled\n");
+		}
+		else
+		{
+			// Only works with "-w" parameter, won't be able to resize window if not used, possible cause is "glutFitWindowSizeToDesktop"
+			glutPositionWindow(0, 20);
+			glutReshapeWindow(nWidth, nHeight);
+			//glutInitWindowSize(nWidth, nHeight);
+			printf("[TLAC] Windowed size - X: %d Y: %d\n", nWidth, nHeight);
+		}
 		{
 			DWORD oldProtect, bck;
 			VirtualProtect((BYTE*)0x00000001404ACD24, 7, PAGE_EXECUTE_READWRITE, &oldProtect);
@@ -62,30 +82,6 @@ namespace TLAC::Components
 			*((byte*)0x00000001405030A0 + 5) = 0x90;
 			VirtualProtect((BYTE*)0x00000001404ACD2B, 6, oldProtect, &bck);
 		}
-
-		const LPCTSTR RESOLUTION_CONFIG_FILE_NAME = _T(".\\plugins\\config.ini");
-		auto nFullscreen = GetPrivateProfileIntW(L"resolution", L"fullscreen", TRUE, RESOLUTION_CONFIG_FILE_NAME);
-		auto nWidth = GetPrivateProfileIntW(L"resolution", L"width", NULL, RESOLUTION_CONFIG_FILE_NAME);
-		auto nHeight = GetPrivateProfileIntW(L"resolution", L"height", NULL, RESOLUTION_CONFIG_FILE_NAME);
-		//auto nRefreshRate = GetPrivateProfileIntW(L"resolution", L"refreshrate", NULL, RESOLUTION_CONFIG_FILE_NAME);
-
-		if (nFullscreen)
-		{
-			glutFullScreen();
-			glutPostRedisplay;
-			printf("[TLAC] Fullscreen enabled\n");
-		}
-		else
-		{
-			// Only works with "-w" parameter, won't be able to resize window if not used, possible cause is "glutFitWindowSizeToDesktop"
-			glutPositionWindow(0, 12);
-			glutReshapeWindow(nWidth, nHeight);			
-			glutPostRedisplay;
-			printf("[TLAC] Windowed size - X: %d Y: %d\n", nWidth, nHeight);
-		}
-
-
-
 	}
 
 	void ScaleComponent::Update()
