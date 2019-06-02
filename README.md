@@ -39,7 +39,7 @@ Launch **"diva.exe"** with **"-wqhd"** to be able to use a custom internal resol
 
 Your **root** game folder should look like this:
 
-![root game folder](https://i.imgur.com/D48bJS0.png)
+![root game folder](https://i.imgur.com/c57lQPH.png)
 
 Your **"mdata"** folder should look like this:
 
