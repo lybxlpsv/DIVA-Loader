@@ -65,6 +65,8 @@ void ApplyPatches() {
 		{ (void*)0x0000000140502150, { 0x90 } },
 		// Toon Shader Outline Fix by lybxlpsv
 		{ (void*)0x0000000140641102, { 0x01 } },
+		// Disables call to glutFitWindowSizeToDesktop, this fixes the need to use -w for windowed mode (by Brolijah)
+		{ (void*)0x0000000140194E06, { 0x90, 0x90, 0x90, 0x90, 0x90 } }
 	};
 	printf("[Patches] Patches loaded\n");
 
