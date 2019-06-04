@@ -32,7 +32,6 @@ Use **"plugins\playerdata.ini"** to change your playername and other player cust
 Place any **Dynamic-link library (DLL)** with the filename extension as **".dva"** inside the **"plugins"** folder.\
 **TLAC v2.0** and an alternative for **"Prepatch"** are included by default.
 
-Launch **"diva.exe"** with **"-w"** to be able to use a custom windowed size, otherwise it will be always the size of the desktop.\
 Launch **"diva.exe"** with **"-wqhd"** to be able to use a custom internal resolution.
 
 ## Screenshots
