@@ -12,6 +12,7 @@
 #include "CameraController.h"
 #include "DebugComponent.h"
 #include "ScaleComponent.h"
+#include "FPSLimiter.h"
 
 using ConfigFile = TLAC::FileSystem::ConfigFile;
 
@@ -42,6 +43,7 @@ namespace TLAC::Components
 			new CameraController(),
 			new DebugComponent(),
 			new ScaleComponent(),
+			new FPSLimiter(),
 		};
 
 		ConfigFile componentsConfig(framework::GetModuleDirectory(), COMPONENTS_CONFIG_FILE_NAME);

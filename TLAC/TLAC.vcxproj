@@ -171,6 +171,7 @@
     <ClInclude Include="Components\DebugComponent.h" />
     <ClInclude Include="Components\EmulatorComponent.h" />
     <ClInclude Include="Components\FastLoader.h" />
+    <ClInclude Include="Components\FPSLimiter.h" />
     <ClInclude Include="Components\FrameRateManager.h" />
     <ClInclude Include="Components\GameState.h" />
     <ClInclude Include="Components\Input\InputBufferType.h" />
@@ -226,6 +227,7 @@
     <ClCompile Include="Components\DebugComponent.cpp" />
     <ClCompile Include="Components\EmulatorComponent.cpp" />
     <ClCompile Include="Components\FastLoader.cpp" />
+    <ClCompile Include="Components\FPSLimiter.cpp" />
     <ClCompile Include="Components\FrameRateManager.cpp" />
     <ClCompile Include="Components\Input\InputEmulator.cpp" />
     <ClCompile Include="Components\Input\InputState.cpp" />

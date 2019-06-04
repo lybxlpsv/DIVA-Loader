@@ -2,7 +2,7 @@
 #include "windows.h"
 #include "../Bindings/KeyboardBinding.h"
 #include "../Bindings/Ds4Binding.h"
-#include "../../Utilities/Operations.h"3
+#include "../../Utilities/Operations.h"
 #include "../Bindings/XinputBinding.h"
 #include "../../Constants.h"
 
