@@ -41,10 +41,14 @@ namespace TLAC::Components
 		}
 		else
 		{
-			// Only works with "-w" parameter, won't be able to resize window if not used, possible cause is "glutFitWindowSizeToDesktop"
-			glutPositionWindow(0, 20);
+			// Absolute center
 			glutReshapeWindow(nWidth, nHeight);
+			glutPositionWindow((glutGet(GLUT_SCREEN_WIDTH) - nWidth) / 2, (glutGet(GLUT_SCREEN_HEIGHT) - nHeight) / 2);
+
+			// Not working
 			//glutInitWindowSize(nWidth, nHeight);
+			//glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - nWidth) / 2, (glutGet(GLUT_SCREEN_HEIGHT) - nHeight) / 2);
+
 			printf("[TLAC] Windowed size - X: %d Y: %d\n", nWidth, nHeight);
 		}
 		{
