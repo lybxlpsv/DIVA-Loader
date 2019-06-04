@@ -39,7 +39,8 @@ namespace TLAC::Components
 		mBeginFrame = std::chrono::system_clock::now();
 		prevTimeInSeconds = std::chrono::time_point_cast<seconds>(mBeginFrame);
 		frameCountPerSecond = 0;
-		printf("FPSLimiter fpsLimit: %d\n", fpsLimit);
+		if(fpsLimit != 0)
+			printf("FPSLimiter fpsLimit: %d\n", fpsLimit);
 	}
 	
 	// I assume this gets called once per frame... if not this won't work
@@ -52,7 +53,7 @@ namespace TLAC::Components
 		++frameCountPerSecond;
 		if (timeInSeconds > prevTimeInSeconds)
 		{
-			printf("FPSLimiter::Update(): FPS: %d\n", frameCountPerSecond);
+			//printf("FPSLimiter::Update(): FPS: %d\n", frameCountPerSecond);
 			frameCountPerSecond = 0;
 			prevTimeInSeconds = timeInSeconds;
 		}
