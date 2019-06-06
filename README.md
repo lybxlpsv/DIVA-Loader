@@ -74,4 +74,4 @@ Solution for **Visual Studio 2019** platform toolset **v142** and **Windows 10 S
 
 Requires **Windows Universal CRT SDK**.
 
-Requires [**NVIDIA DesignWorks Cg Toolkit 3.1**](https://developer.nvidia.com/cg-toolkit-download)
+Requires [**NVIDIA DesignWorks Cg Toolkit 3.1**](https://developer.nvidia.com/cg-toolkit-download) or [**FreeGLUT 3.0.0 DIVA**](https://github.com/Rayduxz/FreeGLUT), if using the last you must change dependencies accordingly in each project.
