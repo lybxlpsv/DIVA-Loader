@@ -27,30 +27,6 @@ namespace TLAC::Components
 
 	void ScaleComponent::Initialize(ComponentsManager*)
 	{
-		const LPCTSTR RESOLUTION_CONFIG_FILE_NAME = _T(".\\plugins\\config.ini");
-		auto nFullscreen = GetPrivateProfileIntW(L"resolution", L"fullscreen", TRUE, RESOLUTION_CONFIG_FILE_NAME);
-		auto nWidth = GetPrivateProfileIntW(L"resolution", L"width", NULL, RESOLUTION_CONFIG_FILE_NAME);
-		auto nHeight = GetPrivateProfileIntW(L"resolution", L"height", NULL, RESOLUTION_CONFIG_FILE_NAME);
-		//auto nRefreshRate = GetPrivateProfileIntW(L"resolution", L"refreshrate", NULL, RESOLUTION_CONFIG_FILE_NAME);
-
-		if (nFullscreen)
-		{
-			glutFullScreen();
-			// glutEnterGameMode crashes, this one can specify refresh rate
-			printf("[TLAC] Fullscreen enabled\n");
-		}
-		else
-		{
-			// Absolute center
-			glutReshapeWindow(nWidth, nHeight);
-			glutPositionWindow((glutGet(GLUT_SCREEN_WIDTH) - nWidth) / 2, (glutGet(GLUT_SCREEN_HEIGHT) - nHeight) / 2);
-
-			// Not working
-			//glutInitWindowSize(nWidth, nHeight);
-			//glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - nWidth) / 2, (glutGet(GLUT_SCREEN_HEIGHT) - nHeight) / 2);
-
-			printf("[TLAC] Windowed size - X: %d Y: %d\n", nWidth, nHeight);
-		}
 		{
 			DWORD oldProtect, bck;
 			VirtualProtect((BYTE*)0x00000001404ACD24, 7, PAGE_EXECUTE_READWRITE, &oldProtect);
