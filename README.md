@@ -32,7 +32,6 @@ Use **"plugins\playerdata.ini"** to change your playername and other player cust
 Place any **Dynamic-link library (DLL)** with the filename extension as **".dva"** inside the **"plugins"** folder.\
 **TLAC v2.0** and an alternative for **"Prepatch"** are included by default.
 
-Launch **"diva.exe"** with **"-w"** to be able to use a custom windowed size, otherwise it will be always the size of the desktop.\
 Launch **"diva.exe"** with **"-wqhd"** to be able to use a custom internal resolution.
 
 ## Screenshots
@@ -75,4 +74,4 @@ Solution for **Visual Studio 2019** platform toolset **v142** and **Windows 10 S
 
 Requires **Windows Universal CRT SDK**.
 
-Requires [**NVIDIA DesignWorks Cg Toolkit 3.1**](https://developer.nvidia.com/cg-toolkit-download)
+Requires [**NVIDIA DesignWorks Cg Toolkit 3.1**](https://developer.nvidia.com/cg-toolkit-download) or [**FreeGLUT 3.0.0 DIVA**](https://github.com/Rayduxz/FreeGLUT), if using the last you must change dependencies accordingly in each project.
