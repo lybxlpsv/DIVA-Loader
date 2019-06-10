@@ -13,6 +13,7 @@
 #include "DebugComponent.h"
 #include "ScaleComponent.h"
 #include "FPSLimiter.h"
+#include "GameTargets/TargetInspector.h"
 
 using ConfigFile = TLAC::FileSystem::ConfigFile;
 
@@ -32,6 +33,7 @@ namespace TLAC::Components
 	{
 		EmulatorComponent *allComponents[]
 		{
+			new TargetInspector(),
 			new InputEmulator(),
 			new TouchSliderEmulator(),
 			new TouchPanelEmulator(),
@@ -43,7 +45,8 @@ namespace TLAC::Components
 			new CameraController(),
 			new DebugComponent(),
 			new ScaleComponent(),
-			new FPSLimiter(),
+			new FPSLimiter()
+
 		};
 
 		ConfigFile componentsConfig(framework::GetModuleDirectory(), COMPONENTS_CONFIG_FILE_NAME);
