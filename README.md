@@ -30,9 +30,9 @@ Use **"plugins\keyconfig.ini"** to change your game keybinds.\
 Use **"plugins\playerdata.ini"** to change your playername and other player customization.
 
 Place any **Dynamic-link library (DLL)** with the filename extension as **".dva"** inside the **"plugins"** folder.\
-**TLAC v2.0** and an alternative for **"Prepatch"** are included by default.
+**TLAC v2.0** with community modifications and an alternative for **"Prepatch"** are included by default.
 
-Launch **"diva.exe"** with **"-wqhd"** to be able to use a custom internal resolution.
+Launch **"diva.exe"**.
 
 ## Screenshots
 
@@ -54,6 +54,8 @@ Please make sure to update tests as appropriate.
 
 ## FAQ
 
+[Community Discord](https://discord.gg/cvBVGDZ)
+
 Compatible with **Windows 7** except for WMV PV videos.
 
 Previous versions used **dinput8.dll** in the game root folder, if you still have it you must delete it.
@@ -62,16 +64,27 @@ Previous versions used **dinput8.dll** in the game root folder, if you still hav
 
 Special thanks to **korenkonder** for **"PvList"**.
 
-Configuration files for **TLAC** and any other compatible extension may possibly be read from **"plugins\"** instead of the root folder of the game, this depends of each plugin.
+Configuration files for **TLAC** and any other compatible extension may be possibly read from **"plugins\"** instead of the root folder of the game, this depends of each plugin.
 
 [TLAC (TotallyLegitArcadeController) v2.0](https://github.com/samyuu/TotallyLegitArcadeController) by **Samyuu**.
+
+Special thanks to **Brolijah** for his help with IDA, game addresses and very useful tips.
 
 ## Developer FAQ
 
 This is a stripdown of [**ThirteenAG's** Ultimate ASI Loader v4.47](https://github.com/ThirteenAG/Ultimate-ASI-Loader/) for **"dnsapi.dll"** usage only.
 
-Solution for **Visual Studio 2019** platform toolset **v142** and **Windows 10 SDK (10.0.17763.0)**.
+Solution for **Visual Studio 2019**. 
+Requires platform toolset **v142**.
+Requires **Windows 10 SDK (10.0.17763.0)**.
 
+Requires **Desktop development with C++**.
 Requires **Windows Universal CRT SDK**.
 
-Requires [**NVIDIA DesignWorks Cg Toolkit 3.1**](https://developer.nvidia.com/cg-toolkit-download) or [**FreeGLUT 3.0.0 DIVA**](https://github.com/Rayduxz/FreeGLUT), if using the last you must change dependencies accordingly in each project.
+Requires **.NET desktop development** (Launcher plugin)
+Requires **.NET Framework 4 targeting pack** (Launcher plugin)
+Requires **C++/CLI support for v142 build tools (14.21)** (Launcher plugin)
+
+Requires [**FreeGLUT 3.0.0 DIVA**](https://github.com/Rayduxz/FreeGLUT) (included in the solution).
+
+
