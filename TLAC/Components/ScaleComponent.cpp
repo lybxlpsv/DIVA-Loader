@@ -7,7 +7,7 @@
 #include <chrono>
 #include <thread>
 #include <tchar.h>
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 
 namespace TLAC::Components
 {

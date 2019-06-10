@@ -6,6 +6,8 @@
 #include <string>
 
 static int(__cdecl* divaCreateWindow)(const char* title, void(__cdecl* exitfunc)(int)) = (int(__cdecl*)(const char* title, void(__cdecl * exitfunc)(int)))0x140194D00;
+static void(__stdcall* divaParseParameters)(__int64* a1, uint8_t* a2, __int64* a3, __int64* a4, __int64* a5, uint8_t* a6) = (void(__stdcall*)(__int64* a1, uint8_t * a2, __int64* a3, __int64* a4, __int64* a5, uint8_t * a6))0x140193630;
+
 uint8_t* fullScreenFlag = (uint8_t*)0x140EDA5D1;
 DWORD* resolutionType = (DWORD*)0x140EDA5D4;
 
@@ -25,6 +27,8 @@ int nFullscreen = GetPrivateProfileInt("resolution", "fullscreen", TRUE, CONFIG_
 int nBorderless = GetPrivateProfileInt("resolution", "borderless", FALSE, CONFIG_FILE);
 int nWidth = GetPrivateProfileInt("resolution", "width", 1280, CONFIG_FILE);
 int nHeight = GetPrivateProfileInt("resolution", "height", 720, CONFIG_FILE);
+int nRefreshRate = GetPrivateProfileInt("resolution", "refreshrate", 60, CONFIG_FILE);
+int nBitDepth = GetPrivateProfileInt("resolution", "bitdepth", 32, CONFIG_FILE);
 
 int nIntRes = GetPrivateProfileInt("resolution", "r.enable", FALSE, CONFIG_FILE);
 int nIntResWidth = GetPrivateProfileInt("resolution", "r.width", 1280, CONFIG_FILE);

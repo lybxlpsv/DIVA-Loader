@@ -109,8 +109,8 @@ namespace TLAC::Components
 
 		InjectPatches();
 
-		/*HWND consoleHandle = GetConsoleWindow();
-		ShowWindow(consoleHandle, SW_SHOW);*/
+		HWND consoleHandle = GetConsoleWindow();
+		ShowWindow(consoleHandle, SW_SHOW);
 
 		// In case the FrameRateManager isn't enabled
 		DWORD oldProtect;

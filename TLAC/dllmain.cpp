@@ -12,7 +12,7 @@
 #include "Input/DirectInput/Ds4/DualShock4.h"
 #include "Components/ComponentsManager.h"
 #include <tchar.h>
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 
 LRESULT CALLBACK MessageWindowProcessCallback(HWND, UINT, WPARAM, LPARAM);
 DWORD WINAPI WindowMessageDispatcher(LPVOID);
@@ -33,11 +33,6 @@ namespace TLAC
 	bool DeviceConnected = true;
 	bool FirstUpdateTick = true;
 	bool HasWindowFocus, HadWindowFocus;
-
-	void InstallCustomResolution()
-	{
-
-	}
 
 	void* InstallHook(void* source, void* destination, int length)
 	{
@@ -118,6 +113,11 @@ namespace TLAC
 		HadWindowFocus = HasWindowFocus;
 		HasWindowFocus = framework::DivaWindowHandle == NULL || GetForegroundWindow() == framework::DivaWindowHandle;
 
+		if (HasWindowFocus && GetAsyncKeyState(VK_ESCAPE))
+		{
+			exit(1);
+		}
+
 		if ((HasWindowFocus) && (!framework::inputDisable))
 		{
 			Input::Keyboard::GetInstance()->PollInput();
@@ -172,8 +172,8 @@ namespace TLAC
 		{
 			printf("[TLAC] Custom internal resolution enabled\n");
 			printf("[TLAC] X: %d Y: %d\n", nCustomWidth, nCustomHeight);
-			// Requires -wqhd launch parameter
-			/*{
+			// Requires -wqhd launch parameter or Render.dva plugin
+			{
 				DWORD oldProtect, bck;
 				VirtualProtect((BYTE*)0x00000001409B8B68, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
 				*((int*)0x00000001409B8B68) = nCustomWidth;
@@ -184,18 +184,6 @@ namespace TLAC
 				VirtualProtect((BYTE*)0x00000001409B8B6C, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
 				*((int*)0x00000001409B8B6C) = nCustomHeight;
 				VirtualProtect((BYTE*)0x00000001409B8B6C, 6, oldProtect, &bck);
-			}*/
-			{
-				DWORD oldProtect, bck;
-				VirtualProtect((BYTE*)0x00000001409B8B1C, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
-				*((int*)0x00000001409B8B1C) = nCustomWidth;
-				VirtualProtect((BYTE*)0x00000001409B8B1C, 6, oldProtect, &bck);
-			}
-			{
-				DWORD oldProtect, bck;
-				VirtualProtect((BYTE*)0x00000001409B8B20, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
-				*((int*)0x00000001409B8B20) = nCustomHeight;
-				VirtualProtect((BYTE*)0x00000001409B8B20, 6, oldProtect, &bck);
 			}
 
 			//*((int*)0x00000001409B8B6C) = maxHeight;
@@ -247,9 +235,14 @@ namespace TLAC
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
 {
+	HWND consoleHandle = GetConsoleWindow();
+
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
+
+		ShowWindow(consoleHandle, SW_HIDE);
+
 		printf("[TLAC] DllMain(): Installing hooks...\n");
 
 		TLAC::InstallHooks();

@@ -1,7 +1,7 @@
 #include "windows.h"
 #include "vector"
 #include <tchar.h>
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 
 void InjectCode(void* address, const std::initializer_list<uint8_t>& data);
 void ApplyPatches();
