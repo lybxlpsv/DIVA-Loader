@@ -180,6 +180,21 @@
     <ClInclude Include="Components\FPSLimiter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Components\GameTargets\HoldState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\GameTargets\TargetHitStates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\GameTargets\TargetInspector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\GameTargets\TargetState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\GameTargets\TargetTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -312,6 +327,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Components\FPSLimiter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\GameTargets\TargetInspector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

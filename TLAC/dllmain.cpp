@@ -173,7 +173,7 @@ namespace TLAC
 			printf("[TLAC] Custom internal resolution enabled\n");
 			printf("[TLAC] X: %d Y: %d\n", nCustomWidth, nCustomHeight);
 			// Requires -wqhd launch parameter
-			{
+			/*{
 				DWORD oldProtect, bck;
 				VirtualProtect((BYTE*)0x00000001409B8B68, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
 				*((int*)0x00000001409B8B68) = nCustomWidth;
@@ -184,6 +184,18 @@ namespace TLAC
 				VirtualProtect((BYTE*)0x00000001409B8B6C, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
 				*((int*)0x00000001409B8B6C) = nCustomHeight;
 				VirtualProtect((BYTE*)0x00000001409B8B6C, 6, oldProtect, &bck);
+			}*/
+			{
+				DWORD oldProtect, bck;
+				VirtualProtect((BYTE*)0x00000001409B8B1C, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
+				*((int*)0x00000001409B8B1C) = nCustomWidth;
+				VirtualProtect((BYTE*)0x00000001409B8B1C, 6, oldProtect, &bck);
+			}
+			{
+				DWORD oldProtect, bck;
+				VirtualProtect((BYTE*)0x00000001409B8B20, 4, PAGE_EXECUTE_READWRITE, &oldProtect);
+				*((int*)0x00000001409B8B20) = nCustomHeight;
+				VirtualProtect((BYTE*)0x00000001409B8B20, 6, oldProtect, &bck);
 			}
 
 			//*((int*)0x00000001409B8B6C) = maxHeight;
@@ -215,8 +227,6 @@ namespace TLAC
 
 	void InstallHooks()
 	{
-		HWND consoleHandle = GetConsoleWindow();
-		ShowWindow(consoleHandle, SW_HIDE);
 		InstallHook((void*)ENGINE_UPDATE_HOOK_TARGET_ADDRESS, (void*)UpdateTick, 0xE);
 		InitializeExtraSettings();
 	}
