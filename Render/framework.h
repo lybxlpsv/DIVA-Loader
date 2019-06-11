@@ -6,7 +6,7 @@
 #include <string>
 
 static int(__cdecl* divaCreateWindow)(const char* title, void(__cdecl* exitfunc)(int)) = (int(__cdecl*)(const char* title, void(__cdecl * exitfunc)(int)))0x140194D00;
-static void(__stdcall* divaParseParameters)(__int64* a1, uint8_t* a2, __int64* a3, __int64* a4, __int64* a5, uint8_t* a6) = (void(__stdcall*)(__int64* a1, uint8_t * a2, __int64* a3, __int64* a4, __int64* a5, uint8_t * a6))0x140193630;
+__int64 (__fastcall* divaParseParameters)(int a1, __int64* a2) = (__int64(__fastcall*)(int a1, __int64* a2))0x140193630;
 
 uint8_t* fullScreenFlag = (uint8_t*)0x140EDA5D1;
 DWORD* resolutionType = (DWORD*)0x140EDA5D4;

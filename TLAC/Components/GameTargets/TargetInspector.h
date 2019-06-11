@@ -28,7 +28,7 @@ namespace TLAC::Components
 
 	private:
 		const uint64_t offset = 0x4A8;
-		const float timingThreshold = 0.07f;
+		const float timingThreshold = 0.13f; // PS4 estimate
 
 		TargetState tgtStates[maxTargetSlots];
 

@@ -46,13 +46,13 @@ int hookedCreateWindow(const char* title, void(__cdecl* exit_function)(int))
 	return true;
 }
 
-void hookedParseParameters(__int64* a1, uint8_t* a2, __int64* a3, __int64* a4, __int64* a5, uint8_t* a6)
+__int64 hookedParseParameters(int a1, __int64* a2)
 {
 	// Force -wqhd if Custom Internal Resolution enabled
 	if (nIntRes)
 		*resolutionType = 15;
 	// Return to the original function
-	return divaParseParameters(a1, a2, a3, a4, a5, a6);
+	return divaParseParameters(a1, a2);
 }
 
 
