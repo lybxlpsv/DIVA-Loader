@@ -31,7 +31,7 @@ namespace TLAC::Components
 
 	void ComponentsManager::ParseAddComponents()
 	{
-		EmulatorComponent *allComponents[]
+		EmulatorComponent* allComponents[]
 		{
 			new TargetInspector(),
 			new InputEmulator(),
@@ -41,12 +41,11 @@ namespace TLAC::Components
 			new PlayerDataManager(),
 			new FrameRateManager(),
 			new FastLoader(),
+			new ScaleComponent(),
+			new FPSLimiter(),
 			new StageManager(),
 			new CameraController(),
 			new DebugComponent(),
-			new ScaleComponent(),
-			new FPSLimiter()
-
 		};
 
 		ConfigFile componentsConfig(framework::GetModuleDirectory(), COMPONENTS_CONFIG_FILE_NAME);
@@ -65,7 +64,7 @@ namespace TLAC::Components
 
 		for (int i = 0; i < componentCount; i++)
 		{
-			std::string *value;
+			std::string* value;
 
 			auto name = allComponents[i]->GetDisplayName();
 			//printf("ComponentsManager::ParseAddComponents(): searching name: %s\n", name);
@@ -101,8 +100,8 @@ namespace TLAC::Components
 
 	void ComponentsManager::Initialize()
 	{
-		dwGuiDisplay = (DwGuiDisplay*)*(uint64_t*)DW_GUI_DISPLAY_INSTANCE_PTR_ADDRESS;
-		
+		dwGuiDisplay = (DwGuiDisplay*) * (uint64_t*)DW_GUI_DISPLAY_INSTANCE_PTR_ADDRESS;
+
 		ParseAddComponents();
 		updateStopwatch.Start();
 
@@ -129,7 +128,7 @@ namespace TLAC::Components
 
 			// poll input using the original PollInput function we overwrote with the update hook instead
 			if (inputStatePtr != nullptr)
-				((EngineUpdateInput*)ENGINE_UPDATE_INPUT_ADDRESS)((void*)*inputStatePtr);
+				((EngineUpdateInput*)ENGINE_UPDATE_INPUT_ADDRESS)((void*)* inputStatePtr);
 		}
 
 		for (auto& component : components)
