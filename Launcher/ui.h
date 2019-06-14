@@ -25,6 +25,7 @@ namespace Launcher {
 			// Beta version, components not working yet and hidden
 			tabPage_Components->Enabled = false;
 
+			// Not working, but saving the settings does works
 			checkBox_Stereo->Checked = nStereo;
 			checkBox_Cursor->Checked = nCursor;
 			checkBox_TAA->Checked = nTAA;
@@ -622,6 +623,8 @@ private: System::Void Button_Exit_Click(System::Object^ sender, System::EventArg
 	exit(1);
 }
 private: System::Void Button_Launch_Click(System::Object^ sender, System::EventArgs^ e) {
+	// Working fine, but reading the settings are not working
+
 	String^ userInput = textBox_Height->Text;
 	string input = msclr::interop::marshal_as<std::string>(userInput);
 	WritePrivateProfileString("resolution", "height", input.c_str(), CONFIG_FILE);
@@ -670,7 +673,11 @@ private: System::Void Button_Launch_Click(System::Object^ sender, System::EventA
 	input = msclr::interop::marshal_as<std::string>(userInput);
 	WritePrivateProfileString("graphics", "FPS.Limit", input.c_str(), CONFIG_FILE);
 
-	ui::Close();
+	// Not working?
+	if (CreateProcess(DIVA_EXECUTABLE, DIVA_EXECUTABLE_LAUNCH, 0, 0, false, DETACHED_PROCESS, 0, 0, NULL, NULL))
+
+	exit(1);
 }
 };
 }
+

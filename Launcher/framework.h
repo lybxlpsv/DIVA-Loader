@@ -5,7 +5,11 @@
 #include <windows.h>
 #include <string>
 
+int (__cdecl* divaMain)(int argc, const char** argv, const char** envp) = (int(__cdecl*)(int argc, const char** argv, const char** envp))0x140194D90;
+
 using namespace std;
+
+string arg;
 
 string DirPath() {
 	char buffer[MAX_PATH];
@@ -15,6 +19,10 @@ string DirPath() {
 }
 
 string CONFIG_FILE_STRING = DirPath() + "\\plugins\\config.ini";
+string DIVA_EXECUTABLE_STRING = DirPath() + "\\diva.exe";
+string DIVA_EXECUTABLE_LAUNCH_STRING = DirPath() + "\\diva.exe --launch";
+LPCSTR DIVA_EXECUTABLE = DIVA_EXECUTABLE_STRING.c_str();
+LPSTR DIVA_EXECUTABLE_LAUNCH = const_cast<char*>(DIVA_EXECUTABLE_LAUNCH_STRING.c_str());
 LPCSTR CONFIG_FILE = CONFIG_FILE_STRING.c_str();
 
 int nFullscreen = GetPrivateProfileInt("resolution", "fullscreen", TRUE, CONFIG_FILE);
