@@ -623,7 +623,6 @@ private: System::Void Button_Exit_Click(System::Object^ sender, System::EventArg
 	exit(1);
 }
 private: System::Void Button_Launch_Click(System::Object^ sender, System::EventArgs^ e) {
-	// Working fine, but reading the settings are not working
 
 	String^ userInput = textBox_Height->Text;
 	string input = msclr::interop::marshal_as<std::string>(userInput);
@@ -633,15 +632,15 @@ private: System::Void Button_Launch_Click(System::Object^ sender, System::EventA
 	input = msclr::interop::marshal_as<std::string>(userInput);
 	WritePrivateProfileString("resolution", "width", input.c_str(), CONFIG_FILE);
 
-	userInput = checkBox_Fullscreen->Checked.ToString();
+	userInput = Convert::ToInt32(checkBox_Fullscreen->Checked).ToString();
 	input = msclr::interop::marshal_as<std::string>(userInput);
 	WritePrivateProfileString("resolution", "fullscreen", input.c_str(), CONFIG_FILE);
 
-	userInput = checkBox_Borderless->Checked.ToString();
+	userInput = Convert::ToInt32(checkBox_Borderless->Checked).ToString();
 	input = msclr::interop::marshal_as<std::string>(userInput);
 	WritePrivateProfileString("resolution", "borderless", input.c_str(), CONFIG_FILE);
 
-	userInput = checkBox_InternalRes->Checked.ToString();
+	userInput = Convert::ToInt32(checkBox_InternalRes->Checked).ToString();
 	input = msclr::interop::marshal_as<std::string>(userInput);
 	WritePrivateProfileString("resolution", "r.enable", input.c_str(), CONFIG_FILE);
 
@@ -653,19 +652,19 @@ private: System::Void Button_Launch_Click(System::Object^ sender, System::EventA
 	input = msclr::interop::marshal_as<std::string>(userInput);
 	WritePrivateProfileString("resolution", "r.width", input.c_str(), CONFIG_FILE);
 
-	userInput = checkBox_Cursor->Checked.ToString();
+	userInput = Convert::ToInt32(checkBox_Cursor->Checked).ToString();
 	input = msclr::interop::marshal_as<std::string>(userInput);
 	WritePrivateProfileString("patches", "cursor", input.c_str(), CONFIG_FILE);
 
-	userInput = checkBox_Stereo->Checked.ToString();
+	userInput = Convert::ToInt32(checkBox_Stereo->Checked).ToString();
 	input = msclr::interop::marshal_as<std::string>(userInput);
 	WritePrivateProfileString("patches", "stereo", input.c_str(), CONFIG_FILE);
 
-	userInput = checkBox_TAA->Checked.ToString();
+	userInput = Convert::ToInt32(checkBox_TAA->Checked).ToString();
 	input = msclr::interop::marshal_as<std::string>(userInput);
 	WritePrivateProfileString("graphics", "TAA", input.c_str(), CONFIG_FILE);
 
-	userInput = checkBox_MLAA->Checked.ToString();
+	userInput = Convert::ToInt32(checkBox_MLAA->Checked).ToString();
 	input = msclr::interop::marshal_as<std::string>(userInput);
 	WritePrivateProfileString("graphics", "MLAA", input.c_str(), CONFIG_FILE);
 
@@ -673,8 +672,13 @@ private: System::Void Button_Launch_Click(System::Object^ sender, System::EventA
 	input = msclr::interop::marshal_as<std::string>(userInput);
 	WritePrivateProfileString("graphics", "FPS.Limit", input.c_str(), CONFIG_FILE);
 
-	// Not working?
-	if (CreateProcess(DIVA_EXECUTABLE, DIVA_EXECUTABLE_LAUNCH, 0, 0, false, DETACHED_PROCESS, 0, 0, NULL, NULL))
+	STARTUPINFO si;
+	PROCESS_INFORMATION pi;
+
+	ZeroMemory(&si, sizeof(si));
+	si.cb = sizeof(si);
+	ZeroMemory(&pi, sizeof(pi));
+	CreateProcess(DIVA_EXECUTABLE, DIVA_EXECUTABLE_LAUNCH, NULL, NULL, false, DETACHED_PROCESS, NULL, NULL, &si, &pi);
 
 	exit(1);
 }

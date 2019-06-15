@@ -1,6 +1,6 @@
 # DIVA Loader
 
-**DIVA Loader** lets you load plugins into **Hatsune Miku Project DIVA Arcade Future Tone** by placing them into the **"plugins"** folder, it includes useful ones such as **TLAC** and **Prepatch** by **Samyuu** in the form of a plugin without needing to use extra executables.
+**DIVA Loader** lets you load plugins into **Hatsune Miku Project DIVA Arcade Future Tone** by placing them into the **"plugins"** folder, it includes useful ones such as **TLAC**, **Prepatch** and a **Launcher** in the form of a plugin without needing to use extra executables.
 
 ## Installation
 
@@ -30,9 +30,10 @@ Use **"plugins\keyconfig.ini"** to change your game keybinds.\
 Use **"plugins\playerdata.ini"** to change your playername and other player customization.
 
 Place any **Dynamic-link library (DLL)** with the filename extension as **".dva"** inside the **"plugins"** folder.\
-**TLAC v2.0** with community modifications and an alternative for **"Prepatch"** are included by default.
+**TLAC v2.0** with community modifications,an alternative for **"Prepatch"** and a **"Launcher"** are included by default.
 
 Launch **"diva.exe"**.
+Use **"--launch"** argument to bypass the launcher.
 
 ## Screenshots
 
@@ -54,21 +55,15 @@ Please make sure to update tests as appropriate.
 
 ## FAQ
 
-[Community Discord](https://discord.gg/cvBVGDZ)
-
 Compatible with **Windows 7** except for WMV PV videos.
 
 Previous versions used **dinput8.dll** in the game root folder, if you still have it you must delete it.
 
-**"Prepatch"** is not needed, it works with the original game executable. Special thanks to **Skyth**.
-
-Special thanks to **korenkonder** for **"PvList"**.
-
-Configuration files for **TLAC** and any other compatible extension may be possibly read from **"plugins\"** instead of the root folder of the game, this depends of each plugin.
+**"Prepatch"** is not needed, it works with the original game executable.
 
 [TLAC (TotallyLegitArcadeController) v2.0](https://github.com/samyuu/TotallyLegitArcadeController) by **Samyuu**.
 
-Special thanks to **Brolijah** for his help with IDA, game addresses and very useful tips.
+Special thanks to **Brolijah**, **Skyth**, **korenkonder**, **Samyuu**, **somewhatlurker**, **Cainan** and everyone else who helped at [Project DIVA Modding 2nd Community Discord](https://discord.gg/cvBVGDZ).
 
 ## Developer FAQ
 
