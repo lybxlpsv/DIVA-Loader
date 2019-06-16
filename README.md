@@ -63,7 +63,7 @@ Previous versions used **dinput8.dll** in the game root folder, if you still hav
 
 [TLAC (TotallyLegitArcadeController) v2.0](https://github.com/samyuu/TotallyLegitArcadeController) by **Samyuu**.
 
-Special thanks to **Brolijah**, **Skyth**, **korenkonder**, **Samyuu**, **somewhatlurker**, **Cainan** and everyone else who helped at [Project DIVA Modding 2nd Community Discord](https://discord.gg/cvBVGDZ).
+Special thanks to **Brolijah**, **Skyth**, **korenkonder**, **Samyuu**, **somewhatlurker**, **Cainan**, **crash5band**, **vladkorotnev** and everyone else who helped at [Project DIVA Modding 2nd Community Discord](https://discord.gg/cvBVGDZ).
 
 ## Developer FAQ
 
