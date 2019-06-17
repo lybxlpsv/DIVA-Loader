@@ -80,6 +80,7 @@ Requires **.NET desktop development** (Launcher plugin)
 Requires **.NET Framework 4 targeting pack** (Launcher plugin)
 Requires **C++/CLI support for v142 build tools (14.21)** (Launcher plugin)
 
+Requires [**Microsoft Research Detours Package**](https://github.com/microsoft/Detours) (included in the solution).
 Requires [**FreeGLUT 3.0.0 DIVA**](https://github.com/Rayduxz/FreeGLUT) (included in the solution).
 
 
