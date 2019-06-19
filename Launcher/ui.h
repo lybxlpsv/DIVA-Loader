@@ -431,7 +431,7 @@ namespace Launcher {
 			// 
 			this->checkBox_HideStatusIcons->AutoSize = true;
 			this->checkBox_HideStatusIcons->Location = System::Drawing::Point(3, 49);
-			this->checkBox_HideStatusIcons->Name = L"checkBox_Cursor";
+			this->checkBox_HideStatusIcons->Name = L"checkBox_HideStatusIcons";
 			this->checkBox_HideStatusIcons->Size = System::Drawing::Size(56, 17);
 			this->checkBox_HideStatusIcons->TabIndex = 1;
 			this->checkBox_HideStatusIcons->Text = L"Hide Status Icons";
