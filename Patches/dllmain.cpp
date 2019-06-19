@@ -6,7 +6,7 @@
 void InjectCode(void* address, const std::initializer_list<uint8_t>& data);
 void ApplyPatches();
 
-const LPCTSTR CONFIG_FILE = _T(".\\config.ini");
+const LPCWSTR CONFIG_FILE = L".\\config.ini";
 
 BOOL APIENTRY DllMain(HMODULE hModule,
 	DWORD  ul_reason_for_call,
@@ -73,6 +73,7 @@ void ApplyPatches() {
 
 	auto nStereo = GetPrivateProfileIntW(L"patches", L"stereo", FALSE, CONFIG_FILE);
 	auto nCursor = GetPrivateProfileIntW(L"patches", L"cursor", TRUE, CONFIG_FILE);
+	auto nHideStatusIcons = GetPrivateProfileIntW(L"patches", L"hide_status_icons", FALSE, CONFIG_FILE);
 	// Initialize Audio with dual-channels instead of quads
 	if (nStereo)
 	{
@@ -84,6 +85,14 @@ void ApplyPatches() {
 	{
 		InjectCode((void*)0x000000014019341B, { 0x00 });	
 		printf("[Patches] Cursor enabled\n");
+	}
+	// Dirty hack to hide card reader and network status icons from corner of screen
+	if (nHideStatusIcons)		
+	{
+		InjectCode((void*)0x00000001409F6210, { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }); // p_icon_card_c
+		InjectCode((void*)0x00000001409F6220, { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }); // p_icon_data_c
+		InjectCode((void*)0x00000001409F6230, { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }); // p_net_base_c
+		printf("[Patches] Status icons hidden\n");
 	}
 }
 
