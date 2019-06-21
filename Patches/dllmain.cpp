@@ -89,8 +89,19 @@ void ApplyPatches() {
 	// Override status icon states to be invalid (hides them)
 	if (nHideStatusIcons)		
 	{
-		InjectCode((void*)0x00000001403B9D6E, { 0xFD, 0x0A }); // card -- `{ 0xFC, 0x0A }` for green icon
-		InjectCode((void*)0x00000001403BA14B, { 0x00, 0x1E }); // network -- `{ 0xA0, 0x1E }` for green icon, `{ 0xA1, 0x1E }` for yellow warning icon
+		// card icon
+		// `{ 0xFD, 0x0A }` for hidden, `{ 0xFA, 0x0A }` for error icon, `{ 0xFC, 0x0A }` for OK icon
+		InjectCode((void*)0x00000001403B9D6E, { 0xFD, 0x0A }); // error state
+		InjectCode((void*)0x00000001403B9D73, { 0xFD, 0x0A }); // OK state
+		
+		// network icon
+		// `{ 0x00, 0x1E }` for hidden, `{ 0x9F, 0x1E }` for error icon, `{ 0xA0, 0x1E }` for OK icon, `{ 0xA1, 0x1E }` for partial connection (yellow) icon
+		InjectCode((void*)0x00000001403BA14B, { 0x00, 0x1E }); // error state
+		InjectCode((void*)0x00000001403BA155, { 0x00, 0x1E }); // OK state
+		InjectCode((void*)0x00000001403BA16B, { 0x00, 0x1E }); // partial state
+		
+		InjectCode((void*)0x00000001403BA1A5, { 0x48, 0xE9 }); // never show the error code for partial connection
+		
 		printf("[Patches] Status icons hidden\n");
 	}
 }
