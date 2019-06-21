@@ -69,18 +69,18 @@ Special thanks to **Brolijah**, **Skyth**, **korenkonder**, **Samyuu**, **somewh
 
 This is a stripdown of [**ThirteenAG's** Ultimate ASI Loader v4.47](https://github.com/ThirteenAG/Ultimate-ASI-Loader/) for **"dnsapi.dll"** usage only.
 
-Solution for **Visual Studio 2019**. 
-Requires platform toolset **v142**.
+Solution for **Visual Studio 2019**.\
+Requires platform toolset **v142**.\
 Requires **Windows 10 SDK (10.0.17763.0)**.
 
-Requires **Desktop development with C++**.
+Requires **Desktop development with C++**.\
 Requires **Windows Universal CRT SDK**.
 
-Requires **.NET desktop development** (Launcher plugin)
-Requires **.NET Framework 4 targeting pack** (Launcher plugin)
+Requires **.NET desktop development** (Launcher plugin).\
+Requires **.NET Framework 4 targeting pack** (Launcher plugin).\
 Requires **C++/CLI support for v142 build tools (14.21)** (Launcher plugin)
 
-Requires [**Microsoft Research Detours Package**](https://github.com/microsoft/Detours) (included in the solution).
+Requires [**Microsoft Research Detours Package**](https://github.com/microsoft/Detours) (included in the solution).\
 Requires [**FreeGLUT 3.0.0 DIVA**](https://github.com/Rayduxz/FreeGLUT) (included in the solution).
 
 
