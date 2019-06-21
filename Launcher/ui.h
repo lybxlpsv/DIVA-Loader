@@ -1,6 +1,7 @@
 #pragma once
 #include "framework.h"
 #include <msclr\marshal_cppstd.h>
+#include <cstdlib>
 
 namespace Launcher {
 
@@ -634,7 +635,7 @@ namespace Launcher {
 private: System::Void Ui_Load(System::Object^ sender, System::EventArgs^ e){
 }
 private: System::Void Button_Exit_Click(System::Object^ sender, System::EventArgs^ e) {
-	exit(1);
+	exit(EXIT_SUCCESS);
 }
 private: System::Void Button_Launch_Click(System::Object^ sender, System::EventArgs^ e) {
 
@@ -698,7 +699,7 @@ private: System::Void Button_Launch_Click(System::Object^ sender, System::EventA
 	ZeroMemory(&pi, sizeof(pi));
 	CreateProcess(DIVA_EXECUTABLE, DIVA_EXECUTABLE_LAUNCH, NULL, NULL, false, DETACHED_PROCESS, NULL, NULL, &si, &pi);
 
-	exit(1);
+	exit(EXIT_SUCCESS);
 }
 };
 }
