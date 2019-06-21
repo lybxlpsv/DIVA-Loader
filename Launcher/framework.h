@@ -36,6 +36,7 @@ int nIntResHeight = GetPrivateProfileInt("resolution", "r.height", 720, CONFIG_F
 
 int nStereo = GetPrivateProfileInt("patches", "stereo", FALSE, CONFIG_FILE);
 int nCursor = GetPrivateProfileInt("patches", "cursor", TRUE, CONFIG_FILE);
+int nHideStatusIcons = GetPrivateProfileInt("patches", "hide_status_icons", FALSE, CONFIG_FILE);
 int nTAA = GetPrivateProfileInt("graphics", "TAA", TRUE, CONFIG_FILE);
 int nMLAA = GetPrivateProfileInt("graphics", "MLAA", TRUE, CONFIG_FILE);
 

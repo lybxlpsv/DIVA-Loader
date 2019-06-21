@@ -1,6 +1,7 @@
 #pragma once
 #include "framework.h"
 #include <msclr\marshal_cppstd.h>
+#include <cstdlib>
 
 namespace Launcher {
 
@@ -28,6 +29,7 @@ namespace Launcher {
 			// Not working, but saving the settings does works
 			checkBox_Stereo->Checked = nStereo;
 			checkBox_Cursor->Checked = nCursor;
+			checkBox_HideStatusIcons->Checked = nHideStatusIcons;
 			checkBox_TAA->Checked = nTAA;
 			checkBox_MLAA->Checked = nMLAA;
 
@@ -91,6 +93,7 @@ namespace Launcher {
 	private: System::Windows::Forms::Label^ label_FPSLimit;
 	private: System::Windows::Forms::CheckBox^ checkBox_MLAA;
 	private: System::Windows::Forms::CheckBox^ checkBox_TAA;
+	private: System::Windows::Forms::CheckBox^ checkBox_HideStatusIcons;
 	private: System::Windows::Forms::CheckBox^ checkBox_Cursor;
 	private: System::Windows::Forms::LinkLabel^ linkLabel_Discord;
 	private: System::Windows::Forms::TextBox^ textBox_Width;
@@ -140,6 +143,7 @@ namespace Launcher {
 			this->label_FPSLimit = (gcnew System::Windows::Forms::Label());
 			this->checkBox_MLAA = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_TAA = (gcnew System::Windows::Forms::CheckBox());
+			this->checkBox_HideStatusIcons = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_Cursor = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_Stereo = (gcnew System::Windows::Forms::CheckBox());
 			this->tabPage_Components = (gcnew System::Windows::Forms::TabPage());
@@ -352,6 +356,7 @@ namespace Launcher {
 			this->panel_Patches->Controls->Add(this->label_FPSLimit);
 			this->panel_Patches->Controls->Add(this->checkBox_MLAA);
 			this->panel_Patches->Controls->Add(this->checkBox_TAA);
+			this->panel_Patches->Controls->Add(this->checkBox_HideStatusIcons);
 			this->panel_Patches->Controls->Add(this->checkBox_Cursor);
 			this->panel_Patches->Controls->Add(this->checkBox_Stereo);
 			this->panel_Patches->Location = System::Drawing::Point(6, 6);
@@ -361,7 +366,7 @@ namespace Launcher {
 			// 
 			// textBox_FPSLimit
 			// 
-			this->textBox_FPSLimit->Location = System::Drawing::Point(57, 95);
+			this->textBox_FPSLimit->Location = System::Drawing::Point(57, 118);
 			this->textBox_FPSLimit->Name = L"textBox_FPSLimit";
 			this->textBox_FPSLimit->Size = System::Drawing::Size(45, 20);
 			this->textBox_FPSLimit->TabIndex = 11;
@@ -369,7 +374,7 @@ namespace Launcher {
 			// linkLabel_Discord
 			// 
 			this->linkLabel_Discord->AutoSize = true;
-			this->linkLabel_Discord->Location = System::Drawing::Point(40, 183);
+			this->linkLabel_Discord->Location = System::Drawing::Point(40, 206);
 			this->linkLabel_Discord->Name = L"linkLabel_Discord";
 			this->linkLabel_Discord->Size = System::Drawing::Size(91, 13);
 			this->linkLabel_Discord->TabIndex = 10;
@@ -379,7 +384,7 @@ namespace Launcher {
 			// label_help2
 			// 
 			this->label_help2->AutoSize = true;
-			this->label_help2->Location = System::Drawing::Point(4, 150);
+			this->label_help2->Location = System::Drawing::Point(4, 173);
 			this->label_help2->Name = L"label_help2";
 			this->label_help2->Size = System::Drawing::Size(133, 13);
 			this->label_help2->TabIndex = 7;
@@ -388,7 +393,7 @@ namespace Launcher {
 			// label_help1
 			// 
 			this->label_help1->AutoSize = true;
-			this->label_help1->Location = System::Drawing::Point(4, 134);
+			this->label_help1->Location = System::Drawing::Point(4, 157);
 			this->label_help1->Name = L"label_help1";
 			this->label_help1->Size = System::Drawing::Size(149, 13);
 			this->label_help1->TabIndex = 6;
@@ -397,7 +402,7 @@ namespace Launcher {
 			// label_FPSLimit
 			// 
 			this->label_FPSLimit->AutoSize = true;
-			this->label_FPSLimit->Location = System::Drawing::Point(0, 100);
+			this->label_FPSLimit->Location = System::Drawing::Point(0, 123);
 			this->label_FPSLimit->Name = L"label_FPSLimit";
 			this->label_FPSLimit->Size = System::Drawing::Size(51, 13);
 			this->label_FPSLimit->TabIndex = 5;
@@ -406,7 +411,7 @@ namespace Launcher {
 			// checkBox_MLAA
 			// 
 			this->checkBox_MLAA->AutoSize = true;
-			this->checkBox_MLAA->Location = System::Drawing::Point(3, 72);
+			this->checkBox_MLAA->Location = System::Drawing::Point(3, 95);
 			this->checkBox_MLAA->Name = L"checkBox_MLAA";
 			this->checkBox_MLAA->Size = System::Drawing::Size(55, 17);
 			this->checkBox_MLAA->TabIndex = 3;
@@ -416,12 +421,22 @@ namespace Launcher {
 			// checkBox_TAA
 			// 
 			this->checkBox_TAA->AutoSize = true;
-			this->checkBox_TAA->Location = System::Drawing::Point(3, 49);
+			this->checkBox_TAA->Location = System::Drawing::Point(3, 72);
 			this->checkBox_TAA->Name = L"checkBox_TAA";
 			this->checkBox_TAA->Size = System::Drawing::Size(47, 17);
 			this->checkBox_TAA->TabIndex = 2;
 			this->checkBox_TAA->Text = L"TAA";
 			this->checkBox_TAA->UseVisualStyleBackColor = true;
+			// 
+			// checkBox_HideStatusIcons
+			// 
+			this->checkBox_HideStatusIcons->AutoSize = true;
+			this->checkBox_HideStatusIcons->Location = System::Drawing::Point(3, 49);
+			this->checkBox_HideStatusIcons->Name = L"checkBox_HideStatusIcons";
+			this->checkBox_HideStatusIcons->Size = System::Drawing::Size(56, 17);
+			this->checkBox_HideStatusIcons->TabIndex = 1;
+			this->checkBox_HideStatusIcons->Text = L"Hide Status Icons";
+			this->checkBox_HideStatusIcons->UseVisualStyleBackColor = true;
 			// 
 			// checkBox_Cursor
 			// 
@@ -620,7 +635,7 @@ namespace Launcher {
 private: System::Void Ui_Load(System::Object^ sender, System::EventArgs^ e){
 }
 private: System::Void Button_Exit_Click(System::Object^ sender, System::EventArgs^ e) {
-	exit(1);
+	exit(EXIT_SUCCESS);
 }
 private: System::Void Button_Launch_Click(System::Object^ sender, System::EventArgs^ e) {
 
@@ -659,6 +674,10 @@ private: System::Void Button_Launch_Click(System::Object^ sender, System::EventA
 	userInput = Convert::ToInt32(checkBox_Stereo->Checked).ToString();
 	input = msclr::interop::marshal_as<std::string>(userInput);
 	WritePrivateProfileString("patches", "stereo", input.c_str(), CONFIG_FILE);
+	
+	userInput = Convert::ToInt32(checkBox_HideStatusIcons->Checked).ToString();
+	input = msclr::interop::marshal_as<std::string>(userInput);
+	WritePrivateProfileString("patches", "hide_status_icons", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(checkBox_TAA->Checked).ToString();
 	input = msclr::interop::marshal_as<std::string>(userInput);
@@ -680,7 +699,7 @@ private: System::Void Button_Launch_Click(System::Object^ sender, System::EventA
 	ZeroMemory(&pi, sizeof(pi));
 	CreateProcess(DIVA_EXECUTABLE, DIVA_EXECUTABLE_LAUNCH, NULL, NULL, false, DETACHED_PROCESS, NULL, NULL, &si, &pi);
 
-	exit(1);
+	exit(EXIT_SUCCESS);
 }
 };
 }
