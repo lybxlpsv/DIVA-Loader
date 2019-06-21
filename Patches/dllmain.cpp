@@ -92,7 +92,6 @@ void ApplyPatches() {
 		InjectCode((void*)0x00000001403B9D6E, { 0xFD, 0x0A }); // card -- `{ 0xFC, 0x0A }` for green icon
 		InjectCode((void*)0x00000001403BA14B, { 0x00, 0x1E }); // network -- `{ 0xA0, 0x1E }` for green icon, `{ 0xA1, 0x1E }` for yellow warning icon
 		printf("[Patches] Status icons hidden\n");
-		printf("[Patches] Status icons hidden\n");
 	}
 }
 
