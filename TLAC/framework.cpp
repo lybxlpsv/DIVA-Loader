@@ -19,8 +19,8 @@ namespace TLAC
 	{
 		if (moduleDirectory == nullptr)
 		{
-			CHAR modulePathBuffer[MAX_PATH];
-			GetModuleFileNameA(framework::Module, modulePathBuffer, MAX_PATH);
+			WCHAR modulePathBuffer[MAX_PATH];
+			GetModuleFileNameW(framework::Module, modulePathBuffer, MAX_PATH);
 
 			fspath configPath = fspath(modulePathBuffer).parent_path();
 			moduleDirectory = new std::string(configPath.u8string());
