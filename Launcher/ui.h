@@ -718,8 +718,7 @@ namespace Launcher {
 private: System::Void Ui_Load(System::Object^ sender, System::EventArgs^ e){
 }
 private: System::Void Button_Exit_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->Close();
-	exit(EXIT_SUCCESS);
+	TerminateProcess(GetCurrentProcess(), EXIT_SUCCESS);
 }
 private: System::Void Button_Launch_Click(System::Object^ sender, System::EventArgs^ e) {
 
@@ -796,8 +795,7 @@ private: System::Void Button_Launch_Click(System::Object^ sender, System::EventA
 	ZeroMemory(&pi, sizeof(pi));
 	CreateProcessW(DIVA_EXECUTABLE, DIVA_EXECUTABLE_LAUNCH, NULL, NULL, false, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi);
 
-	this->Close();
-	exit(EXIT_SUCCESS);
+	TerminateProcess(GetCurrentProcess(), EXIT_SUCCESS);
 }
 private: System::Void Label_intResWidth_Click(System::Object^ sender, System::EventArgs^ e) {
 }
