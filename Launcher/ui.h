@@ -718,83 +718,85 @@ namespace Launcher {
 private: System::Void Ui_Load(System::Object^ sender, System::EventArgs^ e){
 }
 private: System::Void Button_Exit_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Close();
 	exit(EXIT_SUCCESS);
 }
 private: System::Void Button_Launch_Click(System::Object^ sender, System::EventArgs^ e) {
 
 	String^ userInput = textBox_Height->Text;
-	string input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("resolution", "height", input.c_str(), CONFIG_FILE);
+	wstring input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"resolution", L"height", input.c_str(), CONFIG_FILE);
 
 	userInput = textBox_Width->Text;
-	input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("resolution", "width", input.c_str(), CONFIG_FILE);
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"resolution", L"width", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(checkBox_Fullscreen->Checked).ToString();
-	input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("resolution", "fullscreen", input.c_str(), CONFIG_FILE);
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"resolution", L"fullscreen", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(checkBox_Borderless->Checked).ToString();
-	input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("resolution", "borderless", input.c_str(), CONFIG_FILE);
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"resolution", L"borderless", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(checkBox_InternalRes->Checked).ToString();
-	input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("resolution", "r.enable", input.c_str(), CONFIG_FILE);
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"resolution", L"r.enable", input.c_str(), CONFIG_FILE);
 
 	userInput = textBox_intResHeight->Text;
-	input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("resolution", "r.height", input.c_str(), CONFIG_FILE);
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"resolution", L"r.height", input.c_str(), CONFIG_FILE);
 
 	userInput = textBox_intResWidth->Text;
-	input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("resolution", "r.width", input.c_str(), CONFIG_FILE);
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"resolution", L"r.width", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(checkBox_Cursor->Checked).ToString();
-	input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("patches", "cursor", input.c_str(), CONFIG_FILE);
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"patches", L"cursor", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(checkBox_Stereo->Checked).ToString();
-	input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("patches", "stereo", input.c_str(), CONFIG_FILE);
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"patches", L"stereo", input.c_str(), CONFIG_FILE);
 	
 	userInput = Convert::ToInt32(checkBox_HideCredits->Checked).ToString();
-	input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("patches", "hide_credits", input.c_str(), CONFIG_FILE);
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"patches", L"hide_credits", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(checkBox_HideStatusIcons->Checked).ToString();
-	input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("patches", "hide_status_icons", input.c_str(), CONFIG_FILE);
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"patches", L"hide_status_icons", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(checkBox_HidePVWatermark->Checked).ToString();
-	input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("patches", "hide_pv_watermark", input.c_str(), CONFIG_FILE);
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"patches", L"hide_pv_watermark", input.c_str(), CONFIG_FILE);
 
 
 	userInput = Convert::ToInt32(checkBox_HideVolCtrl->Checked).ToString();
-	input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("patches", "hide_volume", input.c_str(), CONFIG_FILE);
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"patches", L"hide_volume", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(checkBox_TAA->Checked).ToString();
-	input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("graphics", "TAA", input.c_str(), CONFIG_FILE);
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"graphics", L"TAA", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(checkBox_MLAA->Checked).ToString();
-	input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("graphics", "MLAA", input.c_str(), CONFIG_FILE);
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"graphics", L"MLAA", input.c_str(), CONFIG_FILE);
 
 	userInput = textBox_FPSLimit->Text;
-	input = msclr::interop::marshal_as<std::string>(userInput);
-	WritePrivateProfileString("graphics", "FPS.Limit", input.c_str(), CONFIG_FILE);
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"graphics", L"FPS.Limit", input.c_str(), CONFIG_FILE);
 
-	STARTUPINFO si;
+	STARTUPINFOW si;
 	PROCESS_INFORMATION pi;
 
 	ZeroMemory(&si, sizeof(si));
 	si.cb = sizeof(si);
 	ZeroMemory(&pi, sizeof(pi));
-	CreateProcess(DIVA_EXECUTABLE, DIVA_EXECUTABLE_LAUNCH, NULL, NULL, false, DETACHED_PROCESS, NULL, NULL, &si, &pi);
+	CreateProcessW(DIVA_EXECUTABLE, DIVA_EXECUTABLE_LAUNCH, NULL, NULL, false, DETACHED_PROCESS, NULL, NULL, &si, &pi);
 
+	this->Close();
 	exit(EXIT_SUCCESS);
 }
 private: System::Void Label_intResWidth_Click(System::Object^ sender, System::EventArgs^ e) {
