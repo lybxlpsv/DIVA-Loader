@@ -56,8 +56,6 @@ void ApplyPatches() {
 		{ (void*)0x00000001406724E7, { 0x00, 0x00 } },
 		// Ignore SYSTEM_STARTUP Location Server checks
 		{ (void*)0x00000001406732A2, { 0x90, 0x90 } },
-		// Dirty hide of CREDIT(S) counter
-		{ (void*)0x00000001409F6200, { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } },
 		// Toon Shader Fix by lybxlpsv
 		{ (void*)0x000000014050214F, { 0x90 } },
 		{ (void*)0x0000000140502150, { 0x90 } },
@@ -72,7 +70,9 @@ void ApplyPatches() {
 		InjectCode(patches[i].Address, patches[i].Data);
 
 	auto nStereo = GetPrivateProfileIntW(L"patches", L"stereo", FALSE, CONFIG_FILE);
+	auto nOldStereo = GetPrivateProfileIntW(L"patches", L"old_stereo", FALSE, CONFIG_FILE);
 	auto nCursor = GetPrivateProfileIntW(L"patches", L"cursor", TRUE, CONFIG_FILE);
+	auto nHideCredits = GetPrivateProfileIntW(L"patches", L"hide_credits", FALSE, CONFIG_FILE);
 	auto nHideStatusIcons = GetPrivateProfileIntW(L"patches", L"hide_status_icons", FALSE, CONFIG_FILE);
 	auto nHidePVWatermark = GetPrivateProfileIntW(L"patches", L"hide_pv_watermark", FALSE, CONFIG_FILE);
 	auto nHideVolCtrl = GetPrivateProfileIntW(L"patches", L"hide_volume", FALSE, CONFIG_FILE);
@@ -81,6 +81,18 @@ void ApplyPatches() {
 	{
 		InjectCode((void*)0x0000000140A860C0, { 0x02 });
 		printf("[Patches] Stereo enabled\n");
+	}
+	// Fake stereo address
+	if (nOldStereo)
+	{
+		InjectCode((void*)0x0000000140A85AC0, { 0x02 });
+		printf("[Patches] ¯\\_(:/)_/¯ enabled\n");
+	}
+	// Dirty hide of CREDIT(S) counter
+	if (nHideCredits)
+	{
+		InjectCode((void*)0x00000001409F6200, { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 });
+		printf("[Patches] Hide CREDIT(S) enabled\n");
 	}
 	// Use GLUT_CURSOR_RIGHT_ARROW instead of GLUT_CURSOR_NONE
 	if (nCursor)

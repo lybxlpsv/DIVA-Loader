@@ -35,8 +35,12 @@ int nIntResWidth = GetPrivateProfileInt("resolution", "r.width", 1280, CONFIG_FI
 int nIntResHeight = GetPrivateProfileInt("resolution", "r.height", 720, CONFIG_FILE);
 
 int nStereo = GetPrivateProfileInt("patches", "stereo", FALSE, CONFIG_FILE);
+int nOldStereo = GetPrivateProfileInt("patches", "old_stereo", FALSE, CONFIG_FILE);
 int nCursor = GetPrivateProfileInt("patches", "cursor", TRUE, CONFIG_FILE);
+int nHideCredits = GetPrivateProfileInt("patches", "hide_credits", FALSE, CONFIG_FILE);
 int nHideStatusIcons = GetPrivateProfileInt("patches", "hide_status_icons", FALSE, CONFIG_FILE);
+int nHidePVWatermark = GetPrivateProfileInt("patches", "hide_pv_watermark", FALSE, CONFIG_FILE);
+int nHideVolCtrl = GetPrivateProfileInt("patches", "hide_volume", FALSE, CONFIG_FILE);
 int nTAA = GetPrivateProfileInt("graphics", "TAA", TRUE, CONFIG_FILE);
 int nMLAA = GetPrivateProfileInt("graphics", "MLAA", TRUE, CONFIG_FILE);
 
