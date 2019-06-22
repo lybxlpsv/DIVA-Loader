@@ -794,7 +794,7 @@ private: System::Void Button_Launch_Click(System::Object^ sender, System::EventA
 	ZeroMemory(&si, sizeof(si));
 	si.cb = sizeof(si);
 	ZeroMemory(&pi, sizeof(pi));
-	CreateProcessW(DIVA_EXECUTABLE, DIVA_EXECUTABLE_LAUNCH, NULL, NULL, false, DETACHED_PROCESS, NULL, NULL, &si, &pi);
+	CreateProcessW(DIVA_EXECUTABLE, DIVA_EXECUTABLE_LAUNCH, NULL, NULL, false, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi);
 
 	this->Close();
 	exit(EXIT_SUCCESS);
