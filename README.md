@@ -1,4 +1,4 @@
-# DIVA Loader (master)
+# DIVA Loader
 
 **DIVA Loader** lets you load plugins into **Hatsune Miku Project DIVA Arcade Future Tone 7.10**  by placing them into the **"plugins"** folder, it includes useful ones such as **TLAC**, **Prepatch** and a **Launcher** in the form of a plugin without needing to use extra executables.
 
