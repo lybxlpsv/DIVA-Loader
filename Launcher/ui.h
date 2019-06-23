@@ -739,7 +739,8 @@ private: System::Void Button_Launch_Click(System::Object^ sender, System::EventA
 	ZeroMemory(&pi, sizeof(pi));
 	CreateProcessW(DIVA_EXECUTABLE, DIVA_EXECUTABLE_LAUNCH, NULL, NULL, false, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi);
 	
-	this->Close();	
+	// this->Close won't work in here since it will prompt the user to save the settings
+	TerminateProcess(GetCurrentProcess(), EXIT_SUCCESS);
 }
 private: System::Void CheckBox_InternalRes_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 	if (checkBox_InternalRes->Checked)
@@ -762,7 +763,7 @@ private: System::Void ComboBox_Display_SelectedIndexChanged(System::Object^ send
 	}
 }
 private: System::Void Ui_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
-	switch (MessageBox::Show("Do you want to save your settings?", "", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
+	switch (MessageBox::Show("Do you want to save your settings?", "DIVA Launcher", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
 	{
 	case System::Windows::Forms::DialogResult::Yes:
 		SaveSettings();
@@ -777,6 +778,7 @@ private: System::Void Ui_FormClosing(System::Object^ sender, System::Windows::Fo
 	}
 }
 private: System::Void Ui_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
+	// Prevents abnormal termination messages, remember that the game is still technically running and must be killed!
 	TerminateProcess(GetCurrentProcess(), EXIT_SUCCESS);
 }
 };
