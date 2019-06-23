@@ -10,14 +10,16 @@
 
 int hookedCreateWindow(const char* title, void(__cdecl* exit_function)(int))
 {
-	glutInitWindowSize(nWidth, nHeight);
-
-	if (nBorderless)
+	if (nDisplay == 1)
+	{
+		*fullScreenFlag = 0;
 		glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_BORDERLESS);
-	else
-		glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-
-	if (nFullscreen)
+		glutInitWindowSize(glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT));
+		glutInitWindowPosition(0, 0);
+		glutCreateWindow(title);
+	printf("[Render Manager] Borderless mode.\n");
+	}
+	else if (nDisplay == 2)
 	{
 		/* Crashes, no idea why yet
 		if (glutGameModeGet(GLUT_GAME_MODE_POSSIBLE)) {
@@ -38,9 +40,10 @@ int hookedCreateWindow(const char* title, void(__cdecl* exit_function)(int))
 	else
 	{
 		*fullScreenFlag = 0;
+		glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+		glutInitWindowSize(nWidth, nHeight);
 		glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - nWidth) / 2, (glutGet(GLUT_SCREEN_HEIGHT) - nHeight) / 2); // Center to the middle of the scree when windowed
 		glutCreateWindow(title);
-		glViewport(0, 0, 100, 100);
 		printf("[Render Manager] Windowed mode.\n");
 	}
 	return true;

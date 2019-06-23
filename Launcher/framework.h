@@ -32,8 +32,7 @@ LPWSTR DIVA_EXECUTABLE_LAUNCH = const_cast<WCHAR*>(DIVA_EXECUTABLE_LAUNCH_STRING
 wstring CONFIG_FILE_STRING = DirPath() + L"\\plugins\\config.ini";
 LPCWSTR CONFIG_FILE = CONFIG_FILE_STRING.c_str();
 
-int nFullscreen = GetPrivateProfileIntW(L"resolution", L"fullscreen", TRUE, CONFIG_FILE);
-int nBorderless = GetPrivateProfileIntW(L"resolution", L"borderless", FALSE, CONFIG_FILE);
+int nDisplay = GetPrivateProfileIntW(L"resolution", L"display", 0, CONFIG_FILE);
 int nWidth = GetPrivateProfileIntW(L"resolution", L"width", 1280, CONFIG_FILE);
 int nHeight = GetPrivateProfileIntW(L"resolution", L"height", 720, CONFIG_FILE);
 

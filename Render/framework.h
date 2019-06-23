@@ -23,23 +23,13 @@ wstring DirPath() {
 wstring CONFIG_FILE_STRING = DirPath() + L"\\plugins\\config.ini";
 LPCWSTR CONFIG_FILE = CONFIG_FILE_STRING.c_str();
 
-int nFullscreen = GetPrivateProfileIntW(L"resolution", L"fullscreen", TRUE, CONFIG_FILE);
-int nBorderless = GetPrivateProfileIntW(L"resolution", L"borderless", FALSE, CONFIG_FILE);
+int nDisplay = GetPrivateProfileIntW(L"resolution", L"display", 0, CONFIG_FILE);
 int nWidth = GetPrivateProfileIntW(L"resolution", L"width", 1280, CONFIG_FILE);
 int nHeight = GetPrivateProfileIntW(L"resolution", L"height", 720, CONFIG_FILE);
-int nRefreshRate = GetPrivateProfileIntW(L"resolution", L"refreshrate", 60, CONFIG_FILE);
-int nBitDepth = GetPrivateProfileIntW(L"resolution", L"bitdepth", 32, CONFIG_FILE);
 
 int nIntRes = GetPrivateProfileIntW(L"resolution", L"r.enable", FALSE, CONFIG_FILE);
 int nIntResWidth = GetPrivateProfileIntW(L"resolution", L"r.width", 1280, CONFIG_FILE);
 int nIntResHeight = GetPrivateProfileIntW(L"resolution", L"r.height", 720, CONFIG_FILE);
-
-int nStereo = GetPrivateProfileIntW(L"patches", L"stereo", FALSE, CONFIG_FILE);
-int nCursor = GetPrivateProfileIntW(L"patches", L"cursor", TRUE, CONFIG_FILE);
-int nTAA = GetPrivateProfileIntW(L"graphics", L"TAA", TRUE, CONFIG_FILE);
-int nMLAA = GetPrivateProfileIntW(L"graphics", L"MLAA", TRUE, CONFIG_FILE);
-
-int nFPSLimit = GetPrivateProfileIntW(L"graphics", L"FPS.Limit", 0, CONFIG_FILE);
 
 //auto nBitDepth = GetPrivateProfileIntW(L"resolutionL", L"bitdepth", 32, CONFIG_FILE);
 //auto nRefreshRate = GetPrivateProfileIntW(L"resolutionL", L"refreshrate", 60, CONFIG_FILE);

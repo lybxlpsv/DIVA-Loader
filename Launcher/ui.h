@@ -23,10 +23,31 @@ namespace Launcher {
 		{
 			InitializeComponent();
 
-			// Beta version, components not working yet and hidden
+			// Beta version, components not working yet and tab disabled
 			tabPage_Components->Enabled = false;
 
-			// Not working, but saving the settings does work
+			comboBox_Display->SelectedIndex = nDisplay;
+
+			DEVMODEW dm = { 0 };
+			dm.dmSize = sizeof(dm);
+			for (int iModeNum = 0; EnumDisplaySettingsW(NULL, iModeNum, &dm) != 0; iModeNum++) 
+			{
+				if (!comboBox_Resolution->Items->Contains(dm.dmPelsWidth + "x" + dm.dmPelsHeight))
+				{
+					comboBox_Resolution->Items->Add(dm.dmPelsWidth + "x" + dm.dmPelsHeight);
+				}
+			}
+
+			comboBox_intResolution->Items->Add("1280x720");
+			comboBox_intResolution->Items->Add("1920x1080");
+			comboBox_intResolution->Items->Add("2560x1440");
+			comboBox_intResolution->Items->Add("3840x2160");
+			comboBox_intResolution->Items->Add("5120x2880");
+			comboBox_intResolution->Items->Add("7680x4320");
+
+			comboBox_Resolution->Text = nWidth.ToString() + "x" + nHeight.ToString();
+			checkBox_InternalRes->Checked = nIntRes;
+			comboBox_intResolution->Text = nIntResWidth.ToString() + "x" + nIntResHeight.ToString();
 			checkBox_Stereo->Checked = nStereo;
 			checkBox_Cursor->Checked = nCursor;
 			checkBox_HideCredits->Checked = nHideCredits;
@@ -36,19 +57,16 @@ namespace Launcher {
 			checkBox_HideStatusIcons->Checked = nHideStatusIcons;
 			checkBox_TAA->Checked = nTAA;
 			checkBox_MLAA->Checked = nMLAA;
-
-			textBox_Height->Text = nHeight.ToString();
-			textBox_Width->Text = nWidth.ToString();
-
-			checkBox_Fullscreen->Checked = nFullscreen;
-			checkBox_Borderless->Checked = nBorderless;
-
-			checkBox_InternalRes->Checked = nIntRes;
-
-			textBox_intResHeight->Text = nIntResHeight.ToString();
-			textBox_intResWidth->Text = nIntResWidth.ToString();
-
 			textBox_FPSLimit->Text = nFPSLimit.ToString();
+
+			if (!nIntRes)
+			{
+				comboBox_intResolution->Enabled = false;
+			}
+			if (nDisplay == 0)
+			{
+				comboBox_Resolution->Enabled = true;
+			}
 		}
 
 	protected:
@@ -64,14 +82,15 @@ namespace Launcher {
 		}
 	private: System::Windows::Forms::Button^ button_Launch;
 	private: System::Windows::Forms::Button^ button_Exit;
+	private: System::Windows::Forms::Label^ label_Resolution;
 
 	protected:
 
-	private: System::Windows::Forms::Label^ label_Height;
-	private: System::Windows::Forms::Label^ label_Width;
+
+
 	private: System::Windows::Forms::GroupBox^ groupBox_ScreenRes;
-	private: System::Windows::Forms::CheckBox^ checkBox_Fullscreen;
-	private: System::Windows::Forms::CheckBox^ checkBox_Borderless;
+
+
 	private: System::Windows::Forms::TabControl^ tabControl;
 	private: System::Windows::Forms::TabPage^ tabPage_Resolution;
 	private: System::Windows::Forms::GroupBox^ groupBox_InternalRes;
@@ -101,12 +120,13 @@ namespace Launcher {
 
 	private: System::Windows::Forms::CheckBox^ checkBox_Cursor;
 	private: System::Windows::Forms::LinkLabel^ linkLabel_Discord;
-	private: System::Windows::Forms::TextBox^ textBox_Width;
-	private: System::Windows::Forms::TextBox^ textBox_Height;
-	private: System::Windows::Forms::TextBox^ textBox_intResWidth;
-	private: System::Windows::Forms::TextBox^ textBox_intResHeight;
-	private: System::Windows::Forms::Label^ label_intResHeight;
-	private: System::Windows::Forms::Label^ label_intResWidth;
+	private: System::Windows::Forms::Label^ label_intResolution;
+
+
+
+
+
+
 	private: System::Windows::Forms::TextBox^ textBox_FPSLimit;
 	private: System::Windows::Forms::CheckBox^ checkBox_HideCredits;
 	private: System::Windows::Forms::CheckBox^ checkBox_MLAA;
@@ -114,6 +134,10 @@ namespace Launcher {
 	private: System::Windows::Forms::CheckBox^ checkBox_HideStatusIcons;
 	private: System::Windows::Forms::CheckBox^ checkBox_HidePVWatermark;
 	private: System::Windows::Forms::CheckBox^ checkBox_HideVolCtrl;
+	private: System::Windows::Forms::ComboBox^ comboBox_Display;
+	private: System::Windows::Forms::Label^ label_Display;
+private: System::Windows::Forms::ComboBox^ comboBox_Resolution;
+private: System::Windows::Forms::ComboBox^ comboBox_intResolution;
 
 	private:
 		/// <summary>
@@ -131,23 +155,21 @@ namespace Launcher {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(ui::typeid));
 			this->button_Launch = (gcnew System::Windows::Forms::Button());
 			this->button_Exit = (gcnew System::Windows::Forms::Button());
-			this->label_Height = (gcnew System::Windows::Forms::Label());
-			this->label_Width = (gcnew System::Windows::Forms::Label());
+			this->label_Resolution = (gcnew System::Windows::Forms::Label());
 			this->groupBox_ScreenRes = (gcnew System::Windows::Forms::GroupBox());
-			this->textBox_Width = (gcnew System::Windows::Forms::TextBox());
-			this->textBox_Height = (gcnew System::Windows::Forms::TextBox());
-			this->checkBox_Borderless = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox_Fullscreen = (gcnew System::Windows::Forms::CheckBox());
+			this->comboBox_Resolution = (gcnew System::Windows::Forms::ComboBox());
+			this->comboBox_Display = (gcnew System::Windows::Forms::ComboBox());
+			this->label_Display = (gcnew System::Windows::Forms::Label());
 			this->tabControl = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage_Resolution = (gcnew System::Windows::Forms::TabPage());
 			this->groupBox_InternalRes = (gcnew System::Windows::Forms::GroupBox());
-			this->textBox_intResWidth = (gcnew System::Windows::Forms::TextBox());
-			this->textBox_intResHeight = (gcnew System::Windows::Forms::TextBox());
-			this->label_intResHeight = (gcnew System::Windows::Forms::Label());
+			this->comboBox_intResolution = (gcnew System::Windows::Forms::ComboBox());
 			this->checkBox_InternalRes = (gcnew System::Windows::Forms::CheckBox());
-			this->label_intResWidth = (gcnew System::Windows::Forms::Label());
+			this->label_intResolution = (gcnew System::Windows::Forms::Label());
 			this->tabPage_Patches = (gcnew System::Windows::Forms::TabPage());
 			this->panel_Patches = (gcnew System::Windows::Forms::Panel());
+			this->checkBox_HidePVWatermark = (gcnew System::Windows::Forms::CheckBox());
+			this->checkBox_HideVolCtrl = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_HideCredits = (gcnew System::Windows::Forms::CheckBox());
 			this->textBox_FPSLimit = (gcnew System::Windows::Forms::TextBox());
 			this->linkLabel_Discord = (gcnew System::Windows::Forms::LinkLabel());
@@ -170,8 +192,6 @@ namespace Launcher {
 			this->checkBox_frame_rate_manager = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_sys_timer = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_player_data_manager = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox_HideVolCtrl = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox_HidePVWatermark = (gcnew System::Windows::Forms::CheckBox());
 			this->groupBox_ScreenRes->SuspendLayout();
 			this->tabControl->SuspendLayout();
 			this->tabPage_Resolution->SuspendLayout();
@@ -184,10 +204,9 @@ namespace Launcher {
 			// 
 			// button_Launch
 			// 
-			this->button_Launch->Location = System::Drawing::Point(24, 428);
-			this->button_Launch->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->button_Launch->Location = System::Drawing::Point(16, 278);
 			this->button_Launch->Name = L"button_Launch";
-			this->button_Launch->Size = System::Drawing::Size(112, 35);
+			this->button_Launch->Size = System::Drawing::Size(75, 23);
 			this->button_Launch->TabIndex = 30;
 			this->button_Launch->Text = L"Launch";
 			this->button_Launch->UseVisualStyleBackColor = true;
@@ -196,190 +215,133 @@ namespace Launcher {
 			// button_Exit
 			// 
 			this->button_Exit->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-			this->button_Exit->Location = System::Drawing::Point(182, 428);
-			this->button_Exit->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->button_Exit->Location = System::Drawing::Point(121, 278);
 			this->button_Exit->Name = L"button_Exit";
-			this->button_Exit->Size = System::Drawing::Size(112, 35);
+			this->button_Exit->Size = System::Drawing::Size(75, 23);
 			this->button_Exit->TabIndex = 31;
 			this->button_Exit->Text = L"Exit";
 			this->button_Exit->UseVisualStyleBackColor = true;
 			this->button_Exit->Click += gcnew System::EventHandler(this, &ui::Button_Exit_Click);
 			// 
-			// label_Height
+			// label_Resolution
 			// 
-			this->label_Height->AutoSize = true;
-			this->label_Height->Location = System::Drawing::Point(9, 69);
-			this->label_Height->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->label_Height->Name = L"label_Height";
-			this->label_Height->Size = System::Drawing::Size(60, 20);
-			this->label_Height->TabIndex = 3;
-			this->label_Height->Text = L"Height:";
-			// 
-			// label_Width
-			// 
-			this->label_Width->AutoSize = true;
-			this->label_Width->Location = System::Drawing::Point(9, 34);
-			this->label_Width->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->label_Width->Name = L"label_Width";
-			this->label_Width->Size = System::Drawing::Size(54, 20);
-			this->label_Width->TabIndex = 4;
-			this->label_Width->Text = L"Width:";
-			this->label_Width->Click += gcnew System::EventHandler(this, &ui::Label_Width_Click);
+			this->label_Resolution->AutoSize = true;
+			this->label_Resolution->Location = System::Drawing::Point(6, 39);
+			this->label_Resolution->Name = L"label_Resolution";
+			this->label_Resolution->Size = System::Drawing::Size(60, 13);
+			this->label_Resolution->TabIndex = 4;
+			this->label_Resolution->Text = L"Resolution:";
 			// 
 			// groupBox_ScreenRes
 			// 
-			this->groupBox_ScreenRes->Controls->Add(this->textBox_Width);
-			this->groupBox_ScreenRes->Controls->Add(this->textBox_Height);
-			this->groupBox_ScreenRes->Controls->Add(this->checkBox_Borderless);
-			this->groupBox_ScreenRes->Controls->Add(this->label_Height);
-			this->groupBox_ScreenRes->Controls->Add(this->checkBox_Fullscreen);
-			this->groupBox_ScreenRes->Controls->Add(this->label_Width);
-			this->groupBox_ScreenRes->Location = System::Drawing::Point(15, 9);
-			this->groupBox_ScreenRes->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->groupBox_ScreenRes->Controls->Add(this->comboBox_Resolution);
+			this->groupBox_ScreenRes->Controls->Add(this->comboBox_Display);
+			this->groupBox_ScreenRes->Controls->Add(this->label_Display);
+			this->groupBox_ScreenRes->Controls->Add(this->label_Resolution);
+			this->groupBox_ScreenRes->Location = System::Drawing::Point(10, 6);
 			this->groupBox_ScreenRes->Name = L"groupBox_ScreenRes";
-			this->groupBox_ScreenRes->Padding = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->groupBox_ScreenRes->Size = System::Drawing::Size(244, 182);
+			this->groupBox_ScreenRes->Size = System::Drawing::Size(163, 118);
 			this->groupBox_ScreenRes->TabIndex = 6;
 			this->groupBox_ScreenRes->TabStop = false;
 			this->groupBox_ScreenRes->Text = L"Screen Resolution";
 			// 
-			// textBox_Width
+			// comboBox_Resolution
 			// 
-			this->textBox_Width->Location = System::Drawing::Point(118, 29);
-			this->textBox_Width->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->textBox_Width->Name = L"textBox_Width";
-			this->textBox_Width->Size = System::Drawing::Size(115, 26);
-			this->textBox_Width->TabIndex = 1;
-			this->textBox_Width->TextChanged += gcnew System::EventHandler(this, &ui::TextBox_Width_TextChanged);
+			this->comboBox_Resolution->FormattingEnabled = true;
+			this->comboBox_Resolution->Location = System::Drawing::Point(72, 36);
+			this->comboBox_Resolution->Name = L"comboBox_Resolution";
+			this->comboBox_Resolution->Size = System::Drawing::Size(85, 21);
+			this->comboBox_Resolution->TabIndex = 7;
 			// 
-			// textBox_Height
+			// comboBox_Display
 			// 
-			this->textBox_Height->Location = System::Drawing::Point(118, 65);
-			this->textBox_Height->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->textBox_Height->Name = L"textBox_Height";
-			this->textBox_Height->Size = System::Drawing::Size(115, 26);
-			this->textBox_Height->TabIndex = 2;
-			this->textBox_Height->TextChanged += gcnew System::EventHandler(this, &ui::TextBox_Height_TextChanged);
+			this->comboBox_Display->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboBox_Display->FormattingEnabled = true;
+			this->comboBox_Display->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Windowed", L"Borderless", L"Fullscreen" });
+			this->comboBox_Display->Location = System::Drawing::Point(72, 63);
+			this->comboBox_Display->Name = L"comboBox_Display";
+			this->comboBox_Display->Size = System::Drawing::Size(85, 21);
+			this->comboBox_Display->TabIndex = 6;
+			this->comboBox_Display->SelectedIndexChanged += gcnew System::EventHandler(this, &ui::ComboBox_Display_SelectedIndexChanged);
 			// 
-			// checkBox_Borderless
+			// label_Display
 			// 
-			this->checkBox_Borderless->AutoSize = true;
-			this->checkBox_Borderless->Location = System::Drawing::Point(14, 148);
-			this->checkBox_Borderless->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->checkBox_Borderless->Name = L"checkBox_Borderless";
-			this->checkBox_Borderless->Size = System::Drawing::Size(111, 24);
-			this->checkBox_Borderless->TabIndex = 4;
-			this->checkBox_Borderless->Text = L"Borderless";
-			this->checkBox_Borderless->UseVisualStyleBackColor = true;
-			// 
-			// checkBox_Fullscreen
-			// 
-			this->checkBox_Fullscreen->AutoSize = true;
-			this->checkBox_Fullscreen->Location = System::Drawing::Point(14, 112);
-			this->checkBox_Fullscreen->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->checkBox_Fullscreen->Name = L"checkBox_Fullscreen";
-			this->checkBox_Fullscreen->Size = System::Drawing::Size(108, 24);
-			this->checkBox_Fullscreen->TabIndex = 3;
-			this->checkBox_Fullscreen->Text = L"Fullscreen";
-			this->checkBox_Fullscreen->UseVisualStyleBackColor = true;
+			this->label_Display->AutoSize = true;
+			this->label_Display->Location = System::Drawing::Point(6, 66);
+			this->label_Display->Name = L"label_Display";
+			this->label_Display->Size = System::Drawing::Size(44, 13);
+			this->label_Display->TabIndex = 5;
+			this->label_Display->Text = L"Display:";
 			// 
 			// tabControl
 			// 
 			this->tabControl->Controls->Add(this->tabPage_Resolution);
 			this->tabControl->Controls->Add(this->tabPage_Patches);
 			this->tabControl->Controls->Add(this->tabPage_Components);
-			this->tabControl->Location = System::Drawing::Point(18, 18);
-			this->tabControl->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->tabControl->Location = System::Drawing::Point(12, 12);
 			this->tabControl->Name = L"tabControl";
 			this->tabControl->SelectedIndex = 0;
-			this->tabControl->Size = System::Drawing::Size(282, 400);
+			this->tabControl->Size = System::Drawing::Size(188, 260);
 			this->tabControl->TabIndex = 0;
 			// 
 			// tabPage_Resolution
 			// 
 			this->tabPage_Resolution->Controls->Add(this->groupBox_InternalRes);
 			this->tabPage_Resolution->Controls->Add(this->groupBox_ScreenRes);
-			this->tabPage_Resolution->Location = System::Drawing::Point(4, 29);
-			this->tabPage_Resolution->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->tabPage_Resolution->Location = System::Drawing::Point(4, 22);
 			this->tabPage_Resolution->Name = L"tabPage_Resolution";
-			this->tabPage_Resolution->Padding = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->tabPage_Resolution->Size = System::Drawing::Size(274, 367);
+			this->tabPage_Resolution->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage_Resolution->Size = System::Drawing::Size(180, 234);
 			this->tabPage_Resolution->TabIndex = 0;
 			this->tabPage_Resolution->Text = L"Resolution";
 			this->tabPage_Resolution->UseVisualStyleBackColor = true;
 			// 
 			// groupBox_InternalRes
 			// 
-			this->groupBox_InternalRes->Controls->Add(this->textBox_intResWidth);
-			this->groupBox_InternalRes->Controls->Add(this->textBox_intResHeight);
-			this->groupBox_InternalRes->Controls->Add(this->label_intResHeight);
+			this->groupBox_InternalRes->Controls->Add(this->comboBox_intResolution);
 			this->groupBox_InternalRes->Controls->Add(this->checkBox_InternalRes);
-			this->groupBox_InternalRes->Controls->Add(this->label_intResWidth);
-			this->groupBox_InternalRes->Location = System::Drawing::Point(15, 200);
-			this->groupBox_InternalRes->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->groupBox_InternalRes->Controls->Add(this->label_intResolution);
+			this->groupBox_InternalRes->Location = System::Drawing::Point(10, 130);
 			this->groupBox_InternalRes->Name = L"groupBox_InternalRes";
-			this->groupBox_InternalRes->Padding = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->groupBox_InternalRes->Size = System::Drawing::Size(244, 149);
+			this->groupBox_InternalRes->Size = System::Drawing::Size(163, 97);
 			this->groupBox_InternalRes->TabIndex = 5;
 			this->groupBox_InternalRes->TabStop = false;
 			this->groupBox_InternalRes->Text = L"Internal Resolution";
 			// 
-			// textBox_intResWidth
+			// comboBox_intResolution
 			// 
-			this->textBox_intResWidth->Location = System::Drawing::Point(118, 74);
-			this->textBox_intResWidth->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->textBox_intResWidth->Name = L"textBox_intResWidth";
-			this->textBox_intResWidth->Size = System::Drawing::Size(115, 26);
-			this->textBox_intResWidth->TabIndex = 6;
-			// 
-			// textBox_intResHeight
-			// 
-			this->textBox_intResHeight->Location = System::Drawing::Point(118, 110);
-			this->textBox_intResHeight->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->textBox_intResHeight->Name = L"textBox_intResHeight";
-			this->textBox_intResHeight->Size = System::Drawing::Size(115, 26);
-			this->textBox_intResHeight->TabIndex = 7;
-			// 
-			// label_intResHeight
-			// 
-			this->label_intResHeight->AutoSize = true;
-			this->label_intResHeight->Location = System::Drawing::Point(9, 114);
-			this->label_intResHeight->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->label_intResHeight->Name = L"label_intResHeight";
-			this->label_intResHeight->Size = System::Drawing::Size(60, 20);
-			this->label_intResHeight->TabIndex = 10;
-			this->label_intResHeight->Text = L"Height:";
-			this->label_intResHeight->Click += gcnew System::EventHandler(this, &ui::Label_intResHeight_Click);
+			this->comboBox_intResolution->FormattingEnabled = true;
+			this->comboBox_intResolution->Location = System::Drawing::Point(72, 56);
+			this->comboBox_intResolution->Name = L"comboBox_intResolution";
+			this->comboBox_intResolution->Size = System::Drawing::Size(85, 21);
+			this->comboBox_intResolution->TabIndex = 8;
 			// 
 			// checkBox_InternalRes
 			// 
 			this->checkBox_InternalRes->AutoSize = true;
-			this->checkBox_InternalRes->Location = System::Drawing::Point(14, 36);
-			this->checkBox_InternalRes->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->checkBox_InternalRes->Location = System::Drawing::Point(9, 31);
 			this->checkBox_InternalRes->Name = L"checkBox_InternalRes";
-			this->checkBox_InternalRes->Size = System::Drawing::Size(85, 24);
+			this->checkBox_InternalRes->Size = System::Drawing::Size(59, 17);
 			this->checkBox_InternalRes->TabIndex = 7;
 			this->checkBox_InternalRes->Text = L"Enable";
 			this->checkBox_InternalRes->UseVisualStyleBackColor = true;
+			this->checkBox_InternalRes->CheckedChanged += gcnew System::EventHandler(this, &ui::CheckBox_InternalRes_CheckedChanged);
 			// 
-			// label_intResWidth
+			// label_intResolution
 			// 
-			this->label_intResWidth->AutoSize = true;
-			this->label_intResWidth->Location = System::Drawing::Point(9, 79);
-			this->label_intResWidth->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->label_intResWidth->Name = L"label_intResWidth";
-			this->label_intResWidth->Size = System::Drawing::Size(54, 20);
-			this->label_intResWidth->TabIndex = 11;
-			this->label_intResWidth->Text = L"Width:";
-			this->label_intResWidth->Click += gcnew System::EventHandler(this, &ui::Label_intResWidth_Click);
+			this->label_intResolution->AutoSize = true;
+			this->label_intResolution->Location = System::Drawing::Point(6, 59);
+			this->label_intResolution->Name = L"label_intResolution";
+			this->label_intResolution->Size = System::Drawing::Size(60, 13);
+			this->label_intResolution->TabIndex = 11;
+			this->label_intResolution->Text = L"Resolution:";
 			// 
 			// tabPage_Patches
 			// 
 			this->tabPage_Patches->Controls->Add(this->panel_Patches);
-			this->tabPage_Patches->Location = System::Drawing::Point(4, 29);
-			this->tabPage_Patches->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->tabPage_Patches->Location = System::Drawing::Point(4, 22);
 			this->tabPage_Patches->Name = L"tabPage_Patches";
-			this->tabPage_Patches->Size = System::Drawing::Size(274, 367);
+			this->tabPage_Patches->Size = System::Drawing::Size(180, 234);
 			this->tabPage_Patches->TabIndex = 2;
 			this->tabPage_Patches->Text = L"Patches";
 			this->tabPage_Patches->UseVisualStyleBackColor = true;
@@ -398,138 +360,124 @@ namespace Launcher {
 			this->panel_Patches->Controls->Add(this->checkBox_HideStatusIcons);
 			this->panel_Patches->Controls->Add(this->checkBox_Cursor);
 			this->panel_Patches->Controls->Add(this->checkBox_Stereo);
-			this->panel_Patches->Location = System::Drawing::Point(9, 9);
-			this->panel_Patches->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->panel_Patches->Location = System::Drawing::Point(6, 6);
 			this->panel_Patches->Name = L"panel_Patches";
-			this->panel_Patches->Size = System::Drawing::Size(261, 340);
+			this->panel_Patches->Size = System::Drawing::Size(174, 221);
 			this->panel_Patches->TabIndex = 9;
-			// 
-			// checkBox_Stereo
-			// 
-			this->checkBox_Stereo->AutoSize = true;
-			this->checkBox_Stereo->Location = System::Drawing::Point(4, 5);
-			this->checkBox_Stereo->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->checkBox_Stereo->Name = L"checkBox_Stereo";
-			this->checkBox_Stereo->Size = System::Drawing::Size(83, 24);
-			this->checkBox_Stereo->TabIndex = 8;
-			this->checkBox_Stereo->Text = L"Stereo";
-			this->checkBox_Stereo->UseVisualStyleBackColor = true;
-			// 
-			// checkBox_Cursor
-			// 
-			this->checkBox_Cursor->AutoSize = true;
-			this->checkBox_Cursor->Location = System::Drawing::Point(4, 40);
-			this->checkBox_Cursor->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->checkBox_Cursor->Name = L"checkBox_Cursor";
-			this->checkBox_Cursor->Size = System::Drawing::Size(82, 24);
-			this->checkBox_Cursor->TabIndex = 9;
-			this->checkBox_Cursor->Text = L"Cursor";
-			this->checkBox_Cursor->UseVisualStyleBackColor = true;
-			// 
-			// checkBox_HideCredits
-			// 
-			this->checkBox_HideCredits->AutoSize = true;
-			this->checkBox_HideCredits->Location = System::Drawing::Point(4, 76);
-			this->checkBox_HideCredits->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->checkBox_HideCredits->Name = L"checkBox_HideCredits";
-			this->checkBox_HideCredits->Size = System::Drawing::Size(153, 24);
-			this->checkBox_HideCredits->TabIndex = 10;
-			this->checkBox_HideCredits->Text = L"Hide CREDIT(S)";
-			this->checkBox_HideCredits->UseVisualStyleBackColor = true;
-			// 
-			// checkBox_HideStatusIcons
-			// 
-			this->checkBox_HideStatusIcons->AutoSize = true;
-			this->checkBox_HideStatusIcons->Location = System::Drawing::Point(4, 111);
-			this->checkBox_HideStatusIcons->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->checkBox_HideStatusIcons->Name = L"checkBox_HideStatusIcons";
-			this->checkBox_HideStatusIcons->Size = System::Drawing::Size(162, 24);
-			this->checkBox_HideStatusIcons->TabIndex = 11;
-			this->checkBox_HideStatusIcons->Text = L"Hide Status Icons";
-			this->checkBox_HideStatusIcons->UseVisualStyleBackColor = true;
-			// 
-			// checkBox_HideVolCtrl
-			// 
-			this->checkBox_HideVolCtrl->AutoSize = true;
-			this->checkBox_HideVolCtrl->Location = System::Drawing::Point(4, 146);
-			this->checkBox_HideVolCtrl->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->checkBox_HideVolCtrl->Name = L"checkBox_HideVolCtrl";
-			this->checkBox_HideVolCtrl->Size = System::Drawing::Size(162, 24);
-			this->checkBox_HideVolCtrl->TabIndex = 16;
-			this->checkBox_HideVolCtrl->Text = L"Hide Volume Buttons";
-			this->checkBox_HideVolCtrl->UseVisualStyleBackColor = true;
-			this->checkBox_HideVolCtrl->CheckedChanged += gcnew System::EventHandler(this, &ui::checkBox_HideVolCtrl_CheckedChanged);
 			// 
 			// checkBox_HidePVWatermark
 			// 
 			this->checkBox_HidePVWatermark->AutoSize = true;
-			this->checkBox_HidePVWatermark->Location = System::Drawing::Point(4, 181);
-			this->checkBox_HidePVWatermark->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->checkBox_HidePVWatermark->Location = System::Drawing::Point(3, 118);
 			this->checkBox_HidePVWatermark->Name = L"checkBox_HidePVWatermark";
-			this->checkBox_HidePVWatermark->Size = System::Drawing::Size(162, 24);
+			this->checkBox_HidePVWatermark->Size = System::Drawing::Size(120, 17);
 			this->checkBox_HidePVWatermark->TabIndex = 17;
 			this->checkBox_HidePVWatermark->Text = L"Hide PV Watermark";
 			this->checkBox_HidePVWatermark->UseVisualStyleBackColor = true;
 			// 
-			// checkBox_TAA
+			// checkBox_HideVolCtrl
 			// 
-			this->checkBox_TAA->AutoSize = true;
-			this->checkBox_TAA->Location = System::Drawing::Point(4, 216);
-			this->checkBox_TAA->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->checkBox_TAA->Name = L"checkBox_TAA";
-			this->checkBox_TAA->Size = System::Drawing::Size(66, 24);
-			this->checkBox_TAA->TabIndex = 12;
-			this->checkBox_TAA->Text = L"TAA";
-			this->checkBox_TAA->UseVisualStyleBackColor = true;
+			this->checkBox_HideVolCtrl->AutoSize = true;
+			this->checkBox_HideVolCtrl->Location = System::Drawing::Point(3, 95);
+			this->checkBox_HideVolCtrl->Name = L"checkBox_HideVolCtrl";
+			this->checkBox_HideVolCtrl->Size = System::Drawing::Size(125, 17);
+			this->checkBox_HideVolCtrl->TabIndex = 16;
+			this->checkBox_HideVolCtrl->Text = L"Hide Volume Buttons";
+			this->checkBox_HideVolCtrl->UseVisualStyleBackColor = true;
 			// 
-			// checkBox_MLAA
+			// checkBox_HideCredits
 			// 
-			this->checkBox_MLAA->AutoSize = true;
-			this->checkBox_MLAA->Location = System::Drawing::Point(4, 251);
-			this->checkBox_MLAA->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->checkBox_MLAA->Name = L"checkBox_MLAA";
-			this->checkBox_MLAA->Size = System::Drawing::Size(79, 24);
-			this->checkBox_MLAA->TabIndex = 13;
-			this->checkBox_MLAA->Text = L"MLAA";
-			this->checkBox_MLAA->UseVisualStyleBackColor = true;
-			// 
-			// label_FPSLimit
-			// 
-			this->label_FPSLimit->AutoSize = true;
-			this->label_FPSLimit->Location = System::Drawing::Point(0, 292);
-			this->label_FPSLimit->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->label_FPSLimit->Name = L"label_FPSLimit";
-			this->label_FPSLimit->Size = System::Drawing::Size(81, 20);
-			this->label_FPSLimit->TabIndex = 5;
-			this->label_FPSLimit->Text = L"FPS Limit:";
+			this->checkBox_HideCredits->AutoSize = true;
+			this->checkBox_HideCredits->Location = System::Drawing::Point(3, 49);
+			this->checkBox_HideCredits->Name = L"checkBox_HideCredits";
+			this->checkBox_HideCredits->Size = System::Drawing::Size(104, 17);
+			this->checkBox_HideCredits->TabIndex = 10;
+			this->checkBox_HideCredits->Text = L"Hide CREDIT(S)";
+			this->checkBox_HideCredits->UseVisualStyleBackColor = true;
 			// 
 			// textBox_FPSLimit
 			// 
-			this->textBox_FPSLimit->Location = System::Drawing::Point(86, 289);
-			this->textBox_FPSLimit->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->textBox_FPSLimit->Location = System::Drawing::Point(60, 182);
 			this->textBox_FPSLimit->Name = L"textBox_FPSLimit";
-			this->textBox_FPSLimit->Size = System::Drawing::Size(66, 26);
+			this->textBox_FPSLimit->Size = System::Drawing::Size(45, 20);
 			this->textBox_FPSLimit->TabIndex = 14;
 			// 
 			// linkLabel_Discord
 			// 
 			this->linkLabel_Discord->AutoSize = true;
-			this->linkLabel_Discord->Location = System::Drawing::Point(60, 315);
-			this->linkLabel_Discord->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->linkLabel_Discord->Location = System::Drawing::Point(40, 208);
 			this->linkLabel_Discord->Name = L"linkLabel_Discord";
-			this->linkLabel_Discord->Size = System::Drawing::Size(135, 20);
+			this->linkLabel_Discord->Size = System::Drawing::Size(91, 13);
 			this->linkLabel_Discord->TabIndex = 15;
 			this->linkLabel_Discord->TabStop = true;
 			this->linkLabel_Discord->Text = L"Join us at Discord";
 			// 
+			// label_FPSLimit
+			// 
+			this->label_FPSLimit->AutoSize = true;
+			this->label_FPSLimit->Location = System::Drawing::Point(0, 185);
+			this->label_FPSLimit->Name = L"label_FPSLimit";
+			this->label_FPSLimit->Size = System::Drawing::Size(54, 13);
+			this->label_FPSLimit->TabIndex = 5;
+			this->label_FPSLimit->Text = L"FPS Limit:";
+			// 
+			// checkBox_MLAA
+			// 
+			this->checkBox_MLAA->AutoSize = true;
+			this->checkBox_MLAA->Location = System::Drawing::Point(3, 163);
+			this->checkBox_MLAA->Name = L"checkBox_MLAA";
+			this->checkBox_MLAA->Size = System::Drawing::Size(55, 17);
+			this->checkBox_MLAA->TabIndex = 13;
+			this->checkBox_MLAA->Text = L"MLAA";
+			this->checkBox_MLAA->UseVisualStyleBackColor = true;
+			// 
+			// checkBox_TAA
+			// 
+			this->checkBox_TAA->AutoSize = true;
+			this->checkBox_TAA->Location = System::Drawing::Point(3, 140);
+			this->checkBox_TAA->Name = L"checkBox_TAA";
+			this->checkBox_TAA->Size = System::Drawing::Size(47, 17);
+			this->checkBox_TAA->TabIndex = 12;
+			this->checkBox_TAA->Text = L"TAA";
+			this->checkBox_TAA->UseVisualStyleBackColor = true;
+			// 
+			// checkBox_HideStatusIcons
+			// 
+			this->checkBox_HideStatusIcons->AutoSize = true;
+			this->checkBox_HideStatusIcons->Location = System::Drawing::Point(3, 72);
+			this->checkBox_HideStatusIcons->Name = L"checkBox_HideStatusIcons";
+			this->checkBox_HideStatusIcons->Size = System::Drawing::Size(110, 17);
+			this->checkBox_HideStatusIcons->TabIndex = 11;
+			this->checkBox_HideStatusIcons->Text = L"Hide Status Icons";
+			this->checkBox_HideStatusIcons->UseVisualStyleBackColor = true;
+			// 
+			// checkBox_Cursor
+			// 
+			this->checkBox_Cursor->AutoSize = true;
+			this->checkBox_Cursor->Location = System::Drawing::Point(3, 26);
+			this->checkBox_Cursor->Name = L"checkBox_Cursor";
+			this->checkBox_Cursor->Size = System::Drawing::Size(56, 17);
+			this->checkBox_Cursor->TabIndex = 9;
+			this->checkBox_Cursor->Text = L"Cursor";
+			this->checkBox_Cursor->UseVisualStyleBackColor = true;
+			// 
+			// checkBox_Stereo
+			// 
+			this->checkBox_Stereo->AutoSize = true;
+			this->checkBox_Stereo->Location = System::Drawing::Point(3, 3);
+			this->checkBox_Stereo->Name = L"checkBox_Stereo";
+			this->checkBox_Stereo->Size = System::Drawing::Size(57, 17);
+			this->checkBox_Stereo->TabIndex = 8;
+			this->checkBox_Stereo->Text = L"Stereo";
+			this->checkBox_Stereo->UseVisualStyleBackColor = true;
+			// 
 			// tabPage_Components
 			// 
 			this->tabPage_Components->Controls->Add(this->panel1);
-			this->tabPage_Components->Location = System::Drawing::Point(4, 29);
-			this->tabPage_Components->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->tabPage_Components->Location = System::Drawing::Point(4, 22);
 			this->tabPage_Components->Name = L"tabPage_Components";
-			this->tabPage_Components->Padding = System::Windows::Forms::Padding(4, 5, 4, 5);
-			this->tabPage_Components->Size = System::Drawing::Size(274, 367);
+			this->tabPage_Components->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage_Components->Size = System::Drawing::Size(180, 234);
 			this->tabPage_Components->TabIndex = 1;
 			this->tabPage_Components->Text = L"Components";
 			this->tabPage_Components->UseVisualStyleBackColor = true;
@@ -548,19 +496,17 @@ namespace Launcher {
 			this->panel1->Controls->Add(this->checkBox_frame_rate_manager);
 			this->panel1->Controls->Add(this->checkBox_sys_timer);
 			this->panel1->Controls->Add(this->checkBox_player_data_manager);
-			this->panel1->Location = System::Drawing::Point(9, 9);
-			this->panel1->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->panel1->Location = System::Drawing::Point(6, 6);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(256, 340);
+			this->panel1->Size = System::Drawing::Size(171, 221);
 			this->panel1->TabIndex = 8;
 			// 
 			// checkBox_fps_limiter
 			// 
 			this->checkBox_fps_limiter->AutoSize = true;
-			this->checkBox_fps_limiter->Location = System::Drawing::Point(4, 360);
-			this->checkBox_fps_limiter->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->checkBox_fps_limiter->Location = System::Drawing::Point(3, 234);
 			this->checkBox_fps_limiter->Name = L"checkBox_fps_limiter";
-			this->checkBox_fps_limiter->Size = System::Drawing::Size(117, 24);
+			this->checkBox_fps_limiter->Size = System::Drawing::Size(79, 17);
 			this->checkBox_fps_limiter->TabIndex = 10;
 			this->checkBox_fps_limiter->Text = L"FPS Limiter";
 			this->checkBox_fps_limiter->UseVisualStyleBackColor = true;
@@ -568,10 +514,9 @@ namespace Launcher {
 			// checkBox_scale_component
 			// 
 			this->checkBox_scale_component->AutoSize = true;
-			this->checkBox_scale_component->Location = System::Drawing::Point(4, 323);
-			this->checkBox_scale_component->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->checkBox_scale_component->Location = System::Drawing::Point(3, 210);
 			this->checkBox_scale_component->Name = L"checkBox_scale_component";
-			this->checkBox_scale_component->Size = System::Drawing::Size(162, 24);
+			this->checkBox_scale_component->Size = System::Drawing::Size(110, 17);
 			this->checkBox_scale_component->TabIndex = 9;
 			this->checkBox_scale_component->Text = L"Scale Component";
 			this->checkBox_scale_component->UseVisualStyleBackColor = true;
@@ -579,10 +524,9 @@ namespace Launcher {
 			// checkBox_camera_controller
 			// 
 			this->checkBox_camera_controller->AutoSize = true;
-			this->checkBox_camera_controller->Location = System::Drawing::Point(4, 288);
-			this->checkBox_camera_controller->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->checkBox_camera_controller->Location = System::Drawing::Point(3, 187);
 			this->checkBox_camera_controller->Name = L"checkBox_camera_controller";
-			this->checkBox_camera_controller->Size = System::Drawing::Size(163, 24);
+			this->checkBox_camera_controller->Size = System::Drawing::Size(109, 17);
 			this->checkBox_camera_controller->TabIndex = 8;
 			this->checkBox_camera_controller->Text = L"Camera Controller";
 			this->checkBox_camera_controller->UseVisualStyleBackColor = true;
@@ -590,10 +534,9 @@ namespace Launcher {
 			// checkBox_input_emulator
 			// 
 			this->checkBox_input_emulator->AutoSize = true;
-			this->checkBox_input_emulator->Location = System::Drawing::Point(4, 5);
-			this->checkBox_input_emulator->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->checkBox_input_emulator->Location = System::Drawing::Point(3, 3);
 			this->checkBox_input_emulator->Name = L"checkBox_input_emulator";
-			this->checkBox_input_emulator->Size = System::Drawing::Size(140, 24);
+			this->checkBox_input_emulator->Size = System::Drawing::Size(94, 17);
 			this->checkBox_input_emulator->TabIndex = 0;
 			this->checkBox_input_emulator->Text = L"Input Emulator";
 			this->checkBox_input_emulator->UseVisualStyleBackColor = true;
@@ -601,10 +544,9 @@ namespace Launcher {
 			// checkBox_fast_loader
 			// 
 			this->checkBox_fast_loader->AutoSize = true;
-			this->checkBox_fast_loader->Location = System::Drawing::Point(4, 252);
-			this->checkBox_fast_loader->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->checkBox_fast_loader->Location = System::Drawing::Point(3, 164);
 			this->checkBox_fast_loader->Name = L"checkBox_fast_loader";
-			this->checkBox_fast_loader->Size = System::Drawing::Size(121, 24);
+			this->checkBox_fast_loader->Size = System::Drawing::Size(82, 17);
 			this->checkBox_fast_loader->TabIndex = 7;
 			this->checkBox_fast_loader->Text = L"Fast Loader";
 			this->checkBox_fast_loader->UseVisualStyleBackColor = true;
@@ -612,10 +554,9 @@ namespace Launcher {
 			// checkBox_touch_slider_emulator
 			// 
 			this->checkBox_touch_slider_emulator->AutoSize = true;
-			this->checkBox_touch_slider_emulator->Location = System::Drawing::Point(4, 40);
-			this->checkBox_touch_slider_emulator->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->checkBox_touch_slider_emulator->Location = System::Drawing::Point(3, 26);
 			this->checkBox_touch_slider_emulator->Name = L"checkBox_touch_slider_emulator";
-			this->checkBox_touch_slider_emulator->Size = System::Drawing::Size(191, 24);
+			this->checkBox_touch_slider_emulator->Size = System::Drawing::Size(131, 17);
 			this->checkBox_touch_slider_emulator->TabIndex = 1;
 			this->checkBox_touch_slider_emulator->Text = L"Touch Panel Emulator";
 			this->checkBox_touch_slider_emulator->UseVisualStyleBackColor = true;
@@ -623,10 +564,9 @@ namespace Launcher {
 			// checkBox_stage_manager
 			// 
 			this->checkBox_stage_manager->AutoSize = true;
-			this->checkBox_stage_manager->Location = System::Drawing::Point(4, 217);
-			this->checkBox_stage_manager->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->checkBox_stage_manager->Location = System::Drawing::Point(3, 141);
 			this->checkBox_stage_manager->Name = L"checkBox_stage_manager";
-			this->checkBox_stage_manager->Size = System::Drawing::Size(145, 24);
+			this->checkBox_stage_manager->Size = System::Drawing::Size(99, 17);
 			this->checkBox_stage_manager->TabIndex = 6;
 			this->checkBox_stage_manager->Text = L"Stage Manager";
 			this->checkBox_stage_manager->UseVisualStyleBackColor = true;
@@ -634,10 +574,9 @@ namespace Launcher {
 			// checkBox_touch_panel_emulator
 			// 
 			this->checkBox_touch_panel_emulator->AutoSize = true;
-			this->checkBox_touch_panel_emulator->Location = System::Drawing::Point(4, 75);
-			this->checkBox_touch_panel_emulator->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->checkBox_touch_panel_emulator->Location = System::Drawing::Point(3, 49);
 			this->checkBox_touch_panel_emulator->Name = L"checkBox_touch_panel_emulator";
-			this->checkBox_touch_panel_emulator->Size = System::Drawing::Size(191, 24);
+			this->checkBox_touch_panel_emulator->Size = System::Drawing::Size(130, 17);
 			this->checkBox_touch_panel_emulator->TabIndex = 2;
 			this->checkBox_touch_panel_emulator->Text = L"Touch Slider Emulator";
 			this->checkBox_touch_panel_emulator->UseVisualStyleBackColor = true;
@@ -645,10 +584,9 @@ namespace Launcher {
 			// checkBox_frame_rate_manager
 			// 
 			this->checkBox_frame_rate_manager->AutoSize = true;
-			this->checkBox_frame_rate_manager->Location = System::Drawing::Point(4, 182);
-			this->checkBox_frame_rate_manager->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->checkBox_frame_rate_manager->Location = System::Drawing::Point(3, 118);
 			this->checkBox_frame_rate_manager->Name = L"checkBox_frame_rate_manager";
-			this->checkBox_frame_rate_manager->Size = System::Drawing::Size(187, 24);
+			this->checkBox_frame_rate_manager->Size = System::Drawing::Size(126, 17);
 			this->checkBox_frame_rate_manager->TabIndex = 5;
 			this->checkBox_frame_rate_manager->Text = L"Frame Rate Manager";
 			this->checkBox_frame_rate_manager->UseVisualStyleBackColor = true;
@@ -656,10 +594,9 @@ namespace Launcher {
 			// checkBox_sys_timer
 			// 
 			this->checkBox_sys_timer->AutoSize = true;
-			this->checkBox_sys_timer->Location = System::Drawing::Point(4, 111);
-			this->checkBox_sys_timer->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->checkBox_sys_timer->Location = System::Drawing::Point(3, 72);
 			this->checkBox_sys_timer->Name = L"checkBox_sys_timer";
-			this->checkBox_sys_timer->Size = System::Drawing::Size(177, 24);
+			this->checkBox_sys_timer->Size = System::Drawing::Size(120, 17);
 			this->checkBox_sys_timer->TabIndex = 3;
 			this->checkBox_sys_timer->Text = L"Freeze Select Timer";
 			this->checkBox_sys_timer->UseVisualStyleBackColor = true;
@@ -667,10 +604,9 @@ namespace Launcher {
 			// checkBox_player_data_manager
 			// 
 			this->checkBox_player_data_manager->AutoSize = true;
-			this->checkBox_player_data_manager->Location = System::Drawing::Point(4, 146);
-			this->checkBox_player_data_manager->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->checkBox_player_data_manager->Location = System::Drawing::Point(3, 95);
 			this->checkBox_player_data_manager->Name = L"checkBox_player_data_manager";
-			this->checkBox_player_data_manager->Size = System::Drawing::Size(184, 24);
+			this->checkBox_player_data_manager->Size = System::Drawing::Size(126, 17);
 			this->checkBox_player_data_manager->TabIndex = 4;
 			this->checkBox_player_data_manager->Text = L"Player Data Manager";
 			this->checkBox_player_data_manager->UseVisualStyleBackColor = true;
@@ -678,26 +614,27 @@ namespace Launcher {
 			// ui
 			// 
 			this->AcceptButton = this->button_Launch;
-			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 			this->CancelButton = this->button_Exit;
-			this->ClientSize = System::Drawing::Size(663, 482);
+			this->ClientSize = System::Drawing::Size(442, 313);
 			this->Controls->Add(this->tabControl);
 			this->Controls->Add(this->button_Exit);
 			this->Controls->Add(this->button_Launch);
 			this->DoubleBuffered = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"ui";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"DIVA Launcher";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &ui::Ui_FormClosing);
+			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &ui::Ui_FormClosed);
 			this->Load += gcnew System::EventHandler(this, &ui::Ui_Load);
 			this->groupBox_ScreenRes->ResumeLayout(false);
 			this->groupBox_ScreenRes->PerformLayout();
@@ -715,40 +652,38 @@ namespace Launcher {
 
 		}
 #pragma endregion
-private: System::Void Ui_Load(System::Object^ sender, System::EventArgs^ e){
-}
-private: System::Void Button_Exit_Click(System::Object^ sender, System::EventArgs^ e) {
-	TerminateProcess(GetCurrentProcess(), EXIT_SUCCESS);
-}
-private: System::Void Button_Launch_Click(System::Object^ sender, System::EventArgs^ e) {
-
-	String^ userInput = textBox_Height->Text;
+private: System::Void SaveSettings() {
+	String^ userInput = Convert::ToInt32(comboBox_Display->SelectedIndex).ToString();
 	wstring input = msclr::interop::marshal_as<std::wstring>(userInput);
-	WritePrivateProfileStringW(L"resolution", L"height", input.c_str(), CONFIG_FILE);
+	WritePrivateProfileStringW(L"resolution", L"display", input.c_str(), CONFIG_FILE);
 
-	userInput = textBox_Width->Text;
+	userInput = comboBox_Resolution->Text;
+	cli::array<String^>^ ResolutionArray = userInput->Split('x');
+	userInput = ResolutionArray[0];
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
 	WritePrivateProfileStringW(L"resolution", L"width", input.c_str(), CONFIG_FILE);
 
-	userInput = Convert::ToInt32(checkBox_Fullscreen->Checked).ToString();
+	userInput = comboBox_Resolution->Text;
+	ResolutionArray = userInput->Split('x');
+	userInput = ResolutionArray[1];
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
-	WritePrivateProfileStringW(L"resolution", L"fullscreen", input.c_str(), CONFIG_FILE);
-
-	userInput = Convert::ToInt32(checkBox_Borderless->Checked).ToString();
-	input = msclr::interop::marshal_as<std::wstring>(userInput);
-	WritePrivateProfileStringW(L"resolution", L"borderless", input.c_str(), CONFIG_FILE);
+	WritePrivateProfileStringW(L"resolution", L"height", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(checkBox_InternalRes->Checked).ToString();
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
 	WritePrivateProfileStringW(L"resolution", L"r.enable", input.c_str(), CONFIG_FILE);
 
-	userInput = textBox_intResHeight->Text;
-	input = msclr::interop::marshal_as<std::wstring>(userInput);
-	WritePrivateProfileStringW(L"resolution", L"r.height", input.c_str(), CONFIG_FILE);
-
-	userInput = textBox_intResWidth->Text;
+	userInput = comboBox_intResolution->Text;
+	cli::array<String^>^ intResolutionArray = userInput->Split('x');
+	userInput = intResolutionArray[0];
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
 	WritePrivateProfileStringW(L"resolution", L"r.width", input.c_str(), CONFIG_FILE);
+
+	userInput = comboBox_intResolution->Text;
+	intResolutionArray = userInput->Split('x');
+	userInput = intResolutionArray[1];
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"resolution", L"r.height", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(checkBox_Cursor->Checked).ToString();
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
@@ -757,7 +692,7 @@ private: System::Void Button_Launch_Click(System::Object^ sender, System::EventA
 	userInput = Convert::ToInt32(checkBox_Stereo->Checked).ToString();
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
 	WritePrivateProfileStringW(L"patches", L"stereo", input.c_str(), CONFIG_FILE);
-	
+
 	userInput = Convert::ToInt32(checkBox_HideCredits->Checked).ToString();
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
 	WritePrivateProfileStringW(L"patches", L"hide_credits", input.c_str(), CONFIG_FILE);
@@ -786,6 +721,15 @@ private: System::Void Button_Launch_Click(System::Object^ sender, System::EventA
 	userInput = textBox_FPSLimit->Text;
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
 	WritePrivateProfileStringW(L"graphics", L"FPS.Limit", input.c_str(), CONFIG_FILE);
+}
+private: System::Void Ui_Load(System::Object^ sender, System::EventArgs^ e){
+}
+private: System::Void Button_Exit_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Close();
+}
+private: System::Void Button_Launch_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	SaveSettings();
 
 	STARTUPINFOW si;
 	PROCESS_INFORMATION pi;
@@ -794,20 +738,46 @@ private: System::Void Button_Launch_Click(System::Object^ sender, System::EventA
 	si.cb = sizeof(si);
 	ZeroMemory(&pi, sizeof(pi));
 	CreateProcessW(DIVA_EXECUTABLE, DIVA_EXECUTABLE_LAUNCH, NULL, NULL, false, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi);
+	
+	this->Close();	
+}
+private: System::Void CheckBox_InternalRes_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (checkBox_InternalRes->Checked)
+	{
+		comboBox_intResolution->Enabled = true;
+	}
+	else
+	{
+		comboBox_intResolution->Enabled = false;
+	}
+}
+private: System::Void ComboBox_Display_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (comboBox_Display->SelectedIndex == 0)
+	{
+		comboBox_Resolution->Enabled = true;
+	}
+	else
+	{
+		comboBox_Resolution->Enabled = false;
+	}
+}
+private: System::Void Ui_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
+	switch (MessageBox::Show("Do you want to save your settings?", "", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
+	{
+	case System::Windows::Forms::DialogResult::Yes:
+		SaveSettings();
+		break;
 
+	case System::Windows::Forms::DialogResult::No:
+		break;
+
+	case System::Windows::Forms::DialogResult::Cancel:
+		e->Cancel = true;
+		break;
+	}
+}
+private: System::Void Ui_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
 	TerminateProcess(GetCurrentProcess(), EXIT_SUCCESS);
-}
-private: System::Void Label_intResWidth_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void Label_intResHeight_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void Label_Width_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void TextBox_Width_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void TextBox_Height_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void checkBox_HideVolCtrl_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
