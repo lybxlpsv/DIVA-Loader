@@ -118,6 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox_Discord.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACoAAAApCAYAAABDV7v1AAAABGdBTUEAALGPC/xhBQAAA7dJREFUWEft
+        mElME2EUxwdDgh6NVw8e9OzZGwcv3ryZePKmUQodREAN1Ah0BmQTVJZgQFABE1kEl7iAEQWjAiIEOtMW
+        aJGyFWgpbWG6PL+vnSmFDrL0KyHaf/LPtPNm3vtN37dMSkUVlYwuqMYOJmRz52g1n0UzfF4knKTmmERG
+        p1CotEfFsjsTTU8colmuKTmXh70wzfL6S6qxY2L57SsxZ0SBEng2JoyklSzXp1Bo40SE7Qm1xSaXLOJm
+        uZMiwtaKj++MlU2yB1aqtadEjK0VBd2G/2/QtAItFFSPQ2HNOKQX+s9dzeMh5Y7/c2o+D8W141BWb4Rb
+        93Xr7t3MxEFLHxugd8gCtS2T0PJhBj73LsCwfhkMJicYp5y+Y9+wFd53m6Gh3QSD/BJ0fJ2HG0Va2XyS
+        iYLWtZpgbn4FBjkrCIIHtpLb7QXNKH4IB3oYm2xOyURBdQY7rKxuDbhRHo8XvF4vlKBuyOXFJgaaXa4X
+        y+5eliXBN5bl8hMDHUDtDleCywO5VWOy+YmAXkcTYWPLcSttdhcsLbt8rQ2W3ekCq83lA8PXScKf2z7O
+        huTHJgJaXGsAFyoqCRcc0FjRcBiFzFIdfPqxIEYA5i0C5FePwc1iLTS8nl53H1YXWiXkahABbe+cC/ll
+        1BVrLax89luMANQ0TwbOq+7pYcEqiBG/8CogxYNNBPTtF7NYxi8MipcqKf7w+RpoT/9i4PztB6Ngd7jE
+        iF+rgjsQDzYR0K6g1mJhUDz+Wjtm4enLKVhddYsRf6y7f9Fb0zLpnTE713VCUlpBaA0ioD0DFrEEoEnl
+        BtOMM2QCbSbHitu34OPFX1JGSei2SgT0TdfaGPWg4y/eCnUvTGgDWN4UGK8SPT8XoR5to0vLQuB+86IA
+        19C7wMYaREBTUas6vy2AxeYviD1jXoHiR+OQiSZMeeMENL6agqZ30/CkzQR364yQjl5c8Nh2OP3DwuX2
+        gH7CDiV18rsTEVDJORWj0IpeREbQvv0dvZjgtyi56yQX1RhAb7T7JlhZg9G3ZMldh00UNJKOgpL2vwlK
+        UaoDNMs75RKFYzqX96K8NnyUi2PvEJSiaDVXKJcoXCsZTaWS5Zo3g90x6Pl0w2Ga5Yb+9vS7Mc1q6uNV
+        nbFKhm+Qy71jUKyLWboTKGFGMstXo6S1RMxyVTj3FfXIkSRGU4bOCWGDBimGooCgA4pRMhyLAAN/xoUL
+        GjGdUWjj0JhNQZNsfl+DSkpQc2fpXM6x70GxFAx3+jIzdFz8GlVUFEVRfwDiv42+8CmffAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAuQAAAIaCAYAAABoPFgMAAABg2lDQ1BJQ0MgUFJPRklMRQAAKM+VkT1I

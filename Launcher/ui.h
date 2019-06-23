@@ -119,7 +119,7 @@ namespace Launcher {
 
 
 	private: System::Windows::Forms::CheckBox^ checkBox_Cursor;
-	private: System::Windows::Forms::LinkLabel^ linkLabel_Discord;
+
 	private: System::Windows::Forms::Label^ label_intResolution;
 
 
@@ -138,6 +138,8 @@ namespace Launcher {
 	private: System::Windows::Forms::Label^ label_Display;
 private: System::Windows::Forms::ComboBox^ comboBox_Resolution;
 private: System::Windows::Forms::ComboBox^ comboBox_intResolution;
+private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
+
 
 	private:
 		/// <summary>
@@ -172,7 +174,6 @@ private: System::Windows::Forms::ComboBox^ comboBox_intResolution;
 			this->checkBox_HideVolCtrl = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_HideCredits = (gcnew System::Windows::Forms::CheckBox());
 			this->textBox_FPSLimit = (gcnew System::Windows::Forms::TextBox());
-			this->linkLabel_Discord = (gcnew System::Windows::Forms::LinkLabel());
 			this->label_FPSLimit = (gcnew System::Windows::Forms::Label());
 			this->checkBox_MLAA = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_TAA = (gcnew System::Windows::Forms::CheckBox());
@@ -192,6 +193,7 @@ private: System::Windows::Forms::ComboBox^ comboBox_intResolution;
 			this->checkBox_frame_rate_manager = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_sys_timer = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_player_data_manager = (gcnew System::Windows::Forms::CheckBox());
+			this->pictureBox_Discord = (gcnew System::Windows::Forms::PictureBox());
 			this->groupBox_ScreenRes->SuspendLayout();
 			this->tabControl->SuspendLayout();
 			this->tabPage_Resolution->SuspendLayout();
@@ -200,6 +202,7 @@ private: System::Windows::Forms::ComboBox^ comboBox_intResolution;
 			this->panel_Patches->SuspendLayout();
 			this->tabPage_Components->SuspendLayout();
 			this->panel1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox_Discord))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// button_Launch
@@ -353,7 +356,6 @@ private: System::Windows::Forms::ComboBox^ comboBox_intResolution;
 			this->panel_Patches->Controls->Add(this->checkBox_HideVolCtrl);
 			this->panel_Patches->Controls->Add(this->checkBox_HideCredits);
 			this->panel_Patches->Controls->Add(this->textBox_FPSLimit);
-			this->panel_Patches->Controls->Add(this->linkLabel_Discord);
 			this->panel_Patches->Controls->Add(this->label_FPSLimit);
 			this->panel_Patches->Controls->Add(this->checkBox_MLAA);
 			this->panel_Patches->Controls->Add(this->checkBox_TAA);
@@ -401,16 +403,6 @@ private: System::Windows::Forms::ComboBox^ comboBox_intResolution;
 			this->textBox_FPSLimit->Name = L"textBox_FPSLimit";
 			this->textBox_FPSLimit->Size = System::Drawing::Size(45, 20);
 			this->textBox_FPSLimit->TabIndex = 14;
-			// 
-			// linkLabel_Discord
-			// 
-			this->linkLabel_Discord->AutoSize = true;
-			this->linkLabel_Discord->Location = System::Drawing::Point(40, 208);
-			this->linkLabel_Discord->Name = L"linkLabel_Discord";
-			this->linkLabel_Discord->Size = System::Drawing::Size(91, 13);
-			this->linkLabel_Discord->TabIndex = 15;
-			this->linkLabel_Discord->TabStop = true;
-			this->linkLabel_Discord->Text = L"Join us at Discord";
 			// 
 			// label_FPSLimit
 			// 
@@ -611,6 +603,20 @@ private: System::Windows::Forms::ComboBox^ comboBox_intResolution;
 			this->checkBox_player_data_manager->Text = L"Player Data Manager";
 			this->checkBox_player_data_manager->UseVisualStyleBackColor = true;
 			// 
+			// pictureBox_Discord
+			// 
+			this->pictureBox_Discord->BackColor = System::Drawing::Color::Transparent;
+			this->pictureBox_Discord->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
+			this->pictureBox_Discord->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox_Discord.Image")));
+			this->pictureBox_Discord->Location = System::Drawing::Point(388, 260);
+			this->pictureBox_Discord->Name = L"pictureBox_Discord";
+			this->pictureBox_Discord->Size = System::Drawing::Size(42, 41);
+			this->pictureBox_Discord->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pictureBox_Discord->TabIndex = 32;
+			this->pictureBox_Discord->TabStop = false;
+			this->pictureBox_Discord->Click += gcnew System::EventHandler(this, &ui::PictureBox_Discord_Click);
+			this->pictureBox_Discord->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &ui::PictureBox_Discord_MouseMove);
+			// 
 			// ui
 			// 
 			this->AcceptButton = this->button_Launch;
@@ -622,6 +628,7 @@ private: System::Windows::Forms::ComboBox^ comboBox_intResolution;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 			this->CancelButton = this->button_Exit;
 			this->ClientSize = System::Drawing::Size(442, 313);
+			this->Controls->Add(this->pictureBox_Discord);
 			this->Controls->Add(this->tabControl);
 			this->Controls->Add(this->button_Exit);
 			this->Controls->Add(this->button_Launch);
@@ -648,6 +655,7 @@ private: System::Windows::Forms::ComboBox^ comboBox_intResolution;
 			this->tabPage_Components->ResumeLayout(false);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox_Discord))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -780,6 +788,12 @@ private: System::Void Ui_FormClosing(System::Object^ sender, System::Windows::Fo
 private: System::Void Ui_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
 	// Prevents abnormal termination messages, remember that the game is still technically running and must be killed!
 	TerminateProcess(GetCurrentProcess(), EXIT_SUCCESS);
+}
+private: System::Void PictureBox_Discord_Click(System::Object^ sender, System::EventArgs^ e) {
+	System::Diagnostics::Process::Start("https://discord.gg/cvBVGDZ");
+}
+private: System::Void PictureBox_Discord_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+	pictureBox_Discord->Cursor = Cursors::Hand;
 }
 };
 }
