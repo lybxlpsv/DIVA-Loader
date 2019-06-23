@@ -42,7 +42,7 @@ int hookedCreateWindow(const char* title, void(__cdecl* exit_function)(int))
 		*fullScreenFlag = 0;
 		glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 		glutInitWindowSize(nWidth, nHeight);
-		glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - nWidth) / 2, (glutGet(GLUT_SCREEN_HEIGHT) - nHeight) / 2); // Center to the middle of the scree when windowed
+		glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - nWidth) / 2, (glutGet(GLUT_SCREEN_HEIGHT) - nHeight) / 2); // Center to the middle of the screen when windowed
 		glutCreateWindow(title);
 		printf("[Render Manager] Windowed mode.\n");
 	}
@@ -51,7 +51,7 @@ int hookedCreateWindow(const char* title, void(__cdecl* exit_function)(int))
 
 __int64 hookedParseParameters(int a1, __int64* a2)
 {
-	// Force -wqhd if Custom Internal Resolution enabled
+	// Force -wqhd if Custom Internal Resolution is enabled
 	if (nIntRes)
 		*resolutionType = 15;
 	// Return to the original function
