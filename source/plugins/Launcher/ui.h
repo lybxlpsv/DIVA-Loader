@@ -218,7 +218,7 @@ private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
 			// 
 			this->button_Launch->FlatAppearance->BorderColor = System::Drawing::SystemColors::Control;
 			this->button_Launch->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button_Launch->Location = System::Drawing::Point(0, 295);
+			this->button_Launch->Location = System::Drawing::Point(12, 295);
 			this->button_Launch->Name = L"button_Launch";
 			this->button_Launch->Size = System::Drawing::Size(75, 23);
 			this->button_Launch->TabIndex = 30;
@@ -230,7 +230,7 @@ private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
 			this->button_Exit->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			this->button_Exit->FlatAppearance->BorderColor = System::Drawing::SystemColors::Control;
 			this->button_Exit->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button_Exit->Location = System::Drawing::Point(140, 295);
+			this->button_Exit->Location = System::Drawing::Point(130, 295);
 			this->button_Exit->Name = L"button_Exit";
 			this->button_Exit->Size = System::Drawing::Size(75, 23);
 			this->button_Exit->TabIndex = 31;
