@@ -8,6 +8,9 @@ using namespace System::Windows::Forms;
 
 [STAThread]
 int showUI() {
+	if (Environment::OSVersion->Version->Major >= 6)
+		SetProcessDPIAware();
+
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	Application::Run(gcnew Launcher::ui());
