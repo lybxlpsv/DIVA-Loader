@@ -75,7 +75,9 @@ void ApplyPatches() {
 	auto nHideCredits = GetPrivateProfileIntW(L"patches", L"hide_credits", FALSE, CONFIG_FILE);
 	auto nHideStatusIcons = GetPrivateProfileIntW(L"patches", L"hide_status_icons", FALSE, CONFIG_FILE);
 	auto nHidePVWatermark = GetPrivateProfileIntW(L"patches", L"hide_pv_watermark", FALSE, CONFIG_FILE);
+	auto nNoPVUi = GetPrivateProfileIntW(L"patches", L"no_pv_ui", FALSE, CONFIG_FILE);
 	auto nHideVolCtrl = GetPrivateProfileIntW(L"patches", L"hide_volume", FALSE, CONFIG_FILE);
+	auto nNoLyrics = GetPrivateProfileIntW(L"patches", L"no_lyrics", FALSE, CONFIG_FILE);
 	// Initialize Audio with dual-channels instead of quads
 	if (nStereo)
 	{
@@ -124,6 +126,23 @@ void ApplyPatches() {
 		InjectCode((void*)0x0000000140A13A88, { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 });
 		printf("[Patches] PV watermark hidden\n");
 	}
+	// Disable the PV screen photo UI
+	if (nNoPVUi)
+	{
+		InjectCode((void*)0x000000014048F594, { 0x6A, 0x05 }); // skip button panel image
+		// InjectCode((void*)0x000000014048F59C, { 0x77, 0x04 }); // skip screenshot stuff (actually seems not relevant)
+
+		// patch minimum PV UI state to 1 instead of 0
+		// hook check for lyrics enabled (UI state < 2) to change UI state 0 into 1
+		// dump new code in the skipped button panel condition
+		InjectCode((void*)0x000000014048FA26, { 0xC7, 0x83, 0x58, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00 });	// MOV	dword ptr [0x158 + RBX],0x1
+		InjectCode((void*)0x000000014048FA30, { 0xC6, 0x80, 0x3A, 0xD1, 0x02, 0x00, 0x01 });					// MOV	byte ptr [0x2d13a + RAX],0x1
+		InjectCode((void*)0x000000014048FA37, { 0xE9, 0xF8, 0xFB, 0xFF, 0xFF });								// JMP	0x14048f634
+
+		InjectCode((void*)0x000000014048F62D, { 0xE9, 0xF4, 0x03, 0x00, 0x00 }); // JMP	0x14048FA26
+
+		printf("[Patches] PV UI disabled\n");
+	}
 	// Don't show volume control
 	if (nHideVolCtrl)
 	{
@@ -134,6 +153,13 @@ void ApplyPatches() {
 		InjectCode((void*)0x0000000140A85F18, { 0xE0, 0x50 });
 		
 		printf("[Patches] Volume control hidden\n");
+	}
+	// Skip loading (and therefore displaying) song lyrics
+	if (nNoLyrics)
+	{
+		InjectCode((void*)0x00000001404E7A25, { 0x00, 0x00 });
+		InjectCode((void*)0x00000001404E7950, { 0x48, 0xE9 }); // ensure first iteration doesn't run
+		printf("[Patches] Lyrics disabled\n");
 	}
 }
 
