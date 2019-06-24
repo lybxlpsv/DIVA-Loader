@@ -1,4 +1,4 @@
-# DIVA Loader (master)
+# DIVA Loader
 
 **DIVA Loader** lets you load plugins into **Hatsune Miku Project DIVA Arcade Future Tone 7.10**  by placing them into the **"plugins"** folder, it includes useful ones such as **TLAC**, **Prepatch** and a **Launcher** in the form of a plugin without needing to use extra executables.
 
@@ -8,7 +8,7 @@
 * Download the latest release.
 * Decompress everything into the **root folder** of the game.
 
-* **"mdata"** from **M215** to **M270** are supported, custom **"mdata"** will be possible soon.
+* **"mdata"** from **M215** to **M270** are supported, custom ones are also supported.
 * Files required to load **"mdata"** without merging it into the actual game are included (**"ram\databank\PvList*"** files)
 
 For **"mdata"** to work, you have to drop each **"mdata"** update decompressed into the **"mdata\"** folder in the root folder of the game (create it if it doesn't exists).
@@ -52,6 +52,10 @@ Please make sure to update tests as appropriate.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
+
+## Third party plugins
+
+[DiscordDiva](https://github.com/bela333/DiscordDiva) - Discord integration for **PDAFT 7.10** by **bela333**.
 
 ## FAQ
 
