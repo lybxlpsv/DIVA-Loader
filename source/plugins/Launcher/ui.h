@@ -223,7 +223,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->button_Launch->Location = System::Drawing::Point(12, 295);
 			this->button_Launch->Name = L"button_Launch";
 			this->button_Launch->Size = System::Drawing::Size(75, 23);
-			this->button_Launch->TabIndex = 30;
+			this->button_Launch->TabIndex = 20;
 			this->button_Launch->Text = L"Launch";
 			this->button_Launch->Click += gcnew System::EventHandler(this, &ui::Button_Launch_Click);
 			// 
@@ -235,7 +235,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->button_Exit->Location = System::Drawing::Point(130, 295);
 			this->button_Exit->Name = L"button_Exit";
 			this->button_Exit->Size = System::Drawing::Size(75, 23);
-			this->button_Exit->TabIndex = 31;
+			this->button_Exit->TabIndex = 21;
 			this->button_Exit->Text = L"Exit";
 			this->button_Exit->Click += gcnew System::EventHandler(this, &ui::Button_Exit_Click);
 			// 
@@ -246,7 +246,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->label_Resolution->Location = System::Drawing::Point(18, 39);
 			this->label_Resolution->Name = L"label_Resolution";
 			this->label_Resolution->Size = System::Drawing::Size(60, 13);
-			this->label_Resolution->TabIndex = 4;
+			this->label_Resolution->TabIndex = 11;
 			this->label_Resolution->Text = L"Resolution:";
 			// 
 			// groupBox_ScreenRes
@@ -260,7 +260,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->groupBox_ScreenRes->Location = System::Drawing::Point(8, 6);
 			this->groupBox_ScreenRes->Name = L"groupBox_ScreenRes";
 			this->groupBox_ScreenRes->Size = System::Drawing::Size(193, 118);
-			this->groupBox_ScreenRes->TabIndex = 6;
+			this->groupBox_ScreenRes->TabIndex = 10;
 			this->groupBox_ScreenRes->TabStop = false;
 			this->groupBox_ScreenRes->Text = L"Screen Resolution";
 			// 
@@ -271,7 +271,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->comboBox_Resolution->Location = System::Drawing::Point(84, 36);
 			this->comboBox_Resolution->Name = L"comboBox_Resolution";
 			this->comboBox_Resolution->Size = System::Drawing::Size(85, 21);
-			this->comboBox_Resolution->TabIndex = 7;
+			this->comboBox_Resolution->TabIndex = 12;
 			// 
 			// comboBox_Display
 			// 
@@ -282,7 +282,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->comboBox_Display->Location = System::Drawing::Point(84, 63);
 			this->comboBox_Display->Name = L"comboBox_Display";
 			this->comboBox_Display->Size = System::Drawing::Size(85, 21);
-			this->comboBox_Display->TabIndex = 6;
+			this->comboBox_Display->TabIndex = 14;
 			this->comboBox_Display->SelectedIndexChanged += gcnew System::EventHandler(this, &ui::ComboBox_Display_SelectedIndexChanged);
 			// 
 			// label_Display
@@ -292,7 +292,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->label_Display->Location = System::Drawing::Point(18, 66);
 			this->label_Display->Name = L"label_Display";
 			this->label_Display->Size = System::Drawing::Size(44, 13);
-			this->label_Display->TabIndex = 5;
+			this->label_Display->TabIndex = 13;
 			this->label_Display->Text = L"Display:";
 			// 
 			// tabControl
@@ -305,7 +305,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->tabControl->Name = L"tabControl";
 			this->tabControl->SelectedIndex = 0;
 			this->tabControl->Size = System::Drawing::Size(215, 289);
-			this->tabControl->TabIndex = 0;
+			this->tabControl->TabIndex = 10;
 			// 
 			// tabPage_Resolution
 			// 
@@ -330,7 +330,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->groupBox_InternalRes->Location = System::Drawing::Point(8, 130);
 			this->groupBox_InternalRes->Name = L"groupBox_InternalRes";
 			this->groupBox_InternalRes->Size = System::Drawing::Size(193, 124);
-			this->groupBox_InternalRes->TabIndex = 5;
+			this->groupBox_InternalRes->TabIndex = 20;
 			this->groupBox_InternalRes->TabStop = false;
 			this->groupBox_InternalRes->Text = L"Internal Resolution";
 			// 
@@ -341,7 +341,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->comboBox_intResolution->Location = System::Drawing::Point(84, 69);
 			this->comboBox_intResolution->Name = L"comboBox_intResolution";
 			this->comboBox_intResolution->Size = System::Drawing::Size(85, 21);
-			this->comboBox_intResolution->TabIndex = 8;
+			this->comboBox_intResolution->TabIndex = 23;
 			// 
 			// checkBox_InternalRes
 			// 
@@ -350,7 +350,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->checkBox_InternalRes->Location = System::Drawing::Point(21, 39);
 			this->checkBox_InternalRes->Name = L"checkBox_InternalRes";
 			this->checkBox_InternalRes->Size = System::Drawing::Size(56, 17);
-			this->checkBox_InternalRes->TabIndex = 7;
+			this->checkBox_InternalRes->TabIndex = 21;
 			this->checkBox_InternalRes->Text = L"Enable";
 			this->checkBox_InternalRes->CheckedChanged += gcnew System::EventHandler(this, &ui::CheckBox_InternalRes_CheckedChanged);
 			// 
@@ -361,7 +361,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->label_intResolution->Location = System::Drawing::Point(17, 72);
 			this->label_intResolution->Name = L"label_intResolution";
 			this->label_intResolution->Size = System::Drawing::Size(60, 13);
-			this->label_intResolution->TabIndex = 11;
+			this->label_intResolution->TabIndex = 22;
 			this->label_intResolution->Text = L"Resolution:";
 			// 
 			// tabPage_Patches
@@ -372,7 +372,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->tabPage_Patches->Location = System::Drawing::Point(4, 25);
 			this->tabPage_Patches->Name = L"tabPage_Patches";
 			this->tabPage_Patches->Size = System::Drawing::Size(207, 260);
-			this->tabPage_Patches->TabIndex = 2;
+			this->tabPage_Patches->TabIndex = 1;
 			this->tabPage_Patches->Text = L"Patches";
 			// 
 			// panel_Patches
@@ -403,7 +403,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->checkBox_HidePVWatermark->Location = System::Drawing::Point(3, 95);
 			this->checkBox_HidePVWatermark->Name = L"checkBox_HidePVWatermark";
 			this->checkBox_HidePVWatermark->Size = System::Drawing::Size(117, 17);
-			this->checkBox_HidePVWatermark->TabIndex = 17;
+			this->checkBox_HidePVWatermark->TabIndex = 50;
 			this->checkBox_HidePVWatermark->Text = L"Hide PV Watermark";
 			// 
 			// checkBox_NoLyrics
@@ -414,7 +414,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->checkBox_NoLyrics->Margin = System::Windows::Forms::Padding(2);
 			this->checkBox_NoLyrics->Name = L"checkBox_NoLyrics";
 			this->checkBox_NoLyrics->Size = System::Drawing::Size(88, 17);
-			this->checkBox_NoLyrics->TabIndex = 19;
+			this->checkBox_NoLyrics->TabIndex = 70;
 			this->checkBox_NoLyrics->Text = L"Disable Lyrics";
 			// 
 			// checkBox_NoPVUi
@@ -425,7 +425,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->checkBox_NoPVUi->Margin = System::Windows::Forms::Padding(2);
 			this->checkBox_NoPVUi->Name = L"checkBox_NoPVUi";
 			this->checkBox_NoPVUi->Size = System::Drawing::Size(89, 17);
-			this->checkBox_NoPVUi->TabIndex = 18;
+			this->checkBox_NoPVUi->TabIndex = 60;
 			this->checkBox_NoPVUi->Text = L"Disable PV UI";
 			// 
 			// checkBox_HideVolCtrl
@@ -435,7 +435,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->checkBox_HideVolCtrl->Location = System::Drawing::Point(3, 72);
 			this->checkBox_HideVolCtrl->Name = L"checkBox_HideVolCtrl";
 			this->checkBox_HideVolCtrl->Size = System::Drawing::Size(122, 17);
-			this->checkBox_HideVolCtrl->TabIndex = 16;
+			this->checkBox_HideVolCtrl->TabIndex = 40;
 			this->checkBox_HideVolCtrl->Text = L"Hide Volume Buttons";
 			// 
 			// checkBox_HideCredits
@@ -445,7 +445,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->checkBox_HideCredits->Location = System::Drawing::Point(3, 49);
 			this->checkBox_HideCredits->Name = L"checkBox_HideCredits";
 			this->checkBox_HideCredits->Size = System::Drawing::Size(101, 17);
-			this->checkBox_HideCredits->TabIndex = 10;
+			this->checkBox_HideCredits->TabIndex = 30;
 			this->checkBox_HideCredits->Text = L"Hide CREDIT(S)";
 			// 
 			// textBox_FPSLimit
@@ -454,7 +454,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->textBox_FPSLimit->Location = System::Drawing::Point(59, 227);
 			this->textBox_FPSLimit->Name = L"textBox_FPSLimit";
 			this->textBox_FPSLimit->Size = System::Drawing::Size(45, 20);
-			this->textBox_FPSLimit->TabIndex = 14;
+			this->textBox_FPSLimit->TabIndex = 111;
 			// 
 			// label_FPSLimit
 			// 
@@ -463,7 +463,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->label_FPSLimit->Location = System::Drawing::Point(0, 230);
 			this->label_FPSLimit->Name = L"label_FPSLimit";
 			this->label_FPSLimit->Size = System::Drawing::Size(54, 13);
-			this->label_FPSLimit->TabIndex = 5;
+			this->label_FPSLimit->TabIndex = 110;
 			this->label_FPSLimit->Text = L"FPS Limit:";
 			// 
 			// checkBox_MLAA
@@ -473,7 +473,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->checkBox_MLAA->Location = System::Drawing::Point(3, 205);
 			this->checkBox_MLAA->Name = L"checkBox_MLAA";
 			this->checkBox_MLAA->Size = System::Drawing::Size(52, 17);
-			this->checkBox_MLAA->TabIndex = 13;
+			this->checkBox_MLAA->TabIndex = 100;
 			this->checkBox_MLAA->Text = L"MLAA";
 			// 
 			// checkBox_TAA
@@ -483,7 +483,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->checkBox_TAA->Location = System::Drawing::Point(3, 182);
 			this->checkBox_TAA->Name = L"checkBox_TAA";
 			this->checkBox_TAA->Size = System::Drawing::Size(44, 17);
-			this->checkBox_TAA->TabIndex = 12;
+			this->checkBox_TAA->TabIndex = 90;
 			this->checkBox_TAA->Text = L"TAA";
 			// 
 			// checkBox_Cursor
@@ -493,7 +493,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->checkBox_Cursor->Location = System::Drawing::Point(3, 26);
 			this->checkBox_Cursor->Name = L"checkBox_Cursor";
 			this->checkBox_Cursor->Size = System::Drawing::Size(53, 17);
-			this->checkBox_Cursor->TabIndex = 9;
+			this->checkBox_Cursor->TabIndex = 20;
 			this->checkBox_Cursor->Text = L"Cursor";
 			// 
 			// checkBox_Stereo
@@ -503,7 +503,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->checkBox_Stereo->Location = System::Drawing::Point(3, 3);
 			this->checkBox_Stereo->Name = L"checkBox_Stereo";
 			this->checkBox_Stereo->Size = System::Drawing::Size(54, 17);
-			this->checkBox_Stereo->TabIndex = 8;
+			this->checkBox_Stereo->TabIndex = 10;
 			this->checkBox_Stereo->Text = L"Stereo";
 			// 
 			// tabPage_Components
@@ -515,7 +515,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->tabPage_Components->Name = L"tabPage_Components";
 			this->tabPage_Components->Padding = System::Windows::Forms::Padding(3);
 			this->tabPage_Components->Size = System::Drawing::Size(207, 260);
-			this->tabPage_Components->TabIndex = 1;
+			this->tabPage_Components->TabIndex = 2;
 			this->tabPage_Components->Text = L"Components";
 			// 
 			// panel1
@@ -535,7 +535,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->panel1->Location = System::Drawing::Point(0, 0);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(207, 260);
-			this->panel1->TabIndex = 8;
+			this->panel1->TabIndex = 0;
 			// 
 			// checkBox_fps_limiter
 			// 
@@ -655,7 +655,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->pictureBox_Discord->Location = System::Drawing::Point(400, 281);
 			this->pictureBox_Discord->Name = L"pictureBox_Discord";
 			this->pictureBox_Discord->Size = System::Drawing::Size(42, 41);
-			this->pictureBox_Discord->TabIndex = 32;
+			this->pictureBox_Discord->TabIndex = 30;
 			this->pictureBox_Discord->TabStop = false;
 			this->pictureBox_Discord->Click += gcnew System::EventHandler(this, &ui::PictureBox_Discord_Click);
 			this->pictureBox_Discord->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &ui::PictureBox_Discord_MouseMove);
@@ -667,7 +667,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->label_StatusIcons->Location = System::Drawing::Point(0, 163);
 			this->label_StatusIcons->Name = L"label_StatusIcons";
 			this->label_StatusIcons->Size = System::Drawing::Size(69, 13);
-			this->label_StatusIcons->TabIndex = 20;
+			this->label_StatusIcons->TabIndex = 80;
 			this->label_StatusIcons->Text = L"Status Icons:";
 			// 
 			// comboBox_StatusIcons
@@ -679,7 +679,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->comboBox_StatusIcons->Location = System::Drawing::Point(75, 160);
 			this->comboBox_StatusIcons->Name = L"comboBox_StatusIcons";
 			this->comboBox_StatusIcons->Size = System::Drawing::Size(85, 21);
-			this->comboBox_StatusIcons->TabIndex = 21;
+			this->comboBox_StatusIcons->TabIndex = 81;
 			// 
 			// ui
 			// 
