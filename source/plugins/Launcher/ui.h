@@ -54,12 +54,11 @@ namespace Launcher {
 			checkBox_Stereo->Checked = nStereo;
 			checkBox_Cursor->Checked = nCursor;
 			checkBox_HideCredits->Checked = nHideCredits;
-			checkBox_HideStatusIcons->Checked = nHideStatusIcons;
 			checkBox_HidePVWatermark->Checked = nHidePVWatermark;
 			checkBox_NoPVUi->Checked = nNoPVUi;
 			checkBox_NoLyrics->Checked = nNoLyrics;
 			checkBox_HideVolCtrl->Checked = nHideVolCtrl;
-			checkBox_HideStatusIcons->Checked = nHideStatusIcons;
+			comboBox_StatusIcons->SelectedIndex = nStatusIcons;
 			checkBox_TAA->Checked = nTAA;
 			checkBox_MLAA->Checked = nMLAA;
 			textBox_FPSLimit->Text = nFPSLimit.ToString();
@@ -136,7 +135,7 @@ namespace Launcher {
 	private: System::Windows::Forms::CheckBox^ checkBox_HideCredits;
 	private: System::Windows::Forms::CheckBox^ checkBox_MLAA;
 	private: System::Windows::Forms::CheckBox^ checkBox_TAA;
-	private: System::Windows::Forms::CheckBox^ checkBox_HideStatusIcons;
+
 	private: System::Windows::Forms::CheckBox^ checkBox_HidePVWatermark;
 	private: System::Windows::Forms::CheckBox^  checkBox_NoLyrics;
 	private: System::Windows::Forms::CheckBox^  checkBox_NoPVUi;
@@ -146,6 +145,8 @@ namespace Launcher {
 private: System::Windows::Forms::ComboBox^ comboBox_Resolution;
 private: System::Windows::Forms::ComboBox^ comboBox_intResolution;
 private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
+private: System::Windows::Forms::ComboBox^ comboBox_StatusIcons;
+private: System::Windows::Forms::Label^ label_StatusIcons;
 
 
 	private:
@@ -177,6 +178,8 @@ private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
 			this->label_intResolution = (gcnew System::Windows::Forms::Label());
 			this->tabPage_Patches = (gcnew System::Windows::Forms::TabPage());
 			this->panel_Patches = (gcnew System::Windows::Forms::Panel());
+			this->comboBox_StatusIcons = (gcnew System::Windows::Forms::ComboBox());
+			this->label_StatusIcons = (gcnew System::Windows::Forms::Label());
 			this->checkBox_HidePVWatermark = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_NoLyrics = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_NoPVUi = (gcnew System::Windows::Forms::CheckBox());
@@ -186,7 +189,6 @@ private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
 			this->label_FPSLimit = (gcnew System::Windows::Forms::Label());
 			this->checkBox_MLAA = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_TAA = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox_HideStatusIcons = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_Cursor = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_Stereo = (gcnew System::Windows::Forms::CheckBox());
 			this->tabPage_Components = (gcnew System::Windows::Forms::TabPage());
@@ -376,6 +378,8 @@ private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
 			// panel_Patches
 			// 
 			this->panel_Patches->AutoScroll = true;
+			this->panel_Patches->Controls->Add(this->comboBox_StatusIcons);
+			this->panel_Patches->Controls->Add(this->label_StatusIcons);
 			this->panel_Patches->Controls->Add(this->checkBox_HidePVWatermark);
 			this->panel_Patches->Controls->Add(this->checkBox_NoLyrics);
 			this->panel_Patches->Controls->Add(this->checkBox_NoPVUi);
@@ -385,7 +389,6 @@ private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
 			this->panel_Patches->Controls->Add(this->label_FPSLimit);
 			this->panel_Patches->Controls->Add(this->checkBox_MLAA);
 			this->panel_Patches->Controls->Add(this->checkBox_TAA);
-			this->panel_Patches->Controls->Add(this->checkBox_HideStatusIcons);
 			this->panel_Patches->Controls->Add(this->checkBox_Cursor);
 			this->panel_Patches->Controls->Add(this->checkBox_Stereo);
 			this->panel_Patches->Location = System::Drawing::Point(0, 0);
@@ -397,7 +400,7 @@ private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
 			// 
 			this->checkBox_HidePVWatermark->AutoSize = true;
 			this->checkBox_HidePVWatermark->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_HidePVWatermark->Location = System::Drawing::Point(3, 118);
+			this->checkBox_HidePVWatermark->Location = System::Drawing::Point(3, 95);
 			this->checkBox_HidePVWatermark->Name = L"checkBox_HidePVWatermark";
 			this->checkBox_HidePVWatermark->Size = System::Drawing::Size(117, 17);
 			this->checkBox_HidePVWatermark->TabIndex = 17;
@@ -407,7 +410,7 @@ private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
 			// 
 			this->checkBox_NoLyrics->AutoSize = true;
 			this->checkBox_NoLyrics->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_NoLyrics->Location = System::Drawing::Point(3, 162);
+			this->checkBox_NoLyrics->Location = System::Drawing::Point(3, 138);
 			this->checkBox_NoLyrics->Margin = System::Windows::Forms::Padding(2);
 			this->checkBox_NoLyrics->Name = L"checkBox_NoLyrics";
 			this->checkBox_NoLyrics->Size = System::Drawing::Size(88, 17);
@@ -418,7 +421,7 @@ private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
 			// 
 			this->checkBox_NoPVUi->AutoSize = true;
 			this->checkBox_NoPVUi->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_NoPVUi->Location = System::Drawing::Point(3, 140);
+			this->checkBox_NoPVUi->Location = System::Drawing::Point(3, 117);
 			this->checkBox_NoPVUi->Margin = System::Windows::Forms::Padding(2);
 			this->checkBox_NoPVUi->Name = L"checkBox_NoPVUi";
 			this->checkBox_NoPVUi->Size = System::Drawing::Size(89, 17);
@@ -429,7 +432,7 @@ private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
 			// 
 			this->checkBox_HideVolCtrl->AutoSize = true;
 			this->checkBox_HideVolCtrl->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_HideVolCtrl->Location = System::Drawing::Point(3, 95);
+			this->checkBox_HideVolCtrl->Location = System::Drawing::Point(3, 72);
 			this->checkBox_HideVolCtrl->Name = L"checkBox_HideVolCtrl";
 			this->checkBox_HideVolCtrl->Size = System::Drawing::Size(122, 17);
 			this->checkBox_HideVolCtrl->TabIndex = 16;
@@ -448,7 +451,7 @@ private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
 			// textBox_FPSLimit
 			// 
 			this->textBox_FPSLimit->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->textBox_FPSLimit->Location = System::Drawing::Point(59, 230);
+			this->textBox_FPSLimit->Location = System::Drawing::Point(59, 227);
 			this->textBox_FPSLimit->Name = L"textBox_FPSLimit";
 			this->textBox_FPSLimit->Size = System::Drawing::Size(45, 20);
 			this->textBox_FPSLimit->TabIndex = 14;
@@ -457,7 +460,7 @@ private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
 			// 
 			this->label_FPSLimit->AutoSize = true;
 			this->label_FPSLimit->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->label_FPSLimit->Location = System::Drawing::Point(0, 233);
+			this->label_FPSLimit->Location = System::Drawing::Point(0, 230);
 			this->label_FPSLimit->Name = L"label_FPSLimit";
 			this->label_FPSLimit->Size = System::Drawing::Size(54, 13);
 			this->label_FPSLimit->TabIndex = 5;
@@ -467,7 +470,7 @@ private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
 			// 
 			this->checkBox_MLAA->AutoSize = true;
 			this->checkBox_MLAA->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_MLAA->Location = System::Drawing::Point(3, 207);
+			this->checkBox_MLAA->Location = System::Drawing::Point(3, 205);
 			this->checkBox_MLAA->Name = L"checkBox_MLAA";
 			this->checkBox_MLAA->Size = System::Drawing::Size(52, 17);
 			this->checkBox_MLAA->TabIndex = 13;
@@ -477,21 +480,11 @@ private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
 			// 
 			this->checkBox_TAA->AutoSize = true;
 			this->checkBox_TAA->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_TAA->Location = System::Drawing::Point(3, 184);
+			this->checkBox_TAA->Location = System::Drawing::Point(3, 182);
 			this->checkBox_TAA->Name = L"checkBox_TAA";
 			this->checkBox_TAA->Size = System::Drawing::Size(44, 17);
 			this->checkBox_TAA->TabIndex = 12;
 			this->checkBox_TAA->Text = L"TAA";
-			// 
-			// checkBox_HideStatusIcons
-			// 
-			this->checkBox_HideStatusIcons->AutoSize = true;
-			this->checkBox_HideStatusIcons->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_HideStatusIcons->Location = System::Drawing::Point(3, 72);
-			this->checkBox_HideStatusIcons->Name = L"checkBox_HideStatusIcons";
-			this->checkBox_HideStatusIcons->Size = System::Drawing::Size(107, 17);
-			this->checkBox_HideStatusIcons->TabIndex = 11;
-			this->checkBox_HideStatusIcons->Text = L"Hide Status Icons";
 			// 
 			// checkBox_Cursor
 			// 
@@ -667,6 +660,27 @@ private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
 			this->pictureBox_Discord->Click += gcnew System::EventHandler(this, &ui::PictureBox_Discord_Click);
 			this->pictureBox_Discord->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &ui::PictureBox_Discord_MouseMove);
 			// 
+			// label_StatusIcons
+			// 
+			this->label_StatusIcons->AutoSize = true;
+			this->label_StatusIcons->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->label_StatusIcons->Location = System::Drawing::Point(0, 163);
+			this->label_StatusIcons->Name = L"label_StatusIcons";
+			this->label_StatusIcons->Size = System::Drawing::Size(69, 13);
+			this->label_StatusIcons->TabIndex = 20;
+			this->label_StatusIcons->Text = L"Status Icons:";
+			// 
+			// comboBox_StatusIcons
+			// 
+			this->comboBox_StatusIcons->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboBox_StatusIcons->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->comboBox_StatusIcons->FormattingEnabled = true;
+			this->comboBox_StatusIcons->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Default", L"Hidden", L"Error", L"OK" });
+			this->comboBox_StatusIcons->Location = System::Drawing::Point(75, 160);
+			this->comboBox_StatusIcons->Name = L"comboBox_StatusIcons";
+			this->comboBox_StatusIcons->Size = System::Drawing::Size(85, 21);
+			this->comboBox_StatusIcons->TabIndex = 21;
+			// 
 			// ui
 			// 
 			this->AcceptButton = this->button_Launch;
@@ -758,9 +772,9 @@ private: System::Void SaveSettings() {
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
 	WritePrivateProfileStringW(L"patches", L"hide_credits", input.c_str(), CONFIG_FILE);
 
-	userInput = Convert::ToInt32(checkBox_HideStatusIcons->Checked).ToString();
+	userInput = Convert::ToInt32(comboBox_StatusIcons->SelectedIndex).ToString();
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
-	WritePrivateProfileStringW(L"patches", L"hide_status_icons", input.c_str(), CONFIG_FILE);
+	WritePrivateProfileStringW(L"patches", L"status_icons", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(checkBox_HidePVWatermark->Checked).ToString();
 	input = msclr::interop::marshal_as<std::wstring>(userInput);

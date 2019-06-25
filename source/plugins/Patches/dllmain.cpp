@@ -3,7 +3,7 @@
 #include <tchar.h>
 #include <GL/freeglut.h>
 
-void InjectCode(void* address, const std::initializer_list<uint8_t>& data);
+void InjectCode(void* address, const std::vector<uint8_t> data);
 void ApplyPatches();
 
 const LPCWSTR CONFIG_FILE = L".\\config.ini";
@@ -27,7 +27,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 
 void ApplyPatches() {
 
-	const struct { void* Address; std::initializer_list<uint8_t> Data; } patches[] =
+	const struct { void* Address; std::vector<uint8_t> Data; } patches[] =
 	{
 		// Disable the keychip time bomb
 		{ (void*)0x0000000140210820, { 0xB8, 0x00, 0x00, 0x00, 0x00, 0xC3 } },
@@ -73,7 +73,7 @@ void ApplyPatches() {
 	auto nOldStereo = GetPrivateProfileIntW(L"patches", L"old_stereo", FALSE, CONFIG_FILE);
 	auto nCursor = GetPrivateProfileIntW(L"patches", L"cursor", TRUE, CONFIG_FILE);
 	auto nHideCredits = GetPrivateProfileIntW(L"patches", L"hide_credits", FALSE, CONFIG_FILE);
-	auto nHideStatusIcons = GetPrivateProfileIntW(L"patches", L"hide_status_icons", FALSE, CONFIG_FILE);
+	auto nStatusIcons = GetPrivateProfileIntW(L"patches", L"status_icons", 0, CONFIG_FILE);
 	auto nHidePVWatermark = GetPrivateProfileIntW(L"patches", L"hide_pv_watermark", FALSE, CONFIG_FILE);
 	auto nNoPVUi = GetPrivateProfileIntW(L"patches", L"no_pv_ui", FALSE, CONFIG_FILE);
 	auto nHideVolCtrl = GetPrivateProfileIntW(L"patches", L"hide_volume", FALSE, CONFIG_FILE);
@@ -103,22 +103,49 @@ void ApplyPatches() {
 		printf("[Patches] Cursor enabled\n");
 	}
 	// Override status icon states to be invalid (hides them)
-	if (nHideStatusIcons)
+	if (nStatusIcons > 0)
 	{
+		std::vector<uint8_t> cardIcon = { 0xFD, 0x0A };
+		std::vector<uint8_t> networkIcon = { 0x00, 0x1E };
+
+		if (nStatusIcons == 2) // 2 for error icons
+		{
+			cardIcon = { 0xFA, 0x0A };
+			networkIcon = { 0x9F, 0x1E };
+			printf("[Patches] Status icons set to error state\n");
+		}
+		else if (nStatusIcons == 3) // 3 for OK icons
+		{
+			cardIcon = { 0xFC, 0x0A };
+			networkIcon = { 0xA0, 0x1E };
+			printf("[Patches] Status icons set to OK state\n");
+		}
+		else if (nStatusIcons == 4) // 4 for OK with partial network (hidden option)
+		{
+			cardIcon = { 0xFC, 0x0A };
+			networkIcon = { 0xA1, 0x1E };
+			printf("[Patches] Status icons set to OK state (with partial network)\n");
+		}
+		else // 1 or invalid for hidden
+		{
+			cardIcon = { 0xFD, 0x0A };
+			networkIcon = { 0x00, 0x1E };
+			printf("[Patches] Status icons hidden\n");
+		}
+
 		// card icon
-		// `{ 0xFD, 0x0A }` for hidden, `{ 0xFA, 0x0A }` for error icon, `{ 0xFC, 0x0A }` for OK icon
-		InjectCode((void*)0x00000001403B9D6E, { 0xFD, 0x0A }); // error state
-		InjectCode((void*)0x00000001403B9D73, { 0xFD, 0x0A }); // OK state
+		InjectCode((void*)0x00000001403B9D6E, cardIcon); // error state
+		InjectCode((void*)0x00000001403B9D73, cardIcon); // OK state
 		
 		// network icon
-		// `{ 0x00, 0x1E }` for hidden, `{ 0x9F, 0x1E }` for error icon, `{ 0xA0, 0x1E }` for OK icon, `{ 0xA1, 0x1E }` for partial connection (yellow) icon
-		InjectCode((void*)0x00000001403BA14B, { 0x00, 0x1E }); // error state
-		InjectCode((void*)0x00000001403BA155, { 0x00, 0x1E }); // OK state
-		InjectCode((void*)0x00000001403BA16B, { 0x00, 0x1E }); // partial state
+		InjectCode((void*)0x00000001403BA14B, networkIcon); // error state
+		InjectCode((void*)0x00000001403BA155, networkIcon); // OK state
+		InjectCode((void*)0x00000001403BA16B, networkIcon); // partial state
 		
 		InjectCode((void*)0x00000001403BA1A5, { 0x48, 0xE9 }); // never show the error code for partial connection
 		
-		printf("[Patches] Status icons hidden\n");
+		// I was going to use this with a string, but the assignment wasn't behaving well and making separate prints was easier than figuring it out
+		// printf("[Patches] Status icons %s\n", iconType);
 	}
 	// Dirty hack to remove PV watermark
 	if (nHidePVWatermark)
@@ -163,12 +190,12 @@ void ApplyPatches() {
 	}
 }
 
-void InjectCode(void* address, const std::initializer_list<uint8_t>& data)
+void InjectCode(void* address, const std::vector<uint8_t> data)
 {
 	const size_t byteCount = data.size() * sizeof(uint8_t);
 
 	DWORD oldProtect;
 	VirtualProtect(address, byteCount, PAGE_EXECUTE_READWRITE, &oldProtect);
-	memcpy(address, data.begin(), byteCount);
+	memcpy(address, data.data(), byteCount);
 	VirtualProtect(address, byteCount, oldProtect, nullptr);
 }
