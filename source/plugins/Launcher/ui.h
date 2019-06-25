@@ -23,6 +23,7 @@ namespace Launcher {
 		ui(void)
 		{
 			InitializeComponent();
+			this->button_Discord->Cursor = Cursors::Hand;
 			this->ClientSize = Drawing::Size(444, 323);
 			TabPadding^ tabpad = gcnew TabPadding(tabControl);
 
@@ -144,9 +145,11 @@ namespace Launcher {
 	private: System::Windows::Forms::Label^ label_Display;
 private: System::Windows::Forms::ComboBox^ comboBox_Resolution;
 private: System::Windows::Forms::ComboBox^ comboBox_intResolution;
-private: System::Windows::Forms::PictureBox^ pictureBox_Discord;
+
 private: System::Windows::Forms::ComboBox^ comboBox_StatusIcons;
 private: System::Windows::Forms::Label^ label_StatusIcons;
+private: System::Windows::Forms::Button^ button_Discord;
+
 
 
 	private:
@@ -204,7 +207,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->checkBox_frame_rate_manager = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_sys_timer = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_player_data_manager = (gcnew System::Windows::Forms::CheckBox());
-			this->pictureBox_Discord = (gcnew System::Windows::Forms::PictureBox());
+			this->button_Discord = (gcnew System::Windows::Forms::Button());
 			this->groupBox_ScreenRes->SuspendLayout();
 			this->tabControl->SuspendLayout();
 			this->tabPage_Resolution->SuspendLayout();
@@ -213,7 +216,6 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->panel_Patches->SuspendLayout();
 			this->tabPage_Components->SuspendLayout();
 			this->panel1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox_Discord))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// button_Launch
@@ -395,6 +397,27 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->panel_Patches->Name = L"panel_Patches";
 			this->panel_Patches->Size = System::Drawing::Size(207, 260);
 			this->panel_Patches->TabIndex = 9;
+			// 
+			// comboBox_StatusIcons
+			// 
+			this->comboBox_StatusIcons->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboBox_StatusIcons->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->comboBox_StatusIcons->FormattingEnabled = true;
+			this->comboBox_StatusIcons->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Default", L"Hidden", L"Error", L"OK" });
+			this->comboBox_StatusIcons->Location = System::Drawing::Point(75, 160);
+			this->comboBox_StatusIcons->Name = L"comboBox_StatusIcons";
+			this->comboBox_StatusIcons->Size = System::Drawing::Size(85, 21);
+			this->comboBox_StatusIcons->TabIndex = 81;
+			// 
+			// label_StatusIcons
+			// 
+			this->label_StatusIcons->AutoSize = true;
+			this->label_StatusIcons->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->label_StatusIcons->Location = System::Drawing::Point(0, 163);
+			this->label_StatusIcons->Name = L"label_StatusIcons";
+			this->label_StatusIcons->Size = System::Drawing::Size(69, 13);
+			this->label_StatusIcons->TabIndex = 80;
+			this->label_StatusIcons->Text = L"Status Icons:";
 			// 
 			// checkBox_HidePVWatermark
 			// 
@@ -647,39 +670,20 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->checkBox_player_data_manager->TabIndex = 4;
 			this->checkBox_player_data_manager->Text = L"Player Data Manager";
 			// 
-			// pictureBox_Discord
+			// button_Discord
 			// 
-			this->pictureBox_Discord->BackColor = System::Drawing::Color::Transparent;
-			this->pictureBox_Discord->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
-			this->pictureBox_Discord->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox_Discord.Image")));
-			this->pictureBox_Discord->Location = System::Drawing::Point(400, 281);
-			this->pictureBox_Discord->Name = L"pictureBox_Discord";
-			this->pictureBox_Discord->Size = System::Drawing::Size(42, 41);
-			this->pictureBox_Discord->TabIndex = 30;
-			this->pictureBox_Discord->TabStop = false;
-			this->pictureBox_Discord->Click += gcnew System::EventHandler(this, &ui::PictureBox_Discord_Click);
-			this->pictureBox_Discord->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &ui::PictureBox_Discord_MouseMove);
-			// 
-			// label_StatusIcons
-			// 
-			this->label_StatusIcons->AutoSize = true;
-			this->label_StatusIcons->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->label_StatusIcons->Location = System::Drawing::Point(0, 163);
-			this->label_StatusIcons->Name = L"label_StatusIcons";
-			this->label_StatusIcons->Size = System::Drawing::Size(69, 13);
-			this->label_StatusIcons->TabIndex = 80;
-			this->label_StatusIcons->Text = L"Status Icons:";
-			// 
-			// comboBox_StatusIcons
-			// 
-			this->comboBox_StatusIcons->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->comboBox_StatusIcons->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->comboBox_StatusIcons->FormattingEnabled = true;
-			this->comboBox_StatusIcons->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Default", L"Hidden", L"Error", L"OK" });
-			this->comboBox_StatusIcons->Location = System::Drawing::Point(75, 160);
-			this->comboBox_StatusIcons->Name = L"comboBox_StatusIcons";
-			this->comboBox_StatusIcons->Size = System::Drawing::Size(85, 21);
-			this->comboBox_StatusIcons->TabIndex = 81;
+			this->button_Discord->BackColor = System::Drawing::Color::Transparent;
+			this->button_Discord->FlatAppearance->BorderSize = 0;
+			this->button_Discord->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
+			this->button_Discord->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
+			this->button_Discord->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button_Discord->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button_Discord.Image")));
+			this->button_Discord->Location = System::Drawing::Point(399, 280);
+			this->button_Discord->Name = L"button_Discord";
+			this->button_Discord->Size = System::Drawing::Size(42, 42);
+			this->button_Discord->TabIndex = 31;
+			this->button_Discord->UseVisualStyleBackColor = false;
+			this->button_Discord->Click += gcnew System::EventHandler(this, &ui::button_Discord_Click);
 			// 
 			// ui
 			// 
@@ -694,7 +698,7 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->CancelButton = this->button_Exit;
 			this->ClientSize = System::Drawing::Size(442, 323);
-			this->Controls->Add(this->pictureBox_Discord);
+			this->Controls->Add(this->button_Discord);
 			this->Controls->Add(this->tabControl);
 			this->Controls->Add(this->button_Exit);
 			this->Controls->Add(this->button_Launch);
@@ -722,7 +726,6 @@ private: System::Windows::Forms::Label^ label_StatusIcons;
 			this->tabPage_Components->ResumeLayout(false);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox_Discord))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -863,11 +866,8 @@ private: System::Void Ui_FormClosed(System::Object^ sender, System::Windows::For
 	// Prevents abnormal termination messages, remember that the game is still technically running and must be killed!
 	TerminateProcess(GetCurrentProcess(), EXIT_SUCCESS);
 }
-private: System::Void PictureBox_Discord_Click(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void button_Discord_Click(System::Object^ sender, System::EventArgs^ e) {
 	System::Diagnostics::Process::Start("https://discord.gg/cvBVGDZ");
-}
-private: System::Void PictureBox_Discord_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	pictureBox_Discord->Cursor = Cursors::Hand;
 }
 };
 }
