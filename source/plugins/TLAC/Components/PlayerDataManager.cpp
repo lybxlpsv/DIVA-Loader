@@ -93,6 +93,7 @@ namespace TLAC::Components
 
 		customPlayerData = new CustomPlayerData();
 		config.TryGetValue("player_name", &customPlayerData->PlayerName);
+		config.TryGetValue("level_name", &customPlayerData->LevelName);
 
 		customPlayerData->LevelPlateId = config.GetIntegerValue("level_plate_id");
 		customPlayerData->SkinEquip = config.GetIntegerValue("skin_equip");
@@ -130,6 +131,14 @@ namespace TLAC::Components
 		{
 			playerData->field_DC = 0x10;
 			playerData->player_name = (char*)customPlayerData->PlayerName->c_str();
+		}
+
+
+		if (customPlayerData->LevelName != nullptr) 
+		{
+			playerData->level_name = (char*)customPlayerData->LevelName->c_str();
+			playerData->field_110 = 0xFF;
+			playerData->field_118 = 0x1F;
 		}
 	}
 }

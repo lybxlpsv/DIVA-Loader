@@ -6,6 +6,7 @@ namespace TLAC::Components
 	struct CustomPlayerData
 	{
 		std::string *PlayerName;
+		std::string* LevelName;
 		int LevelPlateId;
 		int SkinEquip;
 		int BtnSeEquip;
