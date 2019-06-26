@@ -70,7 +70,6 @@ void ApplyPatches() {
 		InjectCode(patches[i].Address, patches[i].Data);
 
 	auto nStereo = GetPrivateProfileIntW(L"patches", L"stereo", FALSE, CONFIG_FILE);
-	auto nOldStereo = GetPrivateProfileIntW(L"patches", L"old_stereo", FALSE, CONFIG_FILE);
 	auto nCursor = GetPrivateProfileIntW(L"patches", L"cursor", TRUE, CONFIG_FILE);
 	auto nHideCredits = GetPrivateProfileIntW(L"patches", L"hide_credits", FALSE, CONFIG_FILE);
 	auto nStatusIcons = GetPrivateProfileIntW(L"patches", L"status_icons", 0, CONFIG_FILE);
@@ -83,12 +82,6 @@ void ApplyPatches() {
 	{
 		InjectCode((void*)0x0000000140A860C0, { 0x02 });
 		printf("[Patches] Stereo enabled\n");
-	}
-	// Fake stereo address
-	if (nOldStereo)
-	{
-		InjectCode((void*)0x0000000140A85AC0, { 0x02 });
-		printf("[Patches] ¯\\_(:/)_/¯ enabled\n");
 	}
 	// Dirty hide of CREDIT(S) counter
 	if (nHideCredits)

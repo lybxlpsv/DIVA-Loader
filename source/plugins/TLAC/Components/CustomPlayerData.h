@@ -14,5 +14,6 @@ namespace TLAC::Components
 		int ChainslideSeEquip;
 		bool ShowGreatClearBorder;
 		bool ShowExcellentClearBorder;
+		bool UseCard;
 	};
 }

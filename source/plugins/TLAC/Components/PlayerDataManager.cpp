@@ -102,6 +102,7 @@ namespace TLAC::Components
 		customPlayerData->ChainslideSeEquip = config.GetIntegerValue("chainslide_se_equip");
 		customPlayerData->ShowExcellentClearBorder = config.GetBooleanValue("border_excellent");
 		customPlayerData->ShowGreatClearBorder = config.GetBooleanValue("border_great");
+		customPlayerData->UseCard = config.GetBooleanValue("use_card");
 	}
 
 	void PlayerDataManager::ApplyCustomData()
@@ -122,7 +123,8 @@ namespace TLAC::Components
 		// Display clear borders on the progress bar
 		*(byte*)(PLAYER_DATA_ADDRESS + 0xD94) = (customPlayerData->ShowExcellentClearBorder << 1) | (customPlayerData->ShowGreatClearBorder);
 
-		playerData->use_card = 1; // required to allow for module selection
+		if (customPlayerData->UseCard)
+			playerData->use_card = 1; // required to allow for module selection
 
 		memset((void*)MODULE_TABLE_START, 0xFF, 128);
 		memset((void*)ITEM_TABLE_START, 0xFF, 128);
