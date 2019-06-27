@@ -403,7 +403,7 @@ private: System::Windows::Forms::Button^ button_Discord;
 			this->comboBox_StatusIcons->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->comboBox_StatusIcons->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->comboBox_StatusIcons->FormattingEnabled = true;
-			this->comboBox_StatusIcons->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Default", L"Hidden", L"Error", L"OK" });
+			this->comboBox_StatusIcons->Items->AddRange(gcnew cli::array< System::Object^  >(5) { L"Default", L"Hidden", L"Error", L"OK", L"Partial OK" });
 			this->comboBox_StatusIcons->Location = System::Drawing::Point(75, 160);
 			this->comboBox_StatusIcons->Name = L"comboBox_StatusIcons";
 			this->comboBox_StatusIcons->Size = System::Drawing::Size(85, 21);

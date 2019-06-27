@@ -99,7 +99,7 @@ void ApplyPatches() {
 	if (nStatusIcons > 0)
 	{
 		std::vector<uint8_t> cardIcon = { 0xFD, 0x0A };
-		std::vector<uint8_t> networkIcon = { 0x00, 0x1E };
+		std::vector<uint8_t> networkIcon = { 0x9E, 0x1E };
 
 		if (nStatusIcons == 2) // 2 for error icons
 		{
@@ -113,16 +113,16 @@ void ApplyPatches() {
 			networkIcon = { 0xA0, 0x1E };
 			printf("[Patches] Status icons set to OK state\n");
 		}
-		else if (nStatusIcons == 4) // 4 for OK with partial network (hidden option)
+		else if (nStatusIcons == 4) // 4 for partial OK icons
 		{
-			cardIcon = { 0xFC, 0x0A };
+			cardIcon = { 0xFB, 0x0A };
 			networkIcon = { 0xA1, 0x1E };
-			printf("[Patches] Status icons set to OK state (with partial network)\n");
+			printf("[Patches] Status icons set to partial OK state\n");
 		}
 		else // 1 or invalid for hidden
 		{
 			cardIcon = { 0xFD, 0x0A };
-			networkIcon = { 0x00, 0x1E };
+			networkIcon = { 0x9E, 0x1E };
 			printf("[Patches] Status icons hidden\n");
 		}
 
