@@ -52,7 +52,7 @@ namespace TLAC::Components
 
 	bool TargetInspector::IsWithinRange(float time)
 	{
-		return (time < timingThreshold && time > -timingThreshold) && (time != 0);
+		return time < timingThreshold && time > -timingThreshold && time != 0;
 	}
 
 	bool TargetInspector::HasNotBeenHit(int hitState)
