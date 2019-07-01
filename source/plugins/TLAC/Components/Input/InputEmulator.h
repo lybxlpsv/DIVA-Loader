@@ -32,8 +32,6 @@ namespace TLAC::Components
 		Input::Binding* LeftBinding;
 		Input::Binding* RightBinding;
 
-		static int holdTbl[4];
-
 		InputEmulator();
 		~InputEmulator();
 
@@ -83,7 +81,8 @@ namespace TLAC::Components
 		InputState* inputState;
 		JvsButtons lastDownState;
 		JvsButtons heldButtons;
-
+		
+		int holdTbl[4];
 		HoldState holdState;
 
 		void UpdateJvsInput();
