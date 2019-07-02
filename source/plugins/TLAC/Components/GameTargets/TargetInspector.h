@@ -22,9 +22,7 @@ namespace TLAC::Components
 		virtual const char* GetDisplayName() override;
 
 		void GetTargetStates();
-
 		static bool IsAnyRepress();
-
 
 	private:
 		const uint64_t offset = 0x4A8;
@@ -36,7 +34,7 @@ namespace TLAC::Components
 		int* tgtHitStatePtr;
 		float* tgtRemainingTimePtr;
 
-		bool IsSameType(int, int[]);
+		bool IsSlide(int);
 		bool IsWithinRange(float);
 		bool HasNotBeenHit(int);
 		void UpdateRepressTbl();

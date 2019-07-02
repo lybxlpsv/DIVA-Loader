@@ -21,7 +21,6 @@ using namespace TLAC::Utilities;
 
 namespace TLAC::Components
 {
-	int InputEmulator::holdTbl[4];
 
 	InputEmulator::InputEmulator()
 	{

@@ -46,13 +46,13 @@ namespace TLAC::Components
 		{
 			repressTbl[i] = IsWithinRange(tgtStates[i].tgtRemainingTime)
 				&& HasNotBeenHit(tgtStates[i].tgtHitState)
-				&& IsSameType(tgtStates[i].tgtType, InputEmulator::holdTbl);
+				&& !IsSlide(tgtStates[i].tgtType);
 		}
 	}
 
 	bool TargetInspector::IsWithinRange(float time)
 	{
-		return (time < timingThreshold && time > -timingThreshold) && (time != 0);
+		return time < timingThreshold && time > -timingThreshold && time != 0;
 	}
 
 	bool TargetInspector::HasNotBeenHit(int hitState)
@@ -60,14 +60,9 @@ namespace TLAC::Components
 		return hitState == NONE;
 	}
 
-	bool TargetInspector::IsSameType(int type, int tbl[])
+	bool TargetInspector::IsSlide(int type)
 	{
-		for (int i = 0; i < 4; ++i)
-		{
-			if (tbl[i] && (i == type || i + 4 == type || i + 18 == type))
-				return true;
-		}
-		return false;
+		return (type >= SLIDE_L && type <= SLIDE_LONG_R) || type >= SLIDE_L_CH;
 	}
 
 	bool TargetInspector::IsAnyRepress()
