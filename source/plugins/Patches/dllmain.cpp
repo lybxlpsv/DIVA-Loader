@@ -63,7 +63,7 @@ void ApplyPatches() {
 		{ (void*)0x0000000140641102, { 0x01 } },
 		// Disables call to glutFitWindowSizeToDesktop, this fixes the need to use -w for windowed mode
 		{ (void*)0x0000000140194E06, { 0x90, 0x90, 0x90, 0x90, 0x90 } },
-		// Allow modifier mode selection
+		// Allow modifier mode selection (by Team Shimapan)
 		{ (void*)0x00000001405CB1B3, { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 } },
 		{ (void*)0x00000001405CA0F5, { 0x90, 0x90 } },
 	};
