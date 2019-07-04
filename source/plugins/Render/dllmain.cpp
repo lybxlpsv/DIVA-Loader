@@ -3,9 +3,7 @@
 #pragma comment(lib, "detours.lib")
 #include <GL\freeglut.h>
 #include <GL\GL.h>
-
 #include <windows.h>
-#include <detours.h>
 #include <iostream>
 
 int hookedCreateWindow(const char* title, void(__cdecl* exit_function)(int))

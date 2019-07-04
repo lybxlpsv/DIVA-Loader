@@ -14,6 +14,11 @@
 #include <tchar.h>
 #include <GL/freeglut.h>
 
+#include <detours.h>
+#pragma comment(lib, "detours.lib")
+
+void(__cdecl* divaEngineUpdate)() = (void(__cdecl*)())0x14018CC40;
+
 LRESULT CALLBACK MessageWindowProcessCallback(HWND, UINT, WPARAM, LPARAM);
 DWORD WINAPI WindowMessageDispatcher(LPVOID);
 VOID RegisterMessageWindowClass();
@@ -24,8 +29,8 @@ struct
 	HANDLE Handle = NULL;
 } MessageThread;
 
-const wchar_t *MessageWindowClassName = TEXT("MessageWindowClass");
-const wchar_t *MessageWindowName = TEXT("MessageWindowTitle");
+const wchar_t* MessageWindowClassName = TEXT("MessageWindowClass");
+const wchar_t* MessageWindowName = TEXT("MessageWindowTitle");
 
 namespace TLAC
 {
@@ -33,44 +38,6 @@ namespace TLAC
 	bool DeviceConnected = true;
 	bool FirstUpdateTick = true;
 	bool HasWindowFocus, HadWindowFocus;
-
-	void* InstallHook(void* source, void* destination, int length)
-	{
-		const DWORD minLen = 0xE;
-
-		if (length < minLen)
-			return NULL;
-
-		BYTE stub[] =
-		{
-			0xFF, 0x25, 0x00, 0x00, 0x00, 0x00, // jmp qword ?ptr [$+6]
-			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 // ptr???
-		};
-
-		void* trampoline = VirtualAlloc(0, length + sizeof(stub), MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
-
-		DWORD oldProtect;
-		VirtualProtect(source, length, PAGE_EXECUTE_READWRITE, &oldProtect);
-
-		DWORD64 returnAddress = (DWORD64)source + length;
-
-		// trampoline
-		memcpy(stub + 6, &returnAddress, 8);
-
-		memcpy((void*)((DWORD_PTR)trampoline), source, length);
-		memcpy((void*)((DWORD_PTR)trampoline + length), stub, sizeof(stub));
-
-		// orig
-		memcpy(stub + 6, &destination, 8);
-		memcpy(source, stub, sizeof(stub));
-
-		for (int i = minLen; i < length; i++)
-			*(BYTE*)((DWORD_PTR)source + i) = NOP_OPCODE;
-
-		VirtualProtect(source, length, oldProtect, &oldProtect);
-
-		return (void*)((DWORD_PTR)trampoline);
-	}
 
 	void InitializeTick()
 	{
@@ -189,7 +156,7 @@ namespace TLAC
 			//*((int*)0x00000001409B8B6C) = maxHeight;
 			//*((int*)0x00000001409B8B14) = maxWidth;
 			//*((int*)0x00000001409B8B18) = maxHeight;
-			
+
 			//*((int*)0x00000001409B8B1C) = maxWidth; // No parameters width?
 			//*((int*)0x00000001409B8B20) = maxHeight; // No parameters height?
 		}
@@ -213,12 +180,6 @@ namespace TLAC
 		}
 	}
 
-	void InstallHooks()
-	{
-		InstallHook((void*)ENGINE_UPDATE_HOOK_TARGET_ADDRESS, (void*)UpdateTick, 0xE);
-		InitializeExtraSettings();
-	}
-
 	void Dispose()
 	{
 		ComponentsManager.Dispose();
@@ -231,30 +192,6 @@ namespace TLAC
 
 		PostThreadMessage(MessageThread.ID, WM_QUIT, 0, 0);
 	}
-}
-
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
-{
-	HWND consoleHandle = GetConsoleWindow();
-
-	switch (ul_reason_for_call)
-	{
-	case DLL_PROCESS_ATTACH:
-
-		ShowWindow(consoleHandle, SW_HIDE);
-
-		printf("[TLAC] DllMain(): Installing hooks...\n");
-
-		TLAC::InstallHooks();
-		TLAC::framework::Module = hModule;
-		break;
-
-	case DLL_PROCESS_DETACH:
-		TLAC::Dispose();
-		break;
-	}
-
-	return TRUE;
 }
 
 DWORD WINAPI WindowMessageDispatcher(LPVOID lpParam)
@@ -300,7 +237,7 @@ DWORD WINAPI WindowMessageDispatcher(LPVOID lpParam)
 	return 0;
 }
 
-BOOL RegisterDeviceInterface(HWND hWnd, HDEVNOTIFY *hDeviceNotify)
+BOOL RegisterDeviceInterface(HWND hWnd, HDEVNOTIFY* hDeviceNotify)
 {
 	DEV_BROADCAST_DEVICEINTERFACE NotificationFilter = {};
 
@@ -355,4 +292,43 @@ VOID RegisterMessageWindowClass()
 	windowClass.lpszClassName = MessageWindowClassName;
 
 	RegisterClass(&windowClass);
+}
+
+void hookedEngineUpdate()
+{
+	TLAC::UpdateTick();
+	//divaEngineUpdate();
+}
+
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
+{
+	HWND consoleHandle = GetConsoleWindow();
+
+	switch (ul_reason_for_call)
+	{
+	case DLL_PROCESS_ATTACH:
+
+		ShowWindow(consoleHandle, SW_HIDE);
+
+		printf("[TLAC] DllMain(): Installing hooks...\n");
+
+
+		//InstallHook((void*)ENGINE_UPDATE_HOOK_TARGET_ADDRESS, (void*)UpdateTick, 0xE);
+		DisableThreadLibraryCalls(hModule);
+		DetourTransactionBegin();
+		DetourUpdateThread(GetCurrentThread());
+		DetourAttach(&(PVOID&)divaEngineUpdate, hookedEngineUpdate);
+		DetourTransactionCommit();
+
+		TLAC::InitializeExtraSettings();
+
+		TLAC::framework::Module = hModule;
+		break;
+
+	case DLL_PROCESS_DETACH:
+		TLAC::Dispose();
+		break;
+	}
+
+	return TRUE;
 }
