@@ -66,6 +66,8 @@ void ApplyPatches() {
 		// Allow modifier mode selection (by Team Shimapan)
 		{ (void*)0x00000001405CB1B3, { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 } },
 		{ (void*)0x00000001405CA0F5, { 0x90, 0x90 } },
+		// enable module selector without use_card
+		{ (void*)0x00000001405C513B, { 0x01 } },
 	};
 	printf("[Patches] Patches loaded\n");
 
