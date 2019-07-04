@@ -69,7 +69,6 @@ void ApplyPatches() {
 	for (size_t i = 0; i < _countof(patches); i++)
 		InjectCode(patches[i].Address, patches[i].Data);
 
-	auto nStereo = GetPrivateProfileIntW(L"patches", L"stereo", FALSE, CONFIG_FILE);
 	auto nCursor = GetPrivateProfileIntW(L"patches", L"cursor", TRUE, CONFIG_FILE);
 	auto nHideCredits = GetPrivateProfileIntW(L"patches", L"hide_credits", FALSE, CONFIG_FILE);
 	auto nStatusIcons = GetPrivateProfileIntW(L"patches", L"status_icons", 0, CONFIG_FILE);
@@ -78,12 +77,6 @@ void ApplyPatches() {
 	auto nHideVolCtrl = GetPrivateProfileIntW(L"patches", L"hide_volume", FALSE, CONFIG_FILE);
 	auto nNoLyrics = GetPrivateProfileIntW(L"patches", L"no_lyrics", FALSE, CONFIG_FILE);
 	auto nNoMovies = GetPrivateProfileIntW(L"patches", L"no_movies", FALSE, CONFIG_FILE);
-	// Initialize Audio with dual-channels instead of quads
-	if (nStereo)
-	{
-		InjectCode((void*)0x0000000140A860C0, { 0x02 });
-		printf("[Patches] Stereo enabled\n");
-	}
 	// Hides the CREDIT(S) counter
 	if (nHideCredits)
 	{

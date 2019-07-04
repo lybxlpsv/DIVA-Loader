@@ -54,7 +54,6 @@ namespace Launcher {
 			comboBox_Resolution->Text = nWidth.ToString() + "x" + nHeight.ToString();
 			checkBox_InternalRes->Checked = nIntRes;
 			comboBox_intResolution->Text = nIntResWidth.ToString() + "x" + nIntResHeight.ToString();
-			checkBox_Stereo->Checked = nStereo;
 			checkBox_Cursor->Checked = nCursor;
 			checkBox_HideCredits->Checked = nHideCredits;
 			checkBox_HidePVWatermark->Checked = nHidePVWatermark;
@@ -120,7 +119,7 @@ namespace Launcher {
 	private: System::Windows::Forms::CheckBox^ checkBox_fps_limiter;
 	private: System::Windows::Forms::TabPage^ tabPage_Patches;
 	private: System::Windows::Forms::Panel^ panel_Patches;
-	private: System::Windows::Forms::CheckBox^ checkBox_Stereo;
+
 
 
 	private: System::Windows::Forms::Label^ label_FPSLimit;
@@ -153,7 +152,7 @@ private: System::Windows::Forms::ComboBox^ comboBox_intResolution;
 private: System::Windows::Forms::ComboBox^ comboBox_StatusIcons;
 private: System::Windows::Forms::Label^ label_StatusIcons;
 private: System::Windows::Forms::Button^ button_Discord;
-private: System::Windows::Forms::GroupBox^ groupBox_Patches;
+
 private: System::Windows::Forms::Panel^ panel_innerPatches;
 
 
@@ -161,13 +160,14 @@ private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel_FPSLimit;
 
 private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel_Status;
 
-private: System::Windows::Forms::GroupBox^ groupBox_Workarounds;
-private: System::Windows::Forms::Panel^ panel_Workarounds;
+
+
 
 
 
 private: System::Windows::Forms::CheckBox^ checkBox_NoMovies;
 private: System::Windows::Forms::Label^ label_Soon;
+private: System::Windows::Forms::Button^ button_github;
 
 
 
@@ -200,12 +200,12 @@ private: System::Windows::Forms::Label^ label_Soon;
 			this->label_intResolution = (gcnew System::Windows::Forms::Label());
 			this->tabPage_Patches = (gcnew System::Windows::Forms::TabPage());
 			this->panel_Patches = (gcnew System::Windows::Forms::Panel());
-			this->groupBox_Patches = (gcnew System::Windows::Forms::GroupBox());
 			this->panel_innerPatches = (gcnew System::Windows::Forms::Panel());
+			this->checkBox_NoMovies = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_Cursor = (gcnew System::Windows::Forms::CheckBox());
 			this->tableLayoutPanel_FPSLimit = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->label_FPSLimit = (gcnew System::Windows::Forms::Label());
 			this->textBox_FPSLimit = (gcnew System::Windows::Forms::TextBox());
+			this->label_FPSLimit = (gcnew System::Windows::Forms::Label());
 			this->checkBox_TAA = (gcnew System::Windows::Forms::CheckBox());
 			this->tableLayoutPanel_Status = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->label_StatusIcons = (gcnew System::Windows::Forms::Label());
@@ -216,12 +216,9 @@ private: System::Windows::Forms::Label^ label_Soon;
 			this->checkBox_HideVolCtrl = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_NoLyrics = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_NoPVUi = (gcnew System::Windows::Forms::CheckBox());
-			this->groupBox_Workarounds = (gcnew System::Windows::Forms::GroupBox());
-			this->panel_Workarounds = (gcnew System::Windows::Forms::Panel());
-			this->checkBox_NoMovies = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox_Stereo = (gcnew System::Windows::Forms::CheckBox());
 			this->tabPage_Components = (gcnew System::Windows::Forms::TabPage());
 			this->panel_Components = (gcnew System::Windows::Forms::Panel());
+			this->label_Soon = (gcnew System::Windows::Forms::Label());
 			this->checkBox_fps_limiter = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_scale_component = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_camera_controller = (gcnew System::Windows::Forms::CheckBox());
@@ -234,19 +231,16 @@ private: System::Windows::Forms::Label^ label_Soon;
 			this->checkBox_sys_timer = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_player_data_manager = (gcnew System::Windows::Forms::CheckBox());
 			this->button_Discord = (gcnew System::Windows::Forms::Button());
-			this->label_Soon = (gcnew System::Windows::Forms::Label());
+			this->button_github = (gcnew System::Windows::Forms::Button());
 			this->groupBox_ScreenRes->SuspendLayout();
 			this->tabControl->SuspendLayout();
 			this->tabPage_Resolution->SuspendLayout();
 			this->groupBox_InternalRes->SuspendLayout();
 			this->tabPage_Patches->SuspendLayout();
 			this->panel_Patches->SuspendLayout();
-			this->groupBox_Patches->SuspendLayout();
 			this->panel_innerPatches->SuspendLayout();
 			this->tableLayoutPanel_FPSLimit->SuspendLayout();
 			this->tableLayoutPanel_Status->SuspendLayout();
-			this->groupBox_Workarounds->SuspendLayout();
-			this->panel_Workarounds->SuspendLayout();
 			this->tabPage_Components->SuspendLayout();
 			this->panel_Components->SuspendLayout();
 			this->SuspendLayout();
@@ -413,28 +407,15 @@ private: System::Windows::Forms::Label^ label_Soon;
 			// panel_Patches
 			// 
 			this->panel_Patches->AutoScroll = true;
-			this->panel_Patches->Controls->Add(this->groupBox_Patches);
-			this->panel_Patches->Controls->Add(this->groupBox_Workarounds);
+			this->panel_Patches->Controls->Add(this->panel_innerPatches);
 			this->panel_Patches->Location = System::Drawing::Point(0, 0);
 			this->panel_Patches->Name = L"panel_Patches";
 			this->panel_Patches->Size = System::Drawing::Size(225, 201);
 			this->panel_Patches->TabIndex = 9;
 			// 
-			// groupBox_Patches
-			// 
-			this->groupBox_Patches->Controls->Add(this->panel_innerPatches);
-			this->groupBox_Patches->ForeColor = System::Drawing::Color::White;
-			this->groupBox_Patches->Location = System::Drawing::Point(8, 75);
-			this->groupBox_Patches->Margin = System::Windows::Forms::Padding(2);
-			this->groupBox_Patches->Name = L"groupBox_Patches";
-			this->groupBox_Patches->Padding = System::Windows::Forms::Padding(2);
-			this->groupBox_Patches->Size = System::Drawing::Size(193, 235);
-			this->groupBox_Patches->TabIndex = 116;
-			this->groupBox_Patches->TabStop = false;
-			this->groupBox_Patches->Text = L"Patches";
-			// 
 			// panel_innerPatches
 			// 
+			this->panel_innerPatches->Controls->Add(this->checkBox_NoMovies);
 			this->panel_innerPatches->Controls->Add(this->checkBox_Cursor);
 			this->panel_innerPatches->Controls->Add(this->tableLayoutPanel_FPSLimit);
 			this->panel_innerPatches->Controls->Add(this->checkBox_TAA);
@@ -445,17 +426,28 @@ private: System::Windows::Forms::Label^ label_Soon;
 			this->panel_innerPatches->Controls->Add(this->checkBox_HideVolCtrl);
 			this->panel_innerPatches->Controls->Add(this->checkBox_NoLyrics);
 			this->panel_innerPatches->Controls->Add(this->checkBox_NoPVUi);
-			this->panel_innerPatches->Location = System::Drawing::Point(20, 13);
+			this->panel_innerPatches->Location = System::Drawing::Point(2, 2);
 			this->panel_innerPatches->Margin = System::Windows::Forms::Padding(2);
 			this->panel_innerPatches->Name = L"panel_innerPatches";
-			this->panel_innerPatches->Size = System::Drawing::Size(153, 218);
+			this->panel_innerPatches->Size = System::Drawing::Size(204, 271);
 			this->panel_innerPatches->TabIndex = 115;
+			// 
+			// checkBox_NoMovies
+			// 
+			this->checkBox_NoMovies->AutoSize = true;
+			this->checkBox_NoMovies->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->checkBox_NoMovies->Location = System::Drawing::Point(5, 117);
+			this->checkBox_NoMovies->Margin = System::Windows::Forms::Padding(2);
+			this->checkBox_NoMovies->Name = L"checkBox_NoMovies";
+			this->checkBox_NoMovies->Size = System::Drawing::Size(95, 17);
+			this->checkBox_NoMovies->TabIndex = 15;
+			this->checkBox_NoMovies->Text = L"Disable Movies";
 			// 
 			// checkBox_Cursor
 			// 
 			this->checkBox_Cursor->AutoSize = true;
 			this->checkBox_Cursor->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_Cursor->Location = System::Drawing::Point(9, 7);
+			this->checkBox_Cursor->Location = System::Drawing::Point(6, 3);
 			this->checkBox_Cursor->Name = L"checkBox_Cursor";
 			this->checkBox_Cursor->Size = System::Drawing::Size(53, 17);
 			this->checkBox_Cursor->TabIndex = 21;
@@ -470,25 +462,14 @@ private: System::Windows::Forms::Label^ label_Soon;
 				57.14286F)));
 			this->tableLayoutPanel_FPSLimit->Controls->Add(this->textBox_FPSLimit, 1, 0);
 			this->tableLayoutPanel_FPSLimit->Controls->Add(this->label_FPSLimit, 0, 0);
-			this->tableLayoutPanel_FPSLimit->Location = System::Drawing::Point(6, 192);
+			this->tableLayoutPanel_FPSLimit->Location = System::Drawing::Point(5, 235);
 			this->tableLayoutPanel_FPSLimit->Margin = System::Windows::Forms::Padding(2);
 			this->tableLayoutPanel_FPSLimit->Name = L"tableLayoutPanel_FPSLimit";
 			this->tableLayoutPanel_FPSLimit->RowCount = 1;
 			this->tableLayoutPanel_FPSLimit->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent,
 				50)));
-			this->tableLayoutPanel_FPSLimit->Size = System::Drawing::Size(147, 26);
+			this->tableLayoutPanel_FPSLimit->Size = System::Drawing::Size(147, 28);
 			this->tableLayoutPanel_FPSLimit->TabIndex = 114;
-			// 
-			// label_FPSLimit
-			// 
-			this->label_FPSLimit->AutoSize = true;
-			this->label_FPSLimit->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->label_FPSLimit->Location = System::Drawing::Point(3, 0);
-			this->label_FPSLimit->Name = L"label_FPSLimit";
-			this->label_FPSLimit->Size = System::Drawing::Size(54, 13);
-			this->label_FPSLimit->TabIndex = 110;
-			this->label_FPSLimit->Text = L"FPS Limit:";
-			this->label_FPSLimit->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
 			// textBox_FPSLimit
 			// 
@@ -501,11 +482,23 @@ private: System::Windows::Forms::Label^ label_Soon;
 			this->textBox_FPSLimit->TextChanged += gcnew System::EventHandler(this, &ui::TextBox_FPSLimit_TextChanged);
 			this->textBox_FPSLimit->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &ui::TextBox_FPSLimit_KeyPress);
 			// 
+			// label_FPSLimit
+			// 
+			this->label_FPSLimit->Anchor = System::Windows::Forms::AnchorStyles::Left;
+			this->label_FPSLimit->AutoSize = true;
+			this->label_FPSLimit->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->label_FPSLimit->Location = System::Drawing::Point(3, 7);
+			this->label_FPSLimit->Name = L"label_FPSLimit";
+			this->label_FPSLimit->Size = System::Drawing::Size(54, 13);
+			this->label_FPSLimit->TabIndex = 110;
+			this->label_FPSLimit->Text = L"FPS Limit:";
+			this->label_FPSLimit->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			// 
 			// checkBox_TAA
 			// 
 			this->checkBox_TAA->AutoSize = true;
 			this->checkBox_TAA->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_TAA->Location = System::Drawing::Point(9, 27);
+			this->checkBox_TAA->Location = System::Drawing::Point(6, 26);
 			this->checkBox_TAA->Name = L"checkBox_TAA";
 			this->checkBox_TAA->Size = System::Drawing::Size(44, 17);
 			this->checkBox_TAA->TabIndex = 31;
@@ -520,7 +513,7 @@ private: System::Windows::Forms::Label^ label_Soon;
 				57.14286F)));
 			this->tableLayoutPanel_Status->Controls->Add(this->label_StatusIcons, 0, 0);
 			this->tableLayoutPanel_Status->Controls->Add(this->comboBox_StatusIcons, 1, 0);
-			this->tableLayoutPanel_Status->Location = System::Drawing::Point(6, 160);
+			this->tableLayoutPanel_Status->Location = System::Drawing::Point(5, 203);
 			this->tableLayoutPanel_Status->Margin = System::Windows::Forms::Padding(2);
 			this->tableLayoutPanel_Status->Name = L"tableLayoutPanel_Status";
 			this->tableLayoutPanel_Status->RowCount = 1;
@@ -531,9 +524,10 @@ private: System::Windows::Forms::Label^ label_Soon;
 			// 
 			// label_StatusIcons
 			// 
+			this->label_StatusIcons->Anchor = System::Windows::Forms::AnchorStyles::Left;
 			this->label_StatusIcons->AutoSize = true;
 			this->label_StatusIcons->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->label_StatusIcons->Location = System::Drawing::Point(3, 0);
+			this->label_StatusIcons->Location = System::Drawing::Point(3, 1);
 			this->label_StatusIcons->Name = L"label_StatusIcons";
 			this->label_StatusIcons->Size = System::Drawing::Size(40, 26);
 			this->label_StatusIcons->TabIndex = 80;
@@ -558,7 +552,7 @@ private: System::Windows::Forms::Label^ label_Soon;
 			// 
 			this->checkBox_MLAA->AutoSize = true;
 			this->checkBox_MLAA->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_MLAA->Location = System::Drawing::Point(9, 46);
+			this->checkBox_MLAA->Location = System::Drawing::Point(6, 49);
 			this->checkBox_MLAA->Name = L"checkBox_MLAA";
 			this->checkBox_MLAA->Size = System::Drawing::Size(52, 17);
 			this->checkBox_MLAA->TabIndex = 41;
@@ -568,7 +562,7 @@ private: System::Windows::Forms::Label^ label_Soon;
 			// 
 			this->checkBox_HideCredits->AutoSize = true;
 			this->checkBox_HideCredits->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_HideCredits->Location = System::Drawing::Point(9, 65);
+			this->checkBox_HideCredits->Location = System::Drawing::Point(6, 72);
 			this->checkBox_HideCredits->Name = L"checkBox_HideCredits";
 			this->checkBox_HideCredits->Size = System::Drawing::Size(101, 17);
 			this->checkBox_HideCredits->TabIndex = 51;
@@ -578,7 +572,7 @@ private: System::Windows::Forms::Label^ label_Soon;
 			// 
 			this->checkBox_HidePVWatermark->AutoSize = true;
 			this->checkBox_HidePVWatermark->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_HidePVWatermark->Location = System::Drawing::Point(9, 141);
+			this->checkBox_HidePVWatermark->Location = System::Drawing::Point(5, 181);
 			this->checkBox_HidePVWatermark->Name = L"checkBox_HidePVWatermark";
 			this->checkBox_HidePVWatermark->Size = System::Drawing::Size(117, 17);
 			this->checkBox_HidePVWatermark->TabIndex = 91;
@@ -588,7 +582,7 @@ private: System::Windows::Forms::Label^ label_Soon;
 			// 
 			this->checkBox_HideVolCtrl->AutoSize = true;
 			this->checkBox_HideVolCtrl->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_HideVolCtrl->Location = System::Drawing::Point(9, 85);
+			this->checkBox_HideVolCtrl->Location = System::Drawing::Point(6, 95);
 			this->checkBox_HideVolCtrl->Name = L"checkBox_HideVolCtrl";
 			this->checkBox_HideVolCtrl->Size = System::Drawing::Size(122, 17);
 			this->checkBox_HideVolCtrl->TabIndex = 61;
@@ -598,7 +592,7 @@ private: System::Windows::Forms::Label^ label_Soon;
 			// 
 			this->checkBox_NoLyrics->AutoSize = true;
 			this->checkBox_NoLyrics->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_NoLyrics->Location = System::Drawing::Point(9, 122);
+			this->checkBox_NoLyrics->Location = System::Drawing::Point(5, 159);
 			this->checkBox_NoLyrics->Margin = System::Windows::Forms::Padding(2);
 			this->checkBox_NoLyrics->Name = L"checkBox_NoLyrics";
 			this->checkBox_NoLyrics->Size = System::Drawing::Size(88, 17);
@@ -609,56 +603,12 @@ private: System::Windows::Forms::Label^ label_Soon;
 			// 
 			this->checkBox_NoPVUi->AutoSize = true;
 			this->checkBox_NoPVUi->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_NoPVUi->Location = System::Drawing::Point(9, 103);
+			this->checkBox_NoPVUi->Location = System::Drawing::Point(5, 138);
 			this->checkBox_NoPVUi->Margin = System::Windows::Forms::Padding(2);
 			this->checkBox_NoPVUi->Name = L"checkBox_NoPVUi";
 			this->checkBox_NoPVUi->Size = System::Drawing::Size(89, 17);
 			this->checkBox_NoPVUi->TabIndex = 71;
 			this->checkBox_NoPVUi->Text = L"Disable PV UI";
-			// 
-			// groupBox_Workarounds
-			// 
-			this->groupBox_Workarounds->Controls->Add(this->panel_Workarounds);
-			this->groupBox_Workarounds->ForeColor = System::Drawing::Color::White;
-			this->groupBox_Workarounds->Location = System::Drawing::Point(8, 3);
-			this->groupBox_Workarounds->Margin = System::Windows::Forms::Padding(2);
-			this->groupBox_Workarounds->Name = L"groupBox_Workarounds";
-			this->groupBox_Workarounds->Padding = System::Windows::Forms::Padding(2);
-			this->groupBox_Workarounds->Size = System::Drawing::Size(193, 68);
-			this->groupBox_Workarounds->TabIndex = 112;
-			this->groupBox_Workarounds->TabStop = false;
-			this->groupBox_Workarounds->Text = L"Workarounds";
-			// 
-			// panel_Workarounds
-			// 
-			this->panel_Workarounds->Controls->Add(this->checkBox_NoMovies);
-			this->panel_Workarounds->Controls->Add(this->checkBox_Stereo);
-			this->panel_Workarounds->Location = System::Drawing::Point(20, 13);
-			this->panel_Workarounds->Margin = System::Windows::Forms::Padding(2);
-			this->panel_Workarounds->Name = L"panel_Workarounds";
-			this->panel_Workarounds->Size = System::Drawing::Size(153, 50);
-			this->panel_Workarounds->TabIndex = 0;
-			// 
-			// checkBox_NoMovies
-			// 
-			this->checkBox_NoMovies->AutoSize = true;
-			this->checkBox_NoMovies->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_NoMovies->Location = System::Drawing::Point(9, 26);
-			this->checkBox_NoMovies->Margin = System::Windows::Forms::Padding(2);
-			this->checkBox_NoMovies->Name = L"checkBox_NoMovies";
-			this->checkBox_NoMovies->Size = System::Drawing::Size(95, 17);
-			this->checkBox_NoMovies->TabIndex = 15;
-			this->checkBox_NoMovies->Text = L"Disable Movies";
-			// 
-			// checkBox_Stereo
-			// 
-			this->checkBox_Stereo->AutoSize = true;
-			this->checkBox_Stereo->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_Stereo->Location = System::Drawing::Point(9, 7);
-			this->checkBox_Stereo->Name = L"checkBox_Stereo";
-			this->checkBox_Stereo->Size = System::Drawing::Size(54, 17);
-			this->checkBox_Stereo->TabIndex = 10;
-			this->checkBox_Stereo->Text = L"Stereo";
 			// 
 			// tabPage_Components
 			// 
@@ -691,6 +641,16 @@ private: System::Windows::Forms::Label^ label_Soon;
 			this->panel_Components->Name = L"panel_Components";
 			this->panel_Components->Size = System::Drawing::Size(225, 201);
 			this->panel_Components->TabIndex = 0;
+			// 
+			// label_Soon
+			// 
+			this->label_Soon->AutoSize = true;
+			this->label_Soon->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->label_Soon->Location = System::Drawing::Point(3, 10);
+			this->label_Soon->Name = L"label_Soon";
+			this->label_Soon->Size = System::Drawing::Size(126, 13);
+			this->label_Soon->TabIndex = 12;
+			this->label_Soon->Text = L"Options not available yet.";
 			// 
 			// checkBox_fps_limiter
 			// 
@@ -810,22 +770,27 @@ private: System::Windows::Forms::Label^ label_Soon;
 			this->button_Discord->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
 			this->button_Discord->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button_Discord->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button_Discord.Image")));
-			this->button_Discord->Location = System::Drawing::Point(239, 217);
+			this->button_Discord->Location = System::Drawing::Point(239, 12);
 			this->button_Discord->Name = L"button_Discord";
 			this->button_Discord->Size = System::Drawing::Size(42, 42);
 			this->button_Discord->TabIndex = 31;
 			this->button_Discord->UseVisualStyleBackColor = false;
 			this->button_Discord->Click += gcnew System::EventHandler(this, &ui::button_Discord_Click);
 			// 
-			// label_Soon
+			// button_github
 			// 
-			this->label_Soon->AutoSize = true;
-			this->label_Soon->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->label_Soon->Location = System::Drawing::Point(3, 10);
-			this->label_Soon->Name = L"label_Soon";
-			this->label_Soon->Size = System::Drawing::Size(126, 13);
-			this->label_Soon->TabIndex = 12;
-			this->label_Soon->Text = L"Options not available yet.";
+			this->button_github->BackColor = System::Drawing::Color::Transparent;
+			this->button_github->FlatAppearance->BorderSize = 0;
+			this->button_github->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
+			this->button_github->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
+			this->button_github->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button_github->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button_github.Image")));
+			this->button_github->Location = System::Drawing::Point(239, 60);
+			this->button_github->Name = L"button_github";
+			this->button_github->Size = System::Drawing::Size(42, 42);
+			this->button_github->TabIndex = 32;
+			this->button_github->UseVisualStyleBackColor = false;
+			this->button_github->Click += gcnew System::EventHandler(this, &ui::button_github_Click);
 			// 
 			// ui
 			// 
@@ -836,9 +801,11 @@ private: System::Windows::Forms::Label^ label_Soon;
 			this->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->CancelButton = this->button_Exit;
 			this->ClientSize = System::Drawing::Size(288, 265);
+			this->Controls->Add(this->button_github);
 			this->Controls->Add(this->button_Discord);
 			this->Controls->Add(this->tabControl);
 			this->Controls->Add(this->button_Exit);
@@ -862,16 +829,12 @@ private: System::Windows::Forms::Label^ label_Soon;
 			this->groupBox_InternalRes->PerformLayout();
 			this->tabPage_Patches->ResumeLayout(false);
 			this->panel_Patches->ResumeLayout(false);
-			this->groupBox_Patches->ResumeLayout(false);
 			this->panel_innerPatches->ResumeLayout(false);
 			this->panel_innerPatches->PerformLayout();
 			this->tableLayoutPanel_FPSLimit->ResumeLayout(false);
 			this->tableLayoutPanel_FPSLimit->PerformLayout();
 			this->tableLayoutPanel_Status->ResumeLayout(false);
 			this->tableLayoutPanel_Status->PerformLayout();
-			this->groupBox_Workarounds->ResumeLayout(false);
-			this->panel_Workarounds->ResumeLayout(false);
-			this->panel_Workarounds->PerformLayout();
 			this->tabPage_Components->ResumeLayout(false);
 			this->panel_Components->ResumeLayout(false);
 			this->panel_Components->PerformLayout();
@@ -915,10 +878,6 @@ private: System::Void SaveSettings() {
 	userInput = Convert::ToInt32(checkBox_Cursor->Checked).ToString();
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
 	WritePrivateProfileStringW(L"patches", L"cursor", input.c_str(), CONFIG_FILE);
-
-	userInput = Convert::ToInt32(checkBox_Stereo->Checked).ToString();
-	input = msclr::interop::marshal_as<std::wstring>(userInput);
-	WritePrivateProfileStringW(L"patches", L"stereo", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(checkBox_HideCredits->Checked).ToString();
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
@@ -1033,6 +992,9 @@ private: System::Void TextBox_FPSLimit_KeyPress(System::Object^ sender, System::
 	{
 		e->Handled = true;
 	}
+}
+private: System::Void button_github_Click(System::Object^ sender, System::EventArgs^ e) {
+	System::Diagnostics::Process::Start("https://github.com/Rayduxz/DIVA-Loader");
 }
 };
 }
