@@ -63,15 +63,17 @@ void ApplyPatches() {
 		{ (void*)0x0000000140641102, { 0x01 } },
 		// Disables call to glutFitWindowSizeToDesktop, this fixes the need to use -w for windowed mode
 		{ (void*)0x0000000140194E06, { 0x90, 0x90, 0x90, 0x90, 0x90 } },
+		// Allow modifier mode selection (by Team Shimapan)
+		{ (void*)0x00000001405CB1B3, { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 } },
+		{ (void*)0x00000001405CA0F5, { 0x90, 0x90 } },
 		// enable module selector without use_card
-		{ (void*)0x00000001405C513B, { 0x01 } }
+		{ (void*)0x00000001405C513B, { 0x01 } },
 	};
 	printf("[Patches] Patches loaded\n");
 
 	for (size_t i = 0; i < _countof(patches); i++)
 		InjectCode(patches[i].Address, patches[i].Data);
 
-	auto nStereo = GetPrivateProfileIntW(L"patches", L"stereo", FALSE, CONFIG_FILE);
 	auto nCursor = GetPrivateProfileIntW(L"patches", L"cursor", TRUE, CONFIG_FILE);
 	auto nHideCredits = GetPrivateProfileIntW(L"patches", L"hide_credits", FALSE, CONFIG_FILE);
 	auto nStatusIcons = GetPrivateProfileIntW(L"patches", L"status_icons", 0, CONFIG_FILE);
@@ -80,12 +82,6 @@ void ApplyPatches() {
 	auto nHideVolCtrl = GetPrivateProfileIntW(L"patches", L"hide_volume", FALSE, CONFIG_FILE);
 	auto nNoLyrics = GetPrivateProfileIntW(L"patches", L"no_lyrics", FALSE, CONFIG_FILE);
 	auto nNoMovies = GetPrivateProfileIntW(L"patches", L"no_movies", FALSE, CONFIG_FILE);
-	// Initialize Audio with dual-channels instead of quads
-	if (nStereo)
-	{
-		InjectCode((void*)0x0000000140A860C0, { 0x02 });
-		printf("[Patches] Stereo enabled\n");
-	}
 	// Hides the CREDIT(S) counter
 	if (nHideCredits)
 	{
@@ -152,17 +148,16 @@ void ApplyPatches() {
 	// Disable the PV screen photo UI
 	if (nNoPVUi)
 	{
-		InjectCode((void*)0x000000014048F594, { 0x6A, 0x05 }); // skip button panel image
-		// InjectCode((void*)0x000000014048F59C, { 0x77, 0x04 }); // skip screenshot stuff (actually seems not relevant)
+		InjectCode((void*)0x000000014048FA91, { 0xEB, 0x6F }); // skip button panel image (JMP	0x14048FB02)
 
 		// patch minimum PV UI state to 1 instead of 0
 		// hook check for lyrics enabled (UI state < 2) to change UI state 0 into 1
 		// dump new code in the skipped button panel condition
-		InjectCode((void*)0x000000014048FA26, { 0xC7, 0x83, 0x58, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00 });	// MOV	dword ptr [0x158 + RBX],0x1
-		InjectCode((void*)0x000000014048FA30, { 0xC6, 0x80, 0x3A, 0xD1, 0x02, 0x00, 0x01 });					// MOV	byte ptr [0x2d13a + RAX],0x1
-		InjectCode((void*)0x000000014048FA37, { 0xE9, 0xF8, 0xFB, 0xFF, 0xFF });								// JMP	0x14048f634
+		InjectCode((void*)0x000000014048FA93, { 0xC7, 0x83, 0x58, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00 }); // MOV	dword ptr [0x158 + RBX],0x1
+		InjectCode((void*)0x000000014048FA9D, { 0xC6, 0x80, 0x3A, 0xD1, 0x02, 0x00, 0x01 }); // MOV	byte ptr [0x2d13a + RAX],0x1
+		InjectCode((void*)0x000000014048FAA4, { 0xE9, 0x8B, 0xFB, 0xFF, 0xFF }); // JMP	0x14048F634
 
-		InjectCode((void*)0x000000014048F62D, { 0xE9, 0xF4, 0x03, 0x00, 0x00 }); // JMP	0x14048FA26
+		InjectCode((void*)0x000000014048F62D, { 0xE9, 0x61, 0x04, 0x00, 0x00 }); // JMP	0x14048FA93
 
 		printf("[Patches] PV UI disabled\n");
 	}

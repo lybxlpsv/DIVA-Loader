@@ -40,8 +40,6 @@ int nIntRes = GetPrivateProfileIntW(L"resolution", L"r.enable", FALSE, CONFIG_FI
 int nIntResWidth = GetPrivateProfileIntW(L"resolution", L"r.width", 1280, CONFIG_FILE);
 int nIntResHeight = GetPrivateProfileIntW(L"resolution", L"r.height", 720, CONFIG_FILE);
 
-int nStereo = GetPrivateProfileIntW(L"patches", L"stereo", FALSE, CONFIG_FILE);
-int nOldStereo = GetPrivateProfileIntW(L"patches", L"old_stereo", FALSE, CONFIG_FILE);
 int nCursor = GetPrivateProfileIntW(L"patches", L"cursor", TRUE, CONFIG_FILE);
 int nHideCredits = GetPrivateProfileIntW(L"patches", L"hide_credits", FALSE, CONFIG_FILE);
 int nStatusIcons = GetPrivateProfileIntW(L"patches", L"status_icons", 0, CONFIG_FILE);

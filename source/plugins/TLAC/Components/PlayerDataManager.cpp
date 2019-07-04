@@ -103,6 +103,7 @@ namespace TLAC::Components
 		customPlayerData->ShowExcellentClearBorder = config.GetBooleanValue("border_excellent");
 		customPlayerData->ShowGreatClearBorder = config.GetBooleanValue("border_great");
 		customPlayerData->UseCard = config.GetBooleanValue("use_card");
+		customPlayerData->GameModifierOptions = config.GetBooleanValue("gamemode_options");
 	}
 
 	void PlayerDataManager::ApplyCustomData()
@@ -122,9 +123,12 @@ namespace TLAC::Components
 
 		// Display clear borders on the progress bar
 		*(byte*)(PLAYER_DATA_ADDRESS + 0xD94) = (customPlayerData->ShowExcellentClearBorder << 1) | (customPlayerData->ShowGreatClearBorder);
-
+		
 		if (customPlayerData->UseCard)
 			playerData->use_card = 1; // required to allow for module selection
+
+		if (customPlayerData->GameModifierOptions)
+			playerData->game_opts = 1; // hi-speed, etc..
 
 		memset((void*)MODULE_TABLE_START, 0xFF, 128);
 		memset((void*)ITEM_TABLE_START, 0xFF, 128);
