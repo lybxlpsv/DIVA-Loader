@@ -138,6 +138,8 @@ void ApplyPatches() {
 		
 		InjectCode((void*)0x00000001403BA1A5, { 0x48, 0xE9 }); // never show the error code for partial connection
 		
+		InjectCode((void*)0x00000001405C513B, { 0x01 }); // enable module selector without use_card
+		
 		// I was going to use this with a string, but the assignment wasn't behaving well and making separate prints was easier than figuring it out
 		// printf("[Patches] Status icons %s\n", iconType);
 	}
