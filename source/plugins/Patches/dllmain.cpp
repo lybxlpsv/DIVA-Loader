@@ -69,8 +69,8 @@ void ApplyPatches() {
 		// allow modifier modes to work without use_card
 		{ (void*)0x00000001405CB14A,{ 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 } },
 		{ (void*)0x0000000140136CFA,{ 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 } },
-		// enable module selector without use_card
-		{ (void*)0x00000001405C513B, { 0x01 } },
+		// enable module selector without use_card (Modules are not getting saved upon selection, commented until a fix is found)
+		//{ (void*)0x00000001405C513B, { 0x01 } },
 	};
 	printf("[Patches] Patches loaded\n");
 
@@ -85,6 +85,7 @@ void ApplyPatches() {
 	auto nHideVolCtrl = GetPrivateProfileIntW(L"patches", L"hide_volume", FALSE, CONFIG_FILE);
 	auto nNoLyrics = GetPrivateProfileIntW(L"patches", L"no_lyrics", FALSE, CONFIG_FILE);
 	auto nNoMovies = GetPrivateProfileIntW(L"patches", L"no_movies", FALSE, CONFIG_FILE);
+	auto nNoError = GetPrivateProfileIntW(L"patches", L"no_error", FALSE, CONFIG_FILE);
 	// Hides the CREDIT(S) counter
 	if (nHideCredits)
 	{
@@ -188,6 +189,14 @@ void ApplyPatches() {
 		InjectCode((void*)0x00000001404EB584, { 0x48, 0xE9 });
 		InjectCode((void*)0x00000001404EB471, { 0x48, 0xE9 });
 		printf("[Patches] Movies disabled\n");
+	}
+	// Disable error banner
+	if (nNoError)
+	{
+		// Disable Error Banner
+		// Disables text only, need to add patch for sprite
+		InjectCode((void*)0x00000001403BA7A7, { 0x10 });
+		printf("[Patches] Errors Banner disabled\n");
 	}
 }
 

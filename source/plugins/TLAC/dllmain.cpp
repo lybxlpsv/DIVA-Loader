@@ -308,6 +308,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 	{
 	case DLL_PROCESS_ATTACH:
 
+		// Are you a dev and want to debug? Want to always be able to watch the console upon game initialization? Comment this.
 		ShowWindow(consoleHandle, SW_HIDE);
 
 		printf("[TLAC] DllMain(): Installing hooks...\n");

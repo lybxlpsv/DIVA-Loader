@@ -48,9 +48,10 @@ int nNoPVUi = GetPrivateProfileIntW(L"patches", L"no_pv_ui", FALSE, CONFIG_FILE)
 int nHideVolCtrl = GetPrivateProfileIntW(L"patches", L"hide_volume", FALSE, CONFIG_FILE);
 int nNoLyrics = GetPrivateProfileIntW(L"patches", L"no_lyrics", FALSE, CONFIG_FILE);
 int nNoMovies = GetPrivateProfileIntW(L"patches", L"no_movies", FALSE, CONFIG_FILE);
+int nNoError = GetPrivateProfileIntW(L"patches", L"no_error", TRUE, CONFIG_FILE);
+
 int nTAA = GetPrivateProfileIntW(L"graphics", L"TAA", TRUE, CONFIG_FILE);
 int nMLAA = GetPrivateProfileIntW(L"graphics", L"MLAA", TRUE, CONFIG_FILE);
-
 int nFPSLimit = GetPrivateProfileIntW(L"graphics", L"FPS.Limit", 0, CONFIG_FILE);
 
 //auto nBitDepth = GetPrivateProfileIntWW(L"resolutionL", L"bitdepth", 32, CONFIG_FILE);

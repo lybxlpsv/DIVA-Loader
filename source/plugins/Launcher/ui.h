@@ -64,6 +64,7 @@ namespace Launcher {
 			comboBox_StatusIcons->SelectedIndex = nStatusIcons;
 			checkBox_TAA->Checked = nTAA;
 			checkBox_MLAA->Checked = nMLAA;
+			checkBox_DisableErrorBanner->Checked = nNoError;
 			textBox_FPSLimit->Text = nFPSLimit.ToString();
 
 			if (!nIntRes)
@@ -168,6 +169,7 @@ private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel_Status;
 private: System::Windows::Forms::CheckBox^ checkBox_NoMovies;
 private: System::Windows::Forms::Label^ label_Soon;
 private: System::Windows::Forms::Button^ button_github;
+private: System::Windows::Forms::CheckBox^ checkBox_DisableErrorBanner;
 
 
 
@@ -201,6 +203,7 @@ private: System::Windows::Forms::Button^ button_github;
 			this->tabPage_Patches = (gcnew System::Windows::Forms::TabPage());
 			this->panel_Patches = (gcnew System::Windows::Forms::Panel());
 			this->panel_innerPatches = (gcnew System::Windows::Forms::Panel());
+			this->checkBox_DisableErrorBanner = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_NoMovies = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_Cursor = (gcnew System::Windows::Forms::CheckBox());
 			this->tableLayoutPanel_FPSLimit = (gcnew System::Windows::Forms::TableLayoutPanel());
@@ -415,6 +418,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			// panel_innerPatches
 			// 
+			this->panel_innerPatches->Controls->Add(this->checkBox_DisableErrorBanner);
 			this->panel_innerPatches->Controls->Add(this->checkBox_NoMovies);
 			this->panel_innerPatches->Controls->Add(this->checkBox_Cursor);
 			this->panel_innerPatches->Controls->Add(this->tableLayoutPanel_FPSLimit);
@@ -429,14 +433,24 @@ private: System::Windows::Forms::Button^ button_github;
 			this->panel_innerPatches->Location = System::Drawing::Point(2, 2);
 			this->panel_innerPatches->Margin = System::Windows::Forms::Padding(2);
 			this->panel_innerPatches->Name = L"panel_innerPatches";
-			this->panel_innerPatches->Size = System::Drawing::Size(204, 271);
+			this->panel_innerPatches->Size = System::Drawing::Size(204, 291);
 			this->panel_innerPatches->TabIndex = 115;
+			// 
+			// checkBox_DisableErrorBanner
+			// 
+			this->checkBox_DisableErrorBanner->AutoSize = true;
+			this->checkBox_DisableErrorBanner->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->checkBox_DisableErrorBanner->Location = System::Drawing::Point(3, 204);
+			this->checkBox_DisableErrorBanner->Name = L"checkBox_DisableErrorBanner";
+			this->checkBox_DisableErrorBanner->Size = System::Drawing::Size(120, 17);
+			this->checkBox_DisableErrorBanner->TabIndex = 115;
+			this->checkBox_DisableErrorBanner->Text = L"Disable Error Banner";
 			// 
 			// checkBox_NoMovies
 			// 
 			this->checkBox_NoMovies->AutoSize = true;
 			this->checkBox_NoMovies->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_NoMovies->Location = System::Drawing::Point(5, 117);
+			this->checkBox_NoMovies->Location = System::Drawing::Point(3, 117);
 			this->checkBox_NoMovies->Margin = System::Windows::Forms::Padding(2);
 			this->checkBox_NoMovies->Name = L"checkBox_NoMovies";
 			this->checkBox_NoMovies->Size = System::Drawing::Size(95, 17);
@@ -447,7 +461,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_Cursor->AutoSize = true;
 			this->checkBox_Cursor->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_Cursor->Location = System::Drawing::Point(6, 3);
+			this->checkBox_Cursor->Location = System::Drawing::Point(3, 3);
 			this->checkBox_Cursor->Name = L"checkBox_Cursor";
 			this->checkBox_Cursor->Size = System::Drawing::Size(53, 17);
 			this->checkBox_Cursor->TabIndex = 21;
@@ -457,12 +471,12 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->tableLayoutPanel_FPSLimit->ColumnCount = 2;
 			this->tableLayoutPanel_FPSLimit->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				42.85714F)));
+				41.4966F)));
 			this->tableLayoutPanel_FPSLimit->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				57.14286F)));
+				58.5034F)));
 			this->tableLayoutPanel_FPSLimit->Controls->Add(this->textBox_FPSLimit, 1, 0);
 			this->tableLayoutPanel_FPSLimit->Controls->Add(this->label_FPSLimit, 0, 0);
-			this->tableLayoutPanel_FPSLimit->Location = System::Drawing::Point(5, 235);
+			this->tableLayoutPanel_FPSLimit->Location = System::Drawing::Point(3, 258);
 			this->tableLayoutPanel_FPSLimit->Margin = System::Windows::Forms::Padding(2);
 			this->tableLayoutPanel_FPSLimit->Name = L"tableLayoutPanel_FPSLimit";
 			this->tableLayoutPanel_FPSLimit->RowCount = 1;
@@ -474,7 +488,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// textBox_FPSLimit
 			// 
 			this->textBox_FPSLimit->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->textBox_FPSLimit->Location = System::Drawing::Point(65, 3);
+			this->textBox_FPSLimit->Location = System::Drawing::Point(64, 3);
 			this->textBox_FPSLimit->MaxLength = 3;
 			this->textBox_FPSLimit->Name = L"textBox_FPSLimit";
 			this->textBox_FPSLimit->Size = System::Drawing::Size(79, 20);
@@ -498,7 +512,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_TAA->AutoSize = true;
 			this->checkBox_TAA->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_TAA->Location = System::Drawing::Point(6, 26);
+			this->checkBox_TAA->Location = System::Drawing::Point(3, 26);
 			this->checkBox_TAA->Name = L"checkBox_TAA";
 			this->checkBox_TAA->Size = System::Drawing::Size(44, 17);
 			this->checkBox_TAA->TabIndex = 31;
@@ -513,7 +527,7 @@ private: System::Windows::Forms::Button^ button_github;
 				57.14286F)));
 			this->tableLayoutPanel_Status->Controls->Add(this->label_StatusIcons, 0, 0);
 			this->tableLayoutPanel_Status->Controls->Add(this->comboBox_StatusIcons, 1, 0);
-			this->tableLayoutPanel_Status->Location = System::Drawing::Point(5, 203);
+			this->tableLayoutPanel_Status->Location = System::Drawing::Point(3, 226);
 			this->tableLayoutPanel_Status->Margin = System::Windows::Forms::Padding(2);
 			this->tableLayoutPanel_Status->Name = L"tableLayoutPanel_Status";
 			this->tableLayoutPanel_Status->RowCount = 1;
@@ -552,7 +566,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_MLAA->AutoSize = true;
 			this->checkBox_MLAA->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_MLAA->Location = System::Drawing::Point(6, 49);
+			this->checkBox_MLAA->Location = System::Drawing::Point(3, 49);
 			this->checkBox_MLAA->Name = L"checkBox_MLAA";
 			this->checkBox_MLAA->Size = System::Drawing::Size(52, 17);
 			this->checkBox_MLAA->TabIndex = 41;
@@ -562,7 +576,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_HideCredits->AutoSize = true;
 			this->checkBox_HideCredits->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_HideCredits->Location = System::Drawing::Point(6, 72);
+			this->checkBox_HideCredits->Location = System::Drawing::Point(3, 72);
 			this->checkBox_HideCredits->Name = L"checkBox_HideCredits";
 			this->checkBox_HideCredits->Size = System::Drawing::Size(101, 17);
 			this->checkBox_HideCredits->TabIndex = 51;
@@ -572,7 +586,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_HidePVWatermark->AutoSize = true;
 			this->checkBox_HidePVWatermark->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_HidePVWatermark->Location = System::Drawing::Point(5, 181);
+			this->checkBox_HidePVWatermark->Location = System::Drawing::Point(3, 181);
 			this->checkBox_HidePVWatermark->Name = L"checkBox_HidePVWatermark";
 			this->checkBox_HidePVWatermark->Size = System::Drawing::Size(117, 17);
 			this->checkBox_HidePVWatermark->TabIndex = 91;
@@ -582,7 +596,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_HideVolCtrl->AutoSize = true;
 			this->checkBox_HideVolCtrl->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_HideVolCtrl->Location = System::Drawing::Point(6, 95);
+			this->checkBox_HideVolCtrl->Location = System::Drawing::Point(3, 95);
 			this->checkBox_HideVolCtrl->Name = L"checkBox_HideVolCtrl";
 			this->checkBox_HideVolCtrl->Size = System::Drawing::Size(122, 17);
 			this->checkBox_HideVolCtrl->TabIndex = 61;
@@ -592,7 +606,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_NoLyrics->AutoSize = true;
 			this->checkBox_NoLyrics->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_NoLyrics->Location = System::Drawing::Point(5, 159);
+			this->checkBox_NoLyrics->Location = System::Drawing::Point(3, 159);
 			this->checkBox_NoLyrics->Margin = System::Windows::Forms::Padding(2);
 			this->checkBox_NoLyrics->Name = L"checkBox_NoLyrics";
 			this->checkBox_NoLyrics->Size = System::Drawing::Size(88, 17);
@@ -603,7 +617,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_NoPVUi->AutoSize = true;
 			this->checkBox_NoPVUi->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_NoPVUi->Location = System::Drawing::Point(5, 138);
+			this->checkBox_NoPVUi->Location = System::Drawing::Point(3, 138);
 			this->checkBox_NoPVUi->Margin = System::Windows::Forms::Padding(2);
 			this->checkBox_NoPVUi->Name = L"checkBox_NoPVUi";
 			this->checkBox_NoPVUi->Size = System::Drawing::Size(89, 17);
@@ -646,17 +660,18 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->label_Soon->AutoSize = true;
 			this->label_Soon->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->label_Soon->Location = System::Drawing::Point(3, 10);
+			this->label_Soon->Location = System::Drawing::Point(3, 3);
 			this->label_Soon->Name = L"label_Soon";
-			this->label_Soon->Size = System::Drawing::Size(126, 13);
+			this->label_Soon->Size = System::Drawing::Size(143, 52);
 			this->label_Soon->TabIndex = 12;
-			this->label_Soon->Text = L"Options not available yet.";
+			this->label_Soon->Text = L"Options not yet available\r\nthrough the launcher.\r\nPlease use \"components.ini\"\r\nin"
+				L"side the \"plugins\" folder.";
 			// 
 			// checkBox_fps_limiter
 			// 
 			this->checkBox_fps_limiter->AutoSize = true;
 			this->checkBox_fps_limiter->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_fps_limiter->Location = System::Drawing::Point(6, 266);
+			this->checkBox_fps_limiter->Location = System::Drawing::Point(6, 277);
 			this->checkBox_fps_limiter->Name = L"checkBox_fps_limiter";
 			this->checkBox_fps_limiter->Size = System::Drawing::Size(76, 17);
 			this->checkBox_fps_limiter->TabIndex = 10;
@@ -666,7 +681,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_scale_component->AutoSize = true;
 			this->checkBox_scale_component->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_scale_component->Location = System::Drawing::Point(6, 242);
+			this->checkBox_scale_component->Location = System::Drawing::Point(6, 253);
 			this->checkBox_scale_component->Name = L"checkBox_scale_component";
 			this->checkBox_scale_component->Size = System::Drawing::Size(107, 17);
 			this->checkBox_scale_component->TabIndex = 9;
@@ -676,7 +691,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_camera_controller->AutoSize = true;
 			this->checkBox_camera_controller->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_camera_controller->Location = System::Drawing::Point(6, 219);
+			this->checkBox_camera_controller->Location = System::Drawing::Point(6, 230);
 			this->checkBox_camera_controller->Name = L"checkBox_camera_controller";
 			this->checkBox_camera_controller->Size = System::Drawing::Size(106, 17);
 			this->checkBox_camera_controller->TabIndex = 8;
@@ -696,7 +711,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_fast_loader->AutoSize = true;
 			this->checkBox_fast_loader->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_fast_loader->Location = System::Drawing::Point(6, 196);
+			this->checkBox_fast_loader->Location = System::Drawing::Point(6, 207);
 			this->checkBox_fast_loader->Name = L"checkBox_fast_loader";
 			this->checkBox_fast_loader->Size = System::Drawing::Size(79, 17);
 			this->checkBox_fast_loader->TabIndex = 7;
@@ -706,7 +721,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_touch_slider_emulator->AutoSize = true;
 			this->checkBox_touch_slider_emulator->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_touch_slider_emulator->Location = System::Drawing::Point(6, 58);
+			this->checkBox_touch_slider_emulator->Location = System::Drawing::Point(6, 69);
 			this->checkBox_touch_slider_emulator->Name = L"checkBox_touch_slider_emulator";
 			this->checkBox_touch_slider_emulator->Size = System::Drawing::Size(128, 17);
 			this->checkBox_touch_slider_emulator->TabIndex = 1;
@@ -716,7 +731,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_stage_manager->AutoSize = true;
 			this->checkBox_stage_manager->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_stage_manager->Location = System::Drawing::Point(6, 173);
+			this->checkBox_stage_manager->Location = System::Drawing::Point(6, 184);
 			this->checkBox_stage_manager->Name = L"checkBox_stage_manager";
 			this->checkBox_stage_manager->Size = System::Drawing::Size(96, 17);
 			this->checkBox_stage_manager->TabIndex = 6;
@@ -726,7 +741,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_touch_panel_emulator->AutoSize = true;
 			this->checkBox_touch_panel_emulator->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_touch_panel_emulator->Location = System::Drawing::Point(6, 81);
+			this->checkBox_touch_panel_emulator->Location = System::Drawing::Point(6, 92);
 			this->checkBox_touch_panel_emulator->Name = L"checkBox_touch_panel_emulator";
 			this->checkBox_touch_panel_emulator->Size = System::Drawing::Size(127, 17);
 			this->checkBox_touch_panel_emulator->TabIndex = 2;
@@ -736,7 +751,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_frame_rate_manager->AutoSize = true;
 			this->checkBox_frame_rate_manager->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_frame_rate_manager->Location = System::Drawing::Point(6, 150);
+			this->checkBox_frame_rate_manager->Location = System::Drawing::Point(6, 161);
 			this->checkBox_frame_rate_manager->Name = L"checkBox_frame_rate_manager";
 			this->checkBox_frame_rate_manager->Size = System::Drawing::Size(123, 17);
 			this->checkBox_frame_rate_manager->TabIndex = 5;
@@ -746,7 +761,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_sys_timer->AutoSize = true;
 			this->checkBox_sys_timer->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_sys_timer->Location = System::Drawing::Point(6, 104);
+			this->checkBox_sys_timer->Location = System::Drawing::Point(6, 115);
 			this->checkBox_sys_timer->Name = L"checkBox_sys_timer";
 			this->checkBox_sys_timer->Size = System::Drawing::Size(117, 17);
 			this->checkBox_sys_timer->TabIndex = 3;
@@ -756,7 +771,7 @@ private: System::Windows::Forms::Button^ button_github;
 			// 
 			this->checkBox_player_data_manager->AutoSize = true;
 			this->checkBox_player_data_manager->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_player_data_manager->Location = System::Drawing::Point(6, 127);
+			this->checkBox_player_data_manager->Location = System::Drawing::Point(6, 138);
 			this->checkBox_player_data_manager->Name = L"checkBox_player_data_manager";
 			this->checkBox_player_data_manager->Size = System::Drawing::Size(123, 17);
 			this->checkBox_player_data_manager->TabIndex = 4;
@@ -906,6 +921,10 @@ private: System::Void SaveSettings() {
 	userInput = Convert::ToInt32(checkBox_HideVolCtrl->Checked).ToString();
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
 	WritePrivateProfileStringW(L"patches", L"hide_volume", input.c_str(), CONFIG_FILE);
+
+	userInput = Convert::ToInt32(checkBox_DisableErrorBanner->Checked).ToString();
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"patches", L"no_error", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(checkBox_TAA->Checked).ToString();
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
