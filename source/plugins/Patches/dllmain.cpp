@@ -193,9 +193,8 @@ void ApplyPatches() {
 	// Disable error banner
 	if (nNoError)
 	{
-		// Disable Error Banner
-		// Disables text only, need to add patch for sprite
-		InjectCode((void*)0x00000001403BA7A7, { 0x10 });
+		// Disable Errors Banner
+		InjectCode((void*)0x00000001403B9E9B, { 0x90, 0x90 });
 		printf("[Patches] Errors Banner disabled\n");
 	}
 }

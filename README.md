@@ -89,6 +89,8 @@ Special thanks to **Brolijah**, **Skyth**, **korenkonder**, **Samyuu**, **somewh
 
 ## Developer FAQ
 
+To enable logs and dumps create a folder called "logs" in the root folder, each dump size is 200MB so watch your disk space.
+
 This is a stripdown of [**ThirteenAG's** Ultimate ASI Loader v4.47](https://github.com/ThirteenAG/Ultimate-ASI-Loader/) for **"dnsapi.dll"** usage only.
 
 Solution for **Visual Studio 2019**.\
