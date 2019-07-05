@@ -104,6 +104,24 @@ namespace TLAC::Components
 		customPlayerData->ShowGreatClearBorder = config.GetBooleanValue("border_great");
 		customPlayerData->UseCard = config.GetBooleanValue("use_card");
 		customPlayerData->GameModifierOptions = config.GetBooleanValue("gamemode_options");
+		
+		if(!customPlayerData->UseCard)
+		{
+			DWORD oldProtect, bck;
+			VirtualProtect((BYTE*)0x000000014010523F, 3, PAGE_EXECUTE_READWRITE, &oldProtect);
+			*((BYTE*)0x0000000140105239 + 0) = 0x30;
+			*((BYTE*)0x0000000140105239 + 1) = 0xC0;
+			*((BYTE*)0x0000000140105239 + 2) = 0x90;
+			VirtualProtect((BYTE*)0x0000000140105239, 3, oldProtect, &bck);
+		}
+		else {
+			DWORD oldProtect, bck;
+			VirtualProtect((BYTE*)0x000000014010523F, 3, PAGE_EXECUTE_READWRITE, &oldProtect);
+			*((BYTE*)0x0000000140105239 + 0) = 0x0F;
+			*((BYTE*)0x0000000140105239 + 1) = 0x94;
+			*((BYTE*)0x0000000140105239 + 2) = 0xC1;
+			VirtualProtect((BYTE*)0x0000000140105239, 3, oldProtect, &bck);
+		}
 	}
 
 	void PlayerDataManager::ApplyCustomData()
