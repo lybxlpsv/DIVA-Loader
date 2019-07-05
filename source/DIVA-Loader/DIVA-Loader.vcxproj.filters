@@ -21,6 +21,9 @@
     <ClInclude Include="ModuleList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="exception.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
