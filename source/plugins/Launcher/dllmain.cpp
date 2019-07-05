@@ -22,7 +22,7 @@ int hookedMain(int argc, const char** argv, const char** envp)
 	for (int i = 0; i < argc; ++i)
 	{
 		arg = argv[i];
-		if (arg == "--launch")
+		if (arg == "--launch" || nSkipLauncher)
 			return divaMain(argc, argv, envp);
 	}
 	return showUI();

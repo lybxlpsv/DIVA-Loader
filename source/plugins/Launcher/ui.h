@@ -66,6 +66,7 @@ namespace Launcher {
 			checkBox_MLAA->Checked = nMLAA;
 			checkBox_DisableErrorBanner->Checked = nNoError;
 			textBox_FPSLimit->Text = nFPSLimit.ToString();
+			checkBox_SkipLauncher->Checked = nSkipLauncher;
 
 			if (!nIntRes)
 			{
@@ -170,6 +171,7 @@ private: System::Windows::Forms::CheckBox^ checkBox_NoMovies;
 private: System::Windows::Forms::Label^ label_Soon;
 private: System::Windows::Forms::Button^ button_github;
 private: System::Windows::Forms::CheckBox^ checkBox_DisableErrorBanner;
+private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 
 
 
@@ -235,6 +237,7 @@ private: System::Windows::Forms::CheckBox^ checkBox_DisableErrorBanner;
 			this->checkBox_player_data_manager = (gcnew System::Windows::Forms::CheckBox());
 			this->button_Discord = (gcnew System::Windows::Forms::Button());
 			this->button_github = (gcnew System::Windows::Forms::Button());
+			this->checkBox_SkipLauncher = (gcnew System::Windows::Forms::CheckBox());
 			this->groupBox_ScreenRes->SuspendLayout();
 			this->tabControl->SuspendLayout();
 			this->tabPage_Resolution->SuspendLayout();
@@ -418,6 +421,7 @@ private: System::Windows::Forms::CheckBox^ checkBox_DisableErrorBanner;
 			// 
 			// panel_innerPatches
 			// 
+			this->panel_innerPatches->Controls->Add(this->checkBox_SkipLauncher);
 			this->panel_innerPatches->Controls->Add(this->checkBox_DisableErrorBanner);
 			this->panel_innerPatches->Controls->Add(this->checkBox_NoMovies);
 			this->panel_innerPatches->Controls->Add(this->checkBox_Cursor);
@@ -433,7 +437,7 @@ private: System::Windows::Forms::CheckBox^ checkBox_DisableErrorBanner;
 			this->panel_innerPatches->Location = System::Drawing::Point(2, 2);
 			this->panel_innerPatches->Margin = System::Windows::Forms::Padding(2);
 			this->panel_innerPatches->Name = L"panel_innerPatches";
-			this->panel_innerPatches->Size = System::Drawing::Size(204, 291);
+			this->panel_innerPatches->Size = System::Drawing::Size(204, 311);
 			this->panel_innerPatches->TabIndex = 115;
 			// 
 			// checkBox_DisableErrorBanner
@@ -476,7 +480,7 @@ private: System::Windows::Forms::CheckBox^ checkBox_DisableErrorBanner;
 				58.5034F)));
 			this->tableLayoutPanel_FPSLimit->Controls->Add(this->textBox_FPSLimit, 1, 0);
 			this->tableLayoutPanel_FPSLimit->Controls->Add(this->label_FPSLimit, 0, 0);
-			this->tableLayoutPanel_FPSLimit->Location = System::Drawing::Point(3, 258);
+			this->tableLayoutPanel_FPSLimit->Location = System::Drawing::Point(2, 281);
 			this->tableLayoutPanel_FPSLimit->Margin = System::Windows::Forms::Padding(2);
 			this->tableLayoutPanel_FPSLimit->Name = L"tableLayoutPanel_FPSLimit";
 			this->tableLayoutPanel_FPSLimit->RowCount = 1;
@@ -527,7 +531,7 @@ private: System::Windows::Forms::CheckBox^ checkBox_DisableErrorBanner;
 				57.14286F)));
 			this->tableLayoutPanel_Status->Controls->Add(this->label_StatusIcons, 0, 0);
 			this->tableLayoutPanel_Status->Controls->Add(this->comboBox_StatusIcons, 1, 0);
-			this->tableLayoutPanel_Status->Location = System::Drawing::Point(3, 226);
+			this->tableLayoutPanel_Status->Location = System::Drawing::Point(2, 249);
 			this->tableLayoutPanel_Status->Margin = System::Windows::Forms::Padding(2);
 			this->tableLayoutPanel_Status->Name = L"tableLayoutPanel_Status";
 			this->tableLayoutPanel_Status->RowCount = 1;
@@ -807,6 +811,16 @@ private: System::Windows::Forms::CheckBox^ checkBox_DisableErrorBanner;
 			this->button_github->UseVisualStyleBackColor = false;
 			this->button_github->Click += gcnew System::EventHandler(this, &ui::button_github_Click);
 			// 
+			// checkBox_SkipLauncher
+			// 
+			this->checkBox_SkipLauncher->AutoSize = true;
+			this->checkBox_SkipLauncher->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->checkBox_SkipLauncher->Location = System::Drawing::Point(3, 227);
+			this->checkBox_SkipLauncher->Name = L"checkBox_SkipLauncher";
+			this->checkBox_SkipLauncher->Size = System::Drawing::Size(92, 17);
+			this->checkBox_SkipLauncher->TabIndex = 116;
+			this->checkBox_SkipLauncher->Text = L"Skip Launcher";
+			// 
 			// ui
 			// 
 			this->AcceptButton = this->button_Launch;
@@ -937,6 +951,10 @@ private: System::Void SaveSettings() {
 	userInput = textBox_FPSLimit->Text;
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
 	WritePrivateProfileStringW(L"graphics", L"FPS.Limit", input.c_str(), CONFIG_FILE);
+
+	userInput = Convert::ToInt32(checkBox_SkipLauncher->Checked).ToString();
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"launcher", L"skip", input.c_str(), CONFIG_FILE);
 }
 private: System::Void Ui_Load(System::Object^ sender, System::EventArgs^ e){
 }

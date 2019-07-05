@@ -54,5 +54,7 @@ int nTAA = GetPrivateProfileIntW(L"graphics", L"TAA", TRUE, CONFIG_FILE);
 int nMLAA = GetPrivateProfileIntW(L"graphics", L"MLAA", TRUE, CONFIG_FILE);
 int nFPSLimit = GetPrivateProfileIntW(L"graphics", L"FPS.Limit", 0, CONFIG_FILE);
 
+int nSkipLauncher = GetPrivateProfileIntW(L"launcher", L"skip", FALSE, CONFIG_FILE);
+
 //auto nBitDepth = GetPrivateProfileIntWW(L"resolutionL", L"bitdepth", 32, CONFIG_FILE);
 //auto nRefreshRate = GetPrivateProfileIntWW(L"resolutionL", L"refreshrate", 60, CONFIG_FILE);
