@@ -43,6 +43,67 @@ namespace TLAC::Components
 			printf("[TLAC] PlayerDataManager::Update(): Loading config...\n");
 			LoadConfig();
 		}
+
+		int* pvId = (int*)0x00000001418054C4;
+		int* modState = (int*)0x00000001411A9790;
+
+		if (!customPlayerData->UseCard)
+		{
+			if ((initPvId == false) || ((lastModState == 0) && (*modState == 1)))
+			{
+				if ((lastModState == 0) && (*modState == 1))
+				{
+					*(int*)0x00000001411A8A10 = *(int*)0x00000001411A8A28;
+					*(int*)(0x00000001411A8A10 + 4) = *(int*)(0x00000001411A8A28 + 4);
+					*(int*)(0x00000001411A8A10 + 8) = *(int*)(0x00000001411A8A28 + 8);
+					*(int*)(0x00000001411A8A10 + 12) = *(int*)(0x00000001411A8A28 + 12);
+					*(int*)(0x00000001411A8A10 + 16) = *(int*)(0x00000001411A8A28 + 16);
+					*(int*)(0x00000001411A8A10 + 18) = *(int*)(0x00000001411A8A28 + 18);
+				}
+
+				initPvId = true;
+				lastModState = *modState;
+				DWORD oldProtect, bck;
+				VirtualProtect((BYTE*)0x00000001405CBBA3, 8, PAGE_EXECUTE_READWRITE, &oldProtect);
+				*((BYTE*)0x00000001405CBBA3 + 0) = 0x90;
+				*((BYTE*)0x00000001405CBBA3 + 1) = 0x90;
+				*((BYTE*)0x00000001405CBBA3 + 2) = 0x90;
+				*((BYTE*)0x00000001405CBBA3 + 3) = 0x90;
+				*((BYTE*)0x00000001405CBBA3 + 4) = 0x90;
+				*((BYTE*)0x00000001405CBBA3 + 5) = 0x90;
+				*((BYTE*)0x00000001405CBBA3 + 6) = 0x90;
+				*((BYTE*)0x00000001405CBBA3 + 7) = 0x90;
+				VirtualProtect((BYTE*)0x00000001405CBBA3, 8, oldProtect, &bck);
+			}
+
+			if ( ((*modState == 0) && (*pvId != lastPvId)) || ((lastModState == 1) && (*modState == 0)))
+			{
+				if ((lastModState == 1) && (*modState == 0))
+				{
+					*(int*)0x00000001411A8A28 = *(int*)0x00000001411A8A10;
+					*(int*)(0x00000001411A8A28 + 4) = *(int*)(0x00000001411A8A10 + 4);
+					*(int*)(0x00000001411A8A28 + 8) = *(int*)(0x00000001411A8A10 + 8);
+					*(int*)(0x00000001411A8A28 + 12) = *(int*)(0x00000001411A8A10 + 12);
+					*(int*)(0x00000001411A8A28 + 16) = *(int*)(0x00000001411A8A10 + 16);
+					*(int*)(0x00000001411A8A28 + 18) = *(int*)(0x00000001411A8A10 + 18);
+				}
+
+				initPvId = false;
+				lastPvId = *pvId;
+				lastModState = *modState;
+				DWORD oldProtect, bck;
+				VirtualProtect((BYTE*)0x00000001405CBBA3, 8, PAGE_EXECUTE_READWRITE, &oldProtect);
+				*((BYTE*)0x00000001405CBBA3 + 0) = 0x42;
+				*((BYTE*)0x00000001405CBBA3 + 1) = 0x89;
+				*((BYTE*)0x00000001405CBBA3 + 2) = 0x84;
+				*((BYTE*)0x00000001405CBBA3 + 3) = 0xb6;
+				*((BYTE*)0x00000001405CBBA3 + 4) = 0xc0;
+				*((BYTE*)0x00000001405CBBA3 + 5) = 0x01;
+				*((BYTE*)0x00000001405CBBA3 + 6) = 0x00;
+				*((BYTE*)0x00000001405CBBA3 + 7) = 0x00;
+				VirtualProtect((BYTE*)0x00000001405CBBA3, 8, oldProtect, &bck);
+			}
+		}
 	}
 
 	void PlayerDataManager::ApplyPatch()
@@ -121,6 +182,18 @@ namespace TLAC::Components
 			*((BYTE*)0x0000000140105239 + 1) = 0x94;
 			*((BYTE*)0x0000000140105239 + 2) = 0xC1;
 			VirtualProtect((BYTE*)0x0000000140105239, 3, oldProtect, &bck);
+
+			//just incase the player is reloading
+			VirtualProtect((BYTE*)0x00000001405CBBA3, 8, PAGE_EXECUTE_READWRITE, &oldProtect);
+			*((BYTE*)0x00000001405CBBA3 + 0) = 0x42;
+			*((BYTE*)0x00000001405CBBA3 + 1) = 0x89;
+			*((BYTE*)0x00000001405CBBA3 + 2) = 0x84;
+			*((BYTE*)0x00000001405CBBA3 + 3) = 0xb6;
+			*((BYTE*)0x00000001405CBBA3 + 4) = 0xc0;
+			*((BYTE*)0x00000001405CBBA3 + 5) = 0x01;
+			*((BYTE*)0x00000001405CBBA3 + 6) = 0x00;
+			*((BYTE*)0x00000001405CBBA3 + 7) = 0x00;
+			VirtualProtect((BYTE*)0x00000001405CBBA3, 8, oldProtect, &bck);
 		}
 	}
 

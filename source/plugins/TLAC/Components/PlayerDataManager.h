@@ -20,7 +20,9 @@ namespace TLAC::Components
 	private:
 		PlayerData* playerData;
 		CustomPlayerData* customPlayerData;
-
+		int lastPvId = -1;
+		bool initPvId = false;
+		int lastModState = 0;
 		void ApplyPatch();
 		void LoadConfig();
 		void ApplyCustomData();
