@@ -48,7 +48,7 @@ void ApplyPatches() {
 		// Change mdata path from "C:/Mount/Option" to "mdata/"
 		{ (void*)0x0000000140A8CA18, { 0x6D, 0x64, 0x61, 0x74, 0x61, 0x2F, 0x00 } },
 		{ (void*)0x000000014066CEAE, { 0x06 } },
-		// *But of course we have a valid keychip*, return true
+		// Keychip is always valid, return true
 		{ (void*)0x000000014066E820, { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 } },
 		// Skip parts of the network check state
 		{ (void*)0x00000001406717B1, { 0xE9, 0x22, 0x03, 0x00 } },
@@ -61,7 +61,7 @@ void ApplyPatches() {
 		{ (void*)0x0000000140502150, { 0x90 } },
 		// Toon Shader Outline Fix by lybxlpsv
 		{ (void*)0x0000000140641102, { 0x01 } },
-		// Disables call to glutFitWindowSizeToDesktop, this fixes the need to use -w for windowed mode
+		// Disables call to glutFitWindowSizeToDesktop, prevents window automatic resize
 		{ (void*)0x0000000140194E06, { 0x90, 0x90, 0x90, 0x90, 0x90 } },
 		// Allow modifier mode selection (by Team Shimapan)
 		{ (void*)0x00000001405CB1B3, { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 } },
@@ -71,6 +71,11 @@ void ApplyPatches() {
 		{ (void*)0x0000000140136CFA,{ 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 } },
 		// enable module selector without use_card (Modules are not getting saved upon selection, commented until a fix is found)
 		//{ (void*)0x00000001405C513B, { 0x01 } },
+		// Show Freeplay instead
+		{ (void*)0x00000001403BABEA, { 0x75 } },
+		// Force Hide IDs
+		{ (void*)0x00000001409A5918, { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } },
+		{ (void*)0x00000001409A5928, { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 } }
 	};
 	printf("[Patches] Patches loaded\n");
 
@@ -78,7 +83,7 @@ void ApplyPatches() {
 		InjectCode(patches[i].Address, patches[i].Data);
 
 	auto nCursor = GetPrivateProfileIntW(L"patches", L"cursor", TRUE, CONFIG_FILE);
-	auto nHideCredits = GetPrivateProfileIntW(L"patches", L"hide_credits", FALSE, CONFIG_FILE);
+	auto nHideFreeplay = GetPrivateProfileIntW(L"patches", L"hide_freeplay", FALSE, CONFIG_FILE);
 	auto nStatusIcons = GetPrivateProfileIntW(L"patches", L"status_icons", 0, CONFIG_FILE);
 	auto nHidePVWatermark = GetPrivateProfileIntW(L"patches", L"hide_pv_watermark", FALSE, CONFIG_FILE);
 	auto nNoPVUi = GetPrivateProfileIntW(L"patches", L"no_pv_ui", FALSE, CONFIG_FILE);
@@ -86,11 +91,11 @@ void ApplyPatches() {
 	auto nNoLyrics = GetPrivateProfileIntW(L"patches", L"no_lyrics", FALSE, CONFIG_FILE);
 	auto nNoMovies = GetPrivateProfileIntW(L"patches", L"no_movies", FALSE, CONFIG_FILE);
 	auto nNoError = GetPrivateProfileIntW(L"patches", L"no_error", FALSE, CONFIG_FILE);
-	// Hides the CREDIT(S) counter
-	if (nHideCredits)
+	// Hides the Freeplay text
+	if (nHideFreeplay)
 	{
-		InjectCode((void*)0x00000001409F6200, { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 });
-		printf("[Patches] Hide CREDIT(S) enabled\n");
+		InjectCode((void*)0x00000001403BABEF, { 0x06, 0xB6 });
+		printf("[Patches] Hide Freeplay enabled\n");
 	}
 	// Use GLUT_CURSOR_RIGHT_ARROW instead of GLUT_CURSOR_NONE
 	if (nCursor)

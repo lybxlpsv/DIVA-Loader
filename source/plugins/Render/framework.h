@@ -31,6 +31,6 @@ int nIntRes = GetPrivateProfileIntW(L"resolution", L"r.enable", FALSE, CONFIG_FI
 int nIntResWidth = GetPrivateProfileIntW(L"resolution", L"r.width", 1280, CONFIG_FILE);
 int nIntResHeight = GetPrivateProfileIntW(L"resolution", L"r.height", 720, CONFIG_FILE);
 
-int nBitDepth = GetPrivateProfileIntW(L"resolutionL", L"bitdepth", 32, CONFIG_FILE);
-int nRefreshRate = GetPrivateProfileIntW(L"resolutionL", L"refreshrate", 60, CONFIG_FILE);
+int nBitDepth = GetPrivateProfileIntW(L"resolution", L"bitdepth", 32, CONFIG_FILE);
+int nRefreshRate = GetPrivateProfileIntW(L"resolution", L"refreshrate", 60, CONFIG_FILE);
 

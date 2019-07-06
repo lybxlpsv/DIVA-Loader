@@ -63,7 +63,7 @@ namespace Launcher {
 			checkBox_InternalRes->Checked = nIntRes;
 			comboBox_intResolution->Text = nIntResWidth.ToString() + "x" + nIntResHeight.ToString();
 			checkBox_Cursor->Checked = nCursor;
-			checkBox_HideCredits->Checked = nHideCredits;
+			checkBox_HideFreeplay->Checked = nHideFreeplay;
 			checkBox_HidePVWatermark->Checked = nHidePVWatermark;
 			checkBox_NoPVUi->Checked = nNoPVUi;
 			checkBox_NoLyrics->Checked = nNoLyrics;
@@ -162,7 +162,7 @@ namespace Launcher {
 
 
 	private: System::Windows::Forms::TextBox^ textBox_FPSLimit;
-	private: System::Windows::Forms::CheckBox^ checkBox_HideCredits;
+	private: System::Windows::Forms::CheckBox^ checkBox_HideFreeplay;
 	private: System::Windows::Forms::CheckBox^ checkBox_MLAA;
 	private: System::Windows::Forms::CheckBox^ checkBox_TAA;
 
@@ -255,7 +255,7 @@ private: System::Windows::Forms::Label^ label_BitDepth;
 			this->label_StatusIcons = (gcnew System::Windows::Forms::Label());
 			this->comboBox_StatusIcons = (gcnew System::Windows::Forms::ComboBox());
 			this->checkBox_MLAA = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox_HideCredits = (gcnew System::Windows::Forms::CheckBox());
+			this->checkBox_HideFreeplay = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_HidePVWatermark = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_HideVolCtrl = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_NoLyrics = (gcnew System::Windows::Forms::CheckBox());
@@ -559,7 +559,7 @@ private: System::Windows::Forms::Label^ label_BitDepth;
 			this->panel_innerPatches->Controls->Add(this->checkBox_TAA);
 			this->panel_innerPatches->Controls->Add(this->tableLayoutPanel_Status);
 			this->panel_innerPatches->Controls->Add(this->checkBox_MLAA);
-			this->panel_innerPatches->Controls->Add(this->checkBox_HideCredits);
+			this->panel_innerPatches->Controls->Add(this->checkBox_HideFreeplay);
 			this->panel_innerPatches->Controls->Add(this->checkBox_HidePVWatermark);
 			this->panel_innerPatches->Controls->Add(this->checkBox_HideVolCtrl);
 			this->panel_innerPatches->Controls->Add(this->checkBox_NoLyrics);
@@ -716,15 +716,15 @@ private: System::Windows::Forms::Label^ label_BitDepth;
 			this->checkBox_MLAA->TabIndex = 41;
 			this->checkBox_MLAA->Text = L"MLAA";
 			// 
-			// checkBox_HideCredits
+			// checkBox_HideFreeplay
 			// 
-			this->checkBox_HideCredits->AutoSize = true;
-			this->checkBox_HideCredits->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_HideCredits->Location = System::Drawing::Point(3, 72);
-			this->checkBox_HideCredits->Name = L"checkBox_HideCredits";
-			this->checkBox_HideCredits->Size = System::Drawing::Size(101, 17);
-			this->checkBox_HideCredits->TabIndex = 51;
-			this->checkBox_HideCredits->Text = L"Hide CREDIT(S)";
+			this->checkBox_HideFreeplay->AutoSize = true;
+			this->checkBox_HideFreeplay->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->checkBox_HideFreeplay->Location = System::Drawing::Point(3, 72);
+			this->checkBox_HideFreeplay->Name = L"checkBox_HideFreeplay";
+			this->checkBox_HideFreeplay->Size = System::Drawing::Size(101, 17);
+			this->checkBox_HideFreeplay->TabIndex = 51;
+			this->checkBox_HideFreeplay->Text = L"Hide Freeplay";
 			// 
 			// checkBox_HidePVWatermark
 			// 
@@ -1048,9 +1048,9 @@ private: System::Void SaveSettings() {
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
 	WritePrivateProfileStringW(L"patches", L"cursor", input.c_str(), CONFIG_FILE);
 
-	userInput = Convert::ToInt32(checkBox_HideCredits->Checked).ToString();
+	userInput = Convert::ToInt32(checkBox_HideFreeplay->Checked).ToString();
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
-	WritePrivateProfileStringW(L"patches", L"hide_credits", input.c_str(), CONFIG_FILE);
+	WritePrivateProfileStringW(L"patches", L"hide_freeplay", input.c_str(), CONFIG_FILE);
 
 	userInput = Convert::ToInt32(comboBox_StatusIcons->SelectedIndex).ToString();
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
