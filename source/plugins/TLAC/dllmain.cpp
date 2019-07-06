@@ -48,6 +48,8 @@ namespace TLAC
 		framework::DivaWindowHandle = FindWindow(0, framework::DivaWindowName);
 		if (framework::DivaWindowHandle == NULL)
 			framework::DivaWindowHandle = FindWindow(0, framework::GlutDefaultName);
+		if (framework::DivaWindowHandle == NULL)
+			framework::DivaWindowHandle = FindWindow(0, framework::freeGlutDefaultName);
 
 		HRESULT diInitResult = Input::InitializeDirectInput(framework::Module);
 		if (FAILED(diInitResult))

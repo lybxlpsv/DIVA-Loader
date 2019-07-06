@@ -40,6 +40,14 @@ namespace Launcher {
 				{
 					comboBox_Resolution->Items->Add(dm.dmPelsWidth + "x" + dm.dmPelsHeight);
 				}
+				if (!comboBox_BitDepth->Items->Contains(dm.dmBitsPerPel))
+				{
+					comboBox_BitDepth->Items->Add(dm.dmBitsPerPel);
+				}
+				if (!comboBox_RefreshRate->Items->Contains(dm.dmDisplayFrequency))
+				{
+					comboBox_RefreshRate->Items->Add(dm.dmDisplayFrequency);
+				}
 			}
 
 			comboBox_intResolution->Items->Add("640x480");
@@ -67,14 +75,30 @@ namespace Launcher {
 			checkBox_DisableErrorBanner->Checked = nNoError;
 			textBox_FPSLimit->Text = nFPSLimit.ToString();
 			checkBox_SkipLauncher->Checked = nSkipLauncher;
+			comboBox_BitDepth->Text = nBitDepth.ToString();
+			comboBox_RefreshRate->Text = nRefreshRate.ToString();
 
 			if (!nIntRes)
 			{
 				comboBox_intResolution->Enabled = false;
 			}
-			if (nDisplay == 0)
+			if (nDisplay == 0 || nDisplay == 2)
 			{
 				comboBox_Resolution->Enabled = true;
+			}
+			else
+			{
+				comboBox_Resolution->Enabled = false;
+			}
+			if (comboBox_Display->SelectedIndex == 2)
+			{
+				comboBox_BitDepth->Enabled = true;
+				comboBox_RefreshRate->Enabled = true;
+			}
+			else
+			{
+				comboBox_BitDepth->Enabled = false;
+				comboBox_RefreshRate->Enabled = false;
 			}
 		}
 
@@ -172,6 +196,14 @@ private: System::Windows::Forms::Label^ label_Soon;
 private: System::Windows::Forms::Button^ button_github;
 private: System::Windows::Forms::CheckBox^ checkBox_DisableErrorBanner;
 private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
+private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel_ScreenRes;
+private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel_IntRes;
+private: System::Windows::Forms::Label^ label_RefreshRate;
+private: System::Windows::Forms::ComboBox^ comboBox_BitDepth;
+private: System::Windows::Forms::ComboBox^ comboBox_RefreshRate;
+private: System::Windows::Forms::Label^ label_BitDepth;
+
+
 
 
 
@@ -193,18 +225,25 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			this->button_Exit = (gcnew System::Windows::Forms::Button());
 			this->label_Resolution = (gcnew System::Windows::Forms::Label());
 			this->groupBox_ScreenRes = (gcnew System::Windows::Forms::GroupBox());
+			this->tableLayoutPanel_ScreenRes = (gcnew System::Windows::Forms::TableLayoutPanel());
+			this->label_RefreshRate = (gcnew System::Windows::Forms::Label());
+			this->label_Display = (gcnew System::Windows::Forms::Label());
 			this->comboBox_Resolution = (gcnew System::Windows::Forms::ComboBox());
 			this->comboBox_Display = (gcnew System::Windows::Forms::ComboBox());
-			this->label_Display = (gcnew System::Windows::Forms::Label());
+			this->comboBox_BitDepth = (gcnew System::Windows::Forms::ComboBox());
+			this->comboBox_RefreshRate = (gcnew System::Windows::Forms::ComboBox());
+			this->label_BitDepth = (gcnew System::Windows::Forms::Label());
 			this->tabControl = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage_Resolution = (gcnew System::Windows::Forms::TabPage());
 			this->groupBox_InternalRes = (gcnew System::Windows::Forms::GroupBox());
+			this->tableLayoutPanel_IntRes = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->comboBox_intResolution = (gcnew System::Windows::Forms::ComboBox());
 			this->checkBox_InternalRes = (gcnew System::Windows::Forms::CheckBox());
 			this->label_intResolution = (gcnew System::Windows::Forms::Label());
 			this->tabPage_Patches = (gcnew System::Windows::Forms::TabPage());
 			this->panel_Patches = (gcnew System::Windows::Forms::Panel());
 			this->panel_innerPatches = (gcnew System::Windows::Forms::Panel());
+			this->checkBox_SkipLauncher = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_DisableErrorBanner = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_NoMovies = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_Cursor = (gcnew System::Windows::Forms::CheckBox());
@@ -237,11 +276,12 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			this->checkBox_player_data_manager = (gcnew System::Windows::Forms::CheckBox());
 			this->button_Discord = (gcnew System::Windows::Forms::Button());
 			this->button_github = (gcnew System::Windows::Forms::Button());
-			this->checkBox_SkipLauncher = (gcnew System::Windows::Forms::CheckBox());
 			this->groupBox_ScreenRes->SuspendLayout();
+			this->tableLayoutPanel_ScreenRes->SuspendLayout();
 			this->tabControl->SuspendLayout();
 			this->tabPage_Resolution->SuspendLayout();
 			this->groupBox_InternalRes->SuspendLayout();
+			this->tableLayoutPanel_IntRes->SuspendLayout();
 			this->tabPage_Patches->SuspendLayout();
 			this->panel_Patches->SuspendLayout();
 			this->panel_innerPatches->SuspendLayout();
@@ -255,7 +295,7 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			// 
 			this->button_Launch->FlatAppearance->BorderColor = System::Drawing::SystemColors::Control;
 			this->button_Launch->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button_Launch->Location = System::Drawing::Point(12, 236);
+			this->button_Launch->Location = System::Drawing::Point(18, 267);
 			this->button_Launch->Name = L"button_Launch";
 			this->button_Launch->Size = System::Drawing::Size(75, 23);
 			this->button_Launch->TabIndex = 20;
@@ -267,7 +307,7 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			this->button_Exit->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			this->button_Exit->FlatAppearance->BorderColor = System::Drawing::SystemColors::Control;
 			this->button_Exit->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button_Exit->Location = System::Drawing::Point(145, 236);
+			this->button_Exit->Location = System::Drawing::Point(139, 267);
 			this->button_Exit->Name = L"button_Exit";
 			this->button_Exit->Size = System::Drawing::Size(75, 23);
 			this->button_Exit->TabIndex = 21;
@@ -276,9 +316,10 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			// 
 			// label_Resolution
 			// 
+			this->label_Resolution->Anchor = System::Windows::Forms::AnchorStyles::Left;
 			this->label_Resolution->AutoSize = true;
 			this->label_Resolution->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->label_Resolution->Location = System::Drawing::Point(18, 25);
+			this->label_Resolution->Location = System::Drawing::Point(3, 32);
 			this->label_Resolution->Name = L"label_Resolution";
 			this->label_Resolution->Size = System::Drawing::Size(60, 13);
 			this->label_Resolution->TabIndex = 11;
@@ -286,49 +327,118 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			// 
 			// groupBox_ScreenRes
 			// 
-			this->groupBox_ScreenRes->Controls->Add(this->comboBox_Resolution);
-			this->groupBox_ScreenRes->Controls->Add(this->comboBox_Display);
-			this->groupBox_ScreenRes->Controls->Add(this->label_Display);
-			this->groupBox_ScreenRes->Controls->Add(this->label_Resolution);
+			this->groupBox_ScreenRes->Controls->Add(this->tableLayoutPanel_ScreenRes);
 			this->groupBox_ScreenRes->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->groupBox_ScreenRes->ForeColor = System::Drawing::Color::White;
 			this->groupBox_ScreenRes->Location = System::Drawing::Point(8, 6);
 			this->groupBox_ScreenRes->Name = L"groupBox_ScreenRes";
-			this->groupBox_ScreenRes->Size = System::Drawing::Size(208, 87);
+			this->groupBox_ScreenRes->Size = System::Drawing::Size(208, 133);
 			this->groupBox_ScreenRes->TabIndex = 10;
 			this->groupBox_ScreenRes->TabStop = false;
 			this->groupBox_ScreenRes->Text = L"Screen Resolution";
 			// 
+			// tableLayoutPanel_ScreenRes
+			// 
+			this->tableLayoutPanel_ScreenRes->ColumnCount = 2;
+			this->tableLayoutPanel_ScreenRes->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				50)));
+			this->tableLayoutPanel_ScreenRes->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				50)));
+			this->tableLayoutPanel_ScreenRes->Controls->Add(this->label_RefreshRate, 0, 3);
+			this->tableLayoutPanel_ScreenRes->Controls->Add(this->label_Display, 0, 0);
+			this->tableLayoutPanel_ScreenRes->Controls->Add(this->comboBox_Resolution, 1, 1);
+			this->tableLayoutPanel_ScreenRes->Controls->Add(this->label_Resolution, 0, 1);
+			this->tableLayoutPanel_ScreenRes->Controls->Add(this->comboBox_Display, 1, 0);
+			this->tableLayoutPanel_ScreenRes->Controls->Add(this->comboBox_BitDepth, 1, 2);
+			this->tableLayoutPanel_ScreenRes->Controls->Add(this->comboBox_RefreshRate, 1, 3);
+			this->tableLayoutPanel_ScreenRes->Controls->Add(this->label_BitDepth, 0, 2);
+			this->tableLayoutPanel_ScreenRes->Location = System::Drawing::Point(9, 19);
+			this->tableLayoutPanel_ScreenRes->Name = L"tableLayoutPanel_ScreenRes";
+			this->tableLayoutPanel_ScreenRes->RowCount = 4;
+			this->tableLayoutPanel_ScreenRes->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent,
+				47.36842F)));
+			this->tableLayoutPanel_ScreenRes->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent,
+				52.63158F)));
+			this->tableLayoutPanel_ScreenRes->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute,
+				26)));
+			this->tableLayoutPanel_ScreenRes->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute,
+				28)));
+			this->tableLayoutPanel_ScreenRes->Size = System::Drawing::Size(193, 107);
+			this->tableLayoutPanel_ScreenRes->TabIndex = 15;
+			// 
+			// label_RefreshRate
+			// 
+			this->label_RefreshRate->Anchor = System::Windows::Forms::AnchorStyles::Left;
+			this->label_RefreshRate->AutoSize = true;
+			this->label_RefreshRate->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->label_RefreshRate->Location = System::Drawing::Point(3, 86);
+			this->label_RefreshRate->Name = L"label_RefreshRate";
+			this->label_RefreshRate->Size = System::Drawing::Size(73, 13);
+			this->label_RefreshRate->TabIndex = 105;
+			this->label_RefreshRate->Text = L"Refresh Rate:";
+			// 
+			// label_Display
+			// 
+			this->label_Display->Anchor = System::Windows::Forms::AnchorStyles::Left;
+			this->label_Display->AutoSize = true;
+			this->label_Display->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->label_Display->Location = System::Drawing::Point(3, 6);
+			this->label_Display->Name = L"label_Display";
+			this->label_Display->Size = System::Drawing::Size(44, 13);
+			this->label_Display->TabIndex = 13;
+			this->label_Display->Text = L"Display:";
+			// 
 			// comboBox_Resolution
 			// 
+			this->comboBox_Resolution->Anchor = System::Windows::Forms::AnchorStyles::Left;
 			this->comboBox_Resolution->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->comboBox_Resolution->FormattingEnabled = true;
-			this->comboBox_Resolution->Location = System::Drawing::Point(97, 22);
+			this->comboBox_Resolution->Location = System::Drawing::Point(99, 28);
 			this->comboBox_Resolution->Name = L"comboBox_Resolution";
 			this->comboBox_Resolution->Size = System::Drawing::Size(85, 21);
 			this->comboBox_Resolution->TabIndex = 12;
 			// 
 			// comboBox_Display
 			// 
+			this->comboBox_Display->Anchor = System::Windows::Forms::AnchorStyles::Left;
 			this->comboBox_Display->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->comboBox_Display->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->comboBox_Display->FormattingEnabled = true;
 			this->comboBox_Display->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Windowed", L"Borderless", L"Fullscreen" });
-			this->comboBox_Display->Location = System::Drawing::Point(97, 49);
+			this->comboBox_Display->Location = System::Drawing::Point(99, 3);
 			this->comboBox_Display->Name = L"comboBox_Display";
 			this->comboBox_Display->Size = System::Drawing::Size(85, 21);
 			this->comboBox_Display->TabIndex = 14;
 			this->comboBox_Display->SelectedIndexChanged += gcnew System::EventHandler(this, &ui::ComboBox_Display_SelectedIndexChanged);
 			// 
-			// label_Display
+			// comboBox_BitDepth
 			// 
-			this->label_Display->AutoSize = true;
-			this->label_Display->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->label_Display->Location = System::Drawing::Point(18, 52);
-			this->label_Display->Name = L"label_Display";
-			this->label_Display->Size = System::Drawing::Size(44, 13);
-			this->label_Display->TabIndex = 13;
-			this->label_Display->Text = L"Display:";
+			this->comboBox_BitDepth->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->comboBox_BitDepth->FormattingEnabled = true;
+			this->comboBox_BitDepth->Location = System::Drawing::Point(99, 55);
+			this->comboBox_BitDepth->Name = L"comboBox_BitDepth";
+			this->comboBox_BitDepth->Size = System::Drawing::Size(57, 21);
+			this->comboBox_BitDepth->TabIndex = 102;
+			// 
+			// comboBox_RefreshRate
+			// 
+			this->comboBox_RefreshRate->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->comboBox_RefreshRate->FormattingEnabled = true;
+			this->comboBox_RefreshRate->Location = System::Drawing::Point(99, 81);
+			this->comboBox_RefreshRate->Name = L"comboBox_RefreshRate";
+			this->comboBox_RefreshRate->Size = System::Drawing::Size(57, 21);
+			this->comboBox_RefreshRate->TabIndex = 103;
+			// 
+			// label_BitDepth
+			// 
+			this->label_BitDepth->Anchor = System::Windows::Forms::AnchorStyles::Left;
+			this->label_BitDepth->AutoSize = true;
+			this->label_BitDepth->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->label_BitDepth->Location = System::Drawing::Point(3, 58);
+			this->label_BitDepth->Name = L"label_BitDepth";
+			this->label_BitDepth->Size = System::Drawing::Size(54, 13);
+			this->label_BitDepth->TabIndex = 104;
+			this->label_BitDepth->Text = L"Bit Depth:";
 			// 
 			// tabControl
 			// 
@@ -339,7 +449,7 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			this->tabControl->Location = System::Drawing::Point(0, 0);
 			this->tabControl->Name = L"tabControl";
 			this->tabControl->SelectedIndex = 0;
-			this->tabControl->Size = System::Drawing::Size(233, 230);
+			this->tabControl->Size = System::Drawing::Size(233, 261);
 			this->tabControl->TabIndex = 10;
 			// 
 			// tabPage_Resolution
@@ -351,38 +461,57 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			this->tabPage_Resolution->Location = System::Drawing::Point(4, 25);
 			this->tabPage_Resolution->Name = L"tabPage_Resolution";
 			this->tabPage_Resolution->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage_Resolution->Size = System::Drawing::Size(225, 201);
+			this->tabPage_Resolution->Size = System::Drawing::Size(225, 232);
 			this->tabPage_Resolution->TabIndex = 0;
 			this->tabPage_Resolution->Text = L"Resolution";
 			// 
 			// groupBox_InternalRes
 			// 
-			this->groupBox_InternalRes->Controls->Add(this->comboBox_intResolution);
-			this->groupBox_InternalRes->Controls->Add(this->checkBox_InternalRes);
-			this->groupBox_InternalRes->Controls->Add(this->label_intResolution);
+			this->groupBox_InternalRes->Controls->Add(this->tableLayoutPanel_IntRes);
 			this->groupBox_InternalRes->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->groupBox_InternalRes->ForeColor = System::Drawing::Color::White;
-			this->groupBox_InternalRes->Location = System::Drawing::Point(8, 99);
+			this->groupBox_InternalRes->Location = System::Drawing::Point(8, 145);
 			this->groupBox_InternalRes->Name = L"groupBox_InternalRes";
-			this->groupBox_InternalRes->Size = System::Drawing::Size(208, 98);
+			this->groupBox_InternalRes->Size = System::Drawing::Size(208, 83);
 			this->groupBox_InternalRes->TabIndex = 20;
 			this->groupBox_InternalRes->TabStop = false;
 			this->groupBox_InternalRes->Text = L"Internal Resolution";
+			// 
+			// tableLayoutPanel_IntRes
+			// 
+			this->tableLayoutPanel_IntRes->ColumnCount = 2;
+			this->tableLayoutPanel_IntRes->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				50)));
+			this->tableLayoutPanel_IntRes->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				50)));
+			this->tableLayoutPanel_IntRes->Controls->Add(this->comboBox_intResolution, 1, 1);
+			this->tableLayoutPanel_IntRes->Controls->Add(this->checkBox_InternalRes, 0, 0);
+			this->tableLayoutPanel_IntRes->Controls->Add(this->label_intResolution, 0, 1);
+			this->tableLayoutPanel_IntRes->Location = System::Drawing::Point(6, 19);
+			this->tableLayoutPanel_IntRes->Name = L"tableLayoutPanel_IntRes";
+			this->tableLayoutPanel_IntRes->RowCount = 2;
+			this->tableLayoutPanel_IntRes->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent,
+				50)));
+			this->tableLayoutPanel_IntRes->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent,
+				50)));
+			this->tableLayoutPanel_IntRes->Size = System::Drawing::Size(196, 57);
+			this->tableLayoutPanel_IntRes->TabIndex = 24;
 			// 
 			// comboBox_intResolution
 			// 
 			this->comboBox_intResolution->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->comboBox_intResolution->FormattingEnabled = true;
-			this->comboBox_intResolution->Location = System::Drawing::Point(97, 57);
+			this->comboBox_intResolution->Location = System::Drawing::Point(101, 31);
 			this->comboBox_intResolution->Name = L"comboBox_intResolution";
 			this->comboBox_intResolution->Size = System::Drawing::Size(85, 21);
 			this->comboBox_intResolution->TabIndex = 23;
 			// 
 			// checkBox_InternalRes
 			// 
+			this->checkBox_InternalRes->Anchor = System::Windows::Forms::AnchorStyles::Left;
 			this->checkBox_InternalRes->AutoSize = true;
 			this->checkBox_InternalRes->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_InternalRes->Location = System::Drawing::Point(18, 28);
+			this->checkBox_InternalRes->Location = System::Drawing::Point(3, 5);
 			this->checkBox_InternalRes->Name = L"checkBox_InternalRes";
 			this->checkBox_InternalRes->Size = System::Drawing::Size(56, 17);
 			this->checkBox_InternalRes->TabIndex = 21;
@@ -391,9 +520,10 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			// 
 			// label_intResolution
 			// 
+			this->label_intResolution->Anchor = System::Windows::Forms::AnchorStyles::Left;
 			this->label_intResolution->AutoSize = true;
 			this->label_intResolution->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->label_intResolution->Location = System::Drawing::Point(15, 60);
+			this->label_intResolution->Location = System::Drawing::Point(3, 36);
 			this->label_intResolution->Name = L"label_intResolution";
 			this->label_intResolution->Size = System::Drawing::Size(60, 13);
 			this->label_intResolution->TabIndex = 22;
@@ -406,7 +536,7 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			this->tabPage_Patches->Controls->Add(this->panel_Patches);
 			this->tabPage_Patches->Location = System::Drawing::Point(4, 25);
 			this->tabPage_Patches->Name = L"tabPage_Patches";
-			this->tabPage_Patches->Size = System::Drawing::Size(225, 201);
+			this->tabPage_Patches->Size = System::Drawing::Size(225, 232);
 			this->tabPage_Patches->TabIndex = 1;
 			this->tabPage_Patches->Text = L"Options";
 			// 
@@ -416,7 +546,7 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			this->panel_Patches->Controls->Add(this->panel_innerPatches);
 			this->panel_Patches->Location = System::Drawing::Point(0, 0);
 			this->panel_Patches->Name = L"panel_Patches";
-			this->panel_Patches->Size = System::Drawing::Size(225, 201);
+			this->panel_Patches->Size = System::Drawing::Size(225, 232);
 			this->panel_Patches->TabIndex = 9;
 			// 
 			// panel_innerPatches
@@ -439,6 +569,16 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			this->panel_innerPatches->Name = L"panel_innerPatches";
 			this->panel_innerPatches->Size = System::Drawing::Size(204, 311);
 			this->panel_innerPatches->TabIndex = 115;
+			// 
+			// checkBox_SkipLauncher
+			// 
+			this->checkBox_SkipLauncher->AutoSize = true;
+			this->checkBox_SkipLauncher->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->checkBox_SkipLauncher->Location = System::Drawing::Point(3, 227);
+			this->checkBox_SkipLauncher->Name = L"checkBox_SkipLauncher";
+			this->checkBox_SkipLauncher->Size = System::Drawing::Size(92, 17);
+			this->checkBox_SkipLauncher->TabIndex = 116;
+			this->checkBox_SkipLauncher->Text = L"Skip Launcher";
 			// 
 			// checkBox_DisableErrorBanner
 			// 
@@ -636,7 +776,7 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			this->tabPage_Components->Location = System::Drawing::Point(4, 25);
 			this->tabPage_Components->Name = L"tabPage_Components";
 			this->tabPage_Components->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage_Components->Size = System::Drawing::Size(225, 201);
+			this->tabPage_Components->Size = System::Drawing::Size(225, 232);
 			this->tabPage_Components->TabIndex = 2;
 			this->tabPage_Components->Text = L"Components";
 			// 
@@ -657,7 +797,7 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			this->panel_Components->Controls->Add(this->checkBox_player_data_manager);
 			this->panel_Components->Location = System::Drawing::Point(0, 0);
 			this->panel_Components->Name = L"panel_Components";
-			this->panel_Components->Size = System::Drawing::Size(225, 201);
+			this->panel_Components->Size = System::Drawing::Size(225, 232);
 			this->panel_Components->TabIndex = 0;
 			// 
 			// label_Soon
@@ -811,16 +951,6 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			this->button_github->UseVisualStyleBackColor = false;
 			this->button_github->Click += gcnew System::EventHandler(this, &ui::button_github_Click);
 			// 
-			// checkBox_SkipLauncher
-			// 
-			this->checkBox_SkipLauncher->AutoSize = true;
-			this->checkBox_SkipLauncher->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->checkBox_SkipLauncher->Location = System::Drawing::Point(3, 227);
-			this->checkBox_SkipLauncher->Name = L"checkBox_SkipLauncher";
-			this->checkBox_SkipLauncher->Size = System::Drawing::Size(92, 17);
-			this->checkBox_SkipLauncher->TabIndex = 116;
-			this->checkBox_SkipLauncher->Text = L"Skip Launcher";
-			// 
 			// ui
 			// 
 			this->AcceptButton = this->button_Launch;
@@ -833,7 +963,7 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->CancelButton = this->button_Exit;
-			this->ClientSize = System::Drawing::Size(288, 265);
+			this->ClientSize = System::Drawing::Size(288, 297);
 			this->Controls->Add(this->button_github);
 			this->Controls->Add(this->button_Discord);
 			this->Controls->Add(this->tabControl);
@@ -851,11 +981,13 @@ private: System::Windows::Forms::CheckBox^ checkBox_SkipLauncher;
 			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &ui::Ui_FormClosed);
 			this->Load += gcnew System::EventHandler(this, &ui::Ui_Load);
 			this->groupBox_ScreenRes->ResumeLayout(false);
-			this->groupBox_ScreenRes->PerformLayout();
+			this->tableLayoutPanel_ScreenRes->ResumeLayout(false);
+			this->tableLayoutPanel_ScreenRes->PerformLayout();
 			this->tabControl->ResumeLayout(false);
 			this->tabPage_Resolution->ResumeLayout(false);
 			this->groupBox_InternalRes->ResumeLayout(false);
-			this->groupBox_InternalRes->PerformLayout();
+			this->tableLayoutPanel_IntRes->ResumeLayout(false);
+			this->tableLayoutPanel_IntRes->PerformLayout();
 			this->tabPage_Patches->ResumeLayout(false);
 			this->panel_Patches->ResumeLayout(false);
 			this->panel_innerPatches->ResumeLayout(false);
@@ -897,6 +1029,14 @@ private: System::Void SaveSettings() {
 	userInput = intResolutionArray[0];
 	input = msclr::interop::marshal_as<std::wstring>(userInput);
 	WritePrivateProfileStringW(L"resolution", L"r.width", input.c_str(), CONFIG_FILE);
+
+	userInput = comboBox_BitDepth->Text;
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"resolution", L"bitdepth", input.c_str(), CONFIG_FILE);
+
+	userInput = comboBox_RefreshRate->Text;
+	input = msclr::interop::marshal_as<std::wstring>(userInput);
+	WritePrivateProfileStringW(L"resolution", L"refreshrate", input.c_str(), CONFIG_FILE);
 
 	userInput = comboBox_intResolution->Text;
 	intResolutionArray = userInput->Split('x');
@@ -987,13 +1127,23 @@ private: System::Void CheckBox_InternalRes_CheckedChanged(System::Object^ sender
 	}
 }
 private: System::Void ComboBox_Display_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-	if (comboBox_Display->SelectedIndex == 0)
+	if (comboBox_Display->SelectedIndex == 0 || comboBox_Display->SelectedIndex == 2)
 	{
 		comboBox_Resolution->Enabled = true;
 	}
 	else
 	{
 		comboBox_Resolution->Enabled = false;
+	}
+	if (comboBox_Display->SelectedIndex == 2)
+	{
+		comboBox_BitDepth->Enabled = true;
+		comboBox_RefreshRate->Enabled = true;
+	}
+	else
+	{
+		comboBox_BitDepth->Enabled = false;
+		comboBox_RefreshRate->Enabled = false;
 	}
 }
 private: System::Void Ui_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
@@ -1035,4 +1185,3 @@ private: System::Void button_github_Click(System::Object^ sender, System::EventA
 }
 };
 }
-

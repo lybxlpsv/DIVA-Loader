@@ -12,6 +12,7 @@ namespace TLAC
 	public:
 		static const wchar_t* DivaWindowName;
 		static const wchar_t* GlutDefaultName;
+		static const wchar_t* freeGlutDefaultName;
 
 		static bool inputDisable;
 

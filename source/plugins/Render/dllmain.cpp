@@ -19,7 +19,7 @@ int hookedCreateWindow(const char* title, void(__cdecl* exit_function)(int))
 	}
 	else if (nDisplay == 2)
 	{
-		/* Crashes, no idea why yet
+		// Crashes, no idea why yet
 		if (glutGameModeGet(GLUT_GAME_MODE_POSSIBLE)) {
 			char GameModeString[24];
 			sprintf_s(GameModeString, sizeof(GameModeString),"%dx%d:%d@%d", nWidth, nHeight, nBitDepth ,nRefreshRate);
@@ -29,11 +29,11 @@ int hookedCreateWindow(const char* title, void(__cdecl* exit_function)(int))
 			glutGameModeString(GameModeString);
 			glutEnterGameMode();
 		}
-		else {*/
+		else {
 		*fullScreenFlag = 1;
 		glutCreateWindow(title);
 		printf("[Render Manager] Fullscreen enabled.\n");
-		//}
+		}
 	}
 	else
 	{

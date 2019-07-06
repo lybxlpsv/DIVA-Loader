@@ -125,6 +125,7 @@ namespace TLAC::Input
 				xoffset = 0;
 				scale = 1;
 			}
+			
 			currentState.RelativePosition.x = ((currentState.RelativePosition.x - round(xoffset)) * *gameWidth / (hWindow.right - hWindow.left)) / scale;
 			currentState.RelativePosition.y = currentState.RelativePosition.y * *gameHeight / (hWindow.bottom - hWindow.top);
 		}
